@@ -1,0 +1,59 @@
+.m-default {
+  margin: 1.875rem;
+}
+
+.mt-default {
+  margin-top: 1.875rem;
+}
+
+.mb-default {
+  margin-bottom: 1.875rem;
+}
+
+.ml-default {
+  margin-left: 1.875rem;
+}
+
+.mr-default {
+  margin-right: 1.875rem;
+}
+
+.mx-default {
+  margin: 0 1.875rem;
+}
+
+.my-default {
+  margin: 1.875rem 0;
+}
+
+.profile-container {
+  cursor: pointer;
+  height: 16.25rem;
+  width: 18.75rem;
+}
+
+.profile-container > a {
+  display: block;
+}
+
+.profile-container img {
+  height: 9.375rem;
+  width: 9.375rem;
+  display: block;
+  margin: auto;
+}
+
+.profile-bg {
+  padding-top: 1.5625rem;
+  width: 18.75rem;
+  height: 12.5rem;
+  border-radius: 5px;
+  background-color: #00b2ff;
+}
+
+.profile-link {
+  font-size: 2.25rem;
+  text-align: center;
+  text-decoration: underline;
+  color: #001aff;
+}
