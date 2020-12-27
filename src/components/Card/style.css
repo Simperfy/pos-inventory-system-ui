@@ -58,3 +58,7 @@
   text-decoration: underline;
   color: #001aff;
 }
+
+.card-link:hover {
+  text-decoration: underline;
+}

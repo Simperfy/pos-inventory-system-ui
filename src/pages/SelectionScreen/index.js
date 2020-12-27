@@ -6,7 +6,7 @@ import Card from '../../components/Card';
 import InventoryLogo from '../../assets/icons/inventory.svg';
 import MoneyLogo from '../../assets/icons/money.svg';
 
-import './style.css'
+import './style.css';
 
 const SelectionScreen = () => {
   return (
