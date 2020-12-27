@@ -13,4 +13,5 @@
 .top-right-nav > a {
   font-size: 1.75rem;
   margin: 0 1.875rem;
+  text-decoration: underline;
 }
