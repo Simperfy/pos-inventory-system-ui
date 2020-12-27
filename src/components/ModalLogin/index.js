@@ -3,8 +3,9 @@ import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 
-import Profile from '../Profile';
+import Card from '../Card';
 
+import profilePic from '../../assets/images/profile_male.png';
 import CloseBtn from '../../assets/icons/close.svg';
 import './style.css';
 
@@ -19,7 +20,7 @@ class ModalLogin extends React.Component {
             <a href="/#" className="login-close" onClick={() => this.props.handleClose()}>
               <img src={CloseBtn} style={{ width: 36 }} alt="close button" />
             </a>
-            <Profile user={this.props.user} noLink noBotMargin />
+            <Card img={profilePic} user={this.props.user} noLink noBotMargin />
             <input
               type="password"
               placeholder="Enter pin"

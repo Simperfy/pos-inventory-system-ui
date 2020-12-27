@@ -26,25 +26,25 @@
   margin: 1.875rem 0;
 }
 
-.profile-container {
+.card-container {
   cursor: pointer;
   height: 16.25rem;
   width: 18.75rem;
   margin-bottom: 3.75rem;
 }
 
-.profile-container > a {
+.card-container > a {
   display: block;
 }
 
-.profile-container img {
+.card-container img {
   height: 9.375rem;
   width: 9.375rem;
   display: block;
   margin: auto;
 }
 
-.profile-bg {
+.card-bg {
   padding-top: 1.5625rem;
   width: 18.75rem;
   height: 12.5rem;
@@ -52,7 +52,7 @@
   background-color: #00b2ff;
 }
 
-.profile-link {
+.card-link {
   font-size: 2.25rem;
   text-align: center;
   text-decoration: underline;

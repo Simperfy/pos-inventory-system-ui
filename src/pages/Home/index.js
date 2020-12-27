@@ -1,8 +1,10 @@
 import React from 'react';
 import Row from 'react-bootstrap/Row';
 
-import ModalLogin from '../ModalLogin';
-import Profile from '../Profile';
+import ModalLogin from '../../components/ModalLogin';
+import Card from '../../components/Card';
+
+import profilePic from '../../assets/images/profile_male.png';
 
 class Home extends React.Component {
   constructor(props) {
@@ -22,10 +24,8 @@ class Home extends React.Component {
 
   handleClose = () => this.setState({ showModal: false });
 
-  handleClick = (user) => {
+  handleClick = (user) =>
     this.setState({ selectedUser: user, showModal: true });
-    console.log('set: ', user);
-  };
 
   render() {
     return (
@@ -35,7 +35,7 @@ class Home extends React.Component {
           style={{ marginTop: '3.75rem' }}
         >
           {this.state.users.map((u) => (
-            <Profile key={u.id} user={u.user} handleClick={this.handleClick} />
+            <Card key={u.id} img={profilePic} user={u.user} handleClick={this.handleClick} />
           ))}
         </Row>
         {this.state.showModal && (
