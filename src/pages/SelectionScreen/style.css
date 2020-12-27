@@ -2,6 +2,7 @@
 .top-right-nav > p {
   vertical-align: baseline;
   display: inline-block;
+  padding-top: 1rem;
 }
 
 .top-right-nav > p {
