@@ -35,7 +35,7 @@ class Home extends React.Component {
           style={{ marginTop: '3.75rem' }}
         >
           {this.state.users.map((u) => (
-            <Card key={u.id} img={profilePic} user={u.user} handleClick={this.handleClick} />
+            <Card key={u.id} img={profilePic} label={u.user} handleClick={this.handleClick} />
           ))}
         </Row>
         {this.state.showModal && (

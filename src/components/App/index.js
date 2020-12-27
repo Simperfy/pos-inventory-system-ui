@@ -7,8 +7,8 @@ import SelectionScreen from "../../pages/SelectionScreen";
 function App() {
   return (
     <Container fluid>
-      <Home />
-      {/* <SelectionScreen /> */}
+      {/* <Home /> */}
+      <SelectionScreen />
     </Container>
   );
 }

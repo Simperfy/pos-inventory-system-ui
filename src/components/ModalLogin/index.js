@@ -20,7 +20,7 @@ class ModalLogin extends React.Component {
             <a href="/#" className="login-close" onClick={() => this.props.handleClose()}>
               <img src={CloseBtn} style={{ width: 36 }} alt="close button" />
             </a>
-            <Card img={profilePic} user={this.props.user} noLink noBotMargin />
+            <Card img={profilePic} label={this.props.user} noLink noBotMargin />
             <input
               type="password"
               placeholder="Enter pin"

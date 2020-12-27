@@ -1,0 +1,16 @@
+.top-right-nav > a,
+.top-right-nav > p {
+  vertical-align: baseline;
+  display: inline-block;
+}
+
+.top-right-nav > p {
+  font-size: 1.5rem;
+  margin: 0;
+  line-height: 2.625rem;
+}
+
+.top-right-nav > a {
+  font-size: 1.75rem;
+  margin: 0 1.875rem;
+}
