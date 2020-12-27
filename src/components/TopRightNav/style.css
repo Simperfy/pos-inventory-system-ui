@@ -1,17 +1,17 @@
-.top-right-nav > a,
-.top-right-nav > p {
+a.top-right-nav,
+p.top-right-nav {
   vertical-align: baseline;
   display: inline-block;
   padding-top: 1rem;
 }
 
-.top-right-nav > p {
+p.top-right-nav {
   font-size: 1.5rem;
   margin: 0;
   line-height: 2.625rem;
 }
 
-.top-right-nav > a {
+a.top-right-nav {
   font-size: 1.75rem;
   margin: 0 1.875rem;
   text-decoration: underline;

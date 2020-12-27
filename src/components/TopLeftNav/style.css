@@ -1,0 +1,17 @@
+.inventory-icon {
+  display: inline-block;
+  vertical-align: baseline;
+  margin-left: 1.875rem;
+}
+
+.top-left-nav {
+  margin-top: 1rem;
+}
+
+.top-left-nav .back-btn {
+    cursor: pointer;
+    width: 2rem;
+    fill: #C4C4C4;
+    display: inline-block;
+    vertical-align: baseline;
+}

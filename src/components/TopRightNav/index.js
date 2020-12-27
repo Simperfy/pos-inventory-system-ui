@@ -1,9 +1,13 @@
 import React from 'react';
 
-const TopRightNav = ({ username }) => (
+import './style.css';
+
+const TopRightNav = ({ username, hasBackBtn }) => (
   <>
-    <p>{username}</p>
-    <a href="/#">Logout</a>
+    <p className="top-right-nav">{username}</p>
+    <a href="/#" className="top-right-nav">
+      Logout
+    </a>
   </>
 );
 
