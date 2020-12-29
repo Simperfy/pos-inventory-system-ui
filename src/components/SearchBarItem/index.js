@@ -2,12 +2,13 @@ import React from 'react';
 
 import './style.css';
 
-function SearchBarItem() {
-    return (
-        <div>
-            SearchBarItem
-        </div>
-    )
+function SearchBarItem({ name, barcode }) {
+  return (
+    <div className="search-bar-item d-flex justify-content-between">
+      <p className="sb-label">{name}</p>
+      <p className="sb-id">{barcode}</p>
+    </div>
+  );
 }
 
-export default SearchBarItem
+export default SearchBarItem;

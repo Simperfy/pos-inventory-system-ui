@@ -1,0 +1,28 @@
+.search-bar-item {
+    height: 2.5rem;
+    background-color: white;
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.search-bar-item:hover {
+    background-color: #EAF3FF;
+    cursor: pointer;
+}
+
+.sb-label, .sb-id {
+    margin: 0;
+    padding: 0;
+    line-height: 2.5rem;
+}
+
+.sb-label {
+    font-size: 1.5rem;
+    margin-left: 1.875rem;
+}
+
+.sb-id {
+    margin-right: 1.875rem;
+    color: rgba(0, 0, 0, 0.5)
+}
