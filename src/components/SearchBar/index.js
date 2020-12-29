@@ -17,6 +17,7 @@ class SearchBar extends React.Component {
 
     for (let i = 0; i < 50; i++)
       this.state.results.push({
+        id: `${i}`,
         name: `item ${i}`,
         barcode: `5fe2ff51ab328745dc2312${i.toString().padStart(2, '0')}`,
       });
@@ -45,7 +46,7 @@ class SearchBar extends React.Component {
         {this.state.showResults && (
           <div className="search-items-container">
             {this.state.results.map((res) => (
-              <SearchBarItem name={res.name} barcode={res.barcode} />
+              <SearchBarItem key={res.id} name={res.name} barcode={res.barcode} />
             ))}
           </div>
         )}
