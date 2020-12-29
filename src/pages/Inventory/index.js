@@ -6,7 +6,9 @@ class Inventory extends React.Component {
   render() {
     return (
       <>
-        <MainLayout><h1>Inventory Page</h1></MainLayout>
+        <MainLayout>
+          <h1>Inventory Page</h1>
+        </MainLayout>
       </>
     );
   }
