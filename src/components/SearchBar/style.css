@@ -39,3 +39,10 @@
   border: 0px solid black;
   background-color: white;
 }
+
+.search-items-container {
+  position: fixed;
+  width: 65%;
+  overflow-y: auto;
+  max-height: 25rem;
+}
