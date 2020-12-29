@@ -45,4 +45,5 @@
   width: 65%;
   overflow-y: auto;
   max-height: 25rem;
+  z-index: 1;
 }

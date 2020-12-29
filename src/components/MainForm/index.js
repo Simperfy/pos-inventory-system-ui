@@ -1,14 +1,13 @@
 import React from 'react';
 
 import SearchBar from '../SearchBar';
+import FormGroup from '../FormGroup';
 
 function MainForm() {
   return (
     <>
-      <div className="row">
-        <SearchBar />
-      </div>
-      <div className="row">Main Form</div>
+      <SearchBar />
+      <FormGroup />
     </>
   );
 }
