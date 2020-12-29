@@ -4,18 +4,16 @@ import Row from 'react-bootstrap/Row';
 
 import MainNav from '../../components/MainNav';
 
-
 import './style.css';
 
 class MainLayout extends React.Component {
   render() {
     return (
       <>
-        <Row className="justify-content-between">
-          <MainNav/>
+        <Row className="justify-content-between mb-5">
+          <MainNav />
         </Row>
-        <h1>MainLayout</h1>
-        {this.props.children}
+        <Row className="mx-0 flex-grow-1">{this.props.children}</Row>
       </>
     );
   }

@@ -1,0 +1,39 @@
+.search-icon {
+  width: 2rem;
+  fill: rgba(0, 0, 0, 0.5);
+}
+
+.search-bar-input {
+  height: 5rem;
+  width: 90%;
+  border: 0;
+  outline: none;
+}
+
+.search-bar {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.search-bar,
+.search-group {
+  width: 100%;
+}
+
+.search-bar-input,
+.search-bar-input::placeholder {
+  font-size: 2.25rem;
+  margin-left: 1.875rem;
+}
+
+.search-bar > img {
+  width: 2rem;
+}
+
+.search-btn {
+  margin-right: 1.875rem;
+  outline: none !important;
+  border: 0px solid black;
+  background-color: white;
+}
