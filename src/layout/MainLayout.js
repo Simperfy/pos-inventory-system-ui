@@ -2,7 +2,7 @@ import React from 'react';
 
 import Row from 'react-bootstrap/Row';
 
-import MainNav from './MainNav';
+import MainNav from './MainNavLayout';
 
 import './MainLayout.css';
 

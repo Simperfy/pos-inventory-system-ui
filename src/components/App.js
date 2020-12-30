@@ -9,8 +9,8 @@ function App() {
   return (
     <div className="vh-100 vw-100" style={{backgroundColor: "#F2F2F2"}}>
       <Container fluid className="d-flex flex-column h-100">
-        <Home />
-        <SelectionScreen />
+        {/* <Home /> */}
+        {/* <SelectionScreen /> */}
         <Inventory />
       </Container>
     </div>

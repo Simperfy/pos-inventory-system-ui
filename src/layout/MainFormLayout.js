@@ -1,7 +1,7 @@
 import React from 'react';
 
-import SearchBar from './SearchBar';
-import FormGroup from './FormGroup';
+import SearchBar from '../components/SearchBar';
+import FormGroup from '../components/FormGroup';
 
 function MainForm() {
   return (

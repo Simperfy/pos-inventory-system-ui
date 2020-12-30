@@ -1,7 +1,7 @@
 import React from 'react';
 
-import TopLeftNav from './TopLeftNav';
-import TopRightNav from './TopRightNav';
+import TopLeftNav from '../components/TopLeftNav';
+import TopRightNav from '../components/TopRightNav';
 
 const MainNav = () => (
   <>
