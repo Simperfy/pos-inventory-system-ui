@@ -4,7 +4,7 @@ import './FormButtonPrimary.css';
 
 function FormButtonPrimary({ text, handleAdd, style }) {
   return (
-    <button onClick={handleAdd} style={style} type="button" className="add-item">
+    <button onClick={handleAdd} style={style} type="button" className="add-btn">
       {text}
     </button>
   );

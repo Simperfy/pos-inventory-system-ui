@@ -1,16 +1,17 @@
-.add-btn {
+.confirm-btn {
+  width: fit-content;
   border: none;
   outline: none;
   border-radius: 5px;
   padding: 0.625rem 3.75rem;
   margin-right: 1.875rem;
-  background-color: #00b2ff;
+  background-color: rgba(0, 255, 0,0.8);
   color: white;
   font-size: 2.25rem;
   font-weight: bold;
 }
 
-.add-btn:focus {
+.confirm-btn:focus {
   outline: none;
   opacity: 0.8;
 }

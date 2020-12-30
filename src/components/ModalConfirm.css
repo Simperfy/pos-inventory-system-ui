@@ -1,0 +1,24 @@
+.confirm-item-container {
+}
+
+.confirm-item-container h4 {
+  margin-bottom: 1.875rem;
+}
+
+.confirm-item {
+}
+
+.confirm-item-text {
+    font-size: 1.5rem;
+}
+
+.confirm-item-info {
+    line-height: 2.5rem;
+    font-size: 1.125rem;
+    color: rgba(0,0,0,0.5);
+}
+
+.confirm-item-scrollable {
+    max-height: 25rem;
+    overflow: auto;
+}

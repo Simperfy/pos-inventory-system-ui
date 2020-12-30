@@ -56,18 +56,6 @@ span.item-barcode,
   border-radius: 5px;
 }
 
-.form-btn-group .cancel-item {
-  border: 0;
-  outline: none;
-}
-
-.form-btn-group .cancel-item {
-  font-size: 1.5rem;
-  color: rgba(255, 0, 0, 0.8);
-  text-decoration: underline;
-  background-color: inherit;
-}
-
 .details-form p {
   font-size: 1.5rem;
 }
