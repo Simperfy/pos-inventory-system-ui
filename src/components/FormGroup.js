@@ -30,7 +30,7 @@ function FormGroup() {
       </div>
 
       <div className="col-md-6">
-        <FormDetailText />
+        <FormDetailText price={"100.00"} discount={"10.00"} subTotal={"300.00"} discountTotal={"30.00"} total={"270.00"}/>
       </div>
     </div>
   );
