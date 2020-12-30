@@ -1,0 +1,16 @@
+.add-item {
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 0.625rem 3.75rem;
+  margin-right: 1.875rem;
+  background-color: #00b2ff;
+  color: white;
+  font-size: 2.25rem;
+  font-weight: bold;
+}
+
+.add-item:focus {
+  outline: none;
+  opacity: 0.8;
+}

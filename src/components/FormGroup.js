@@ -25,7 +25,7 @@ function FormGroup() {
           />
           <FormInputText label={'Qty'} placeHolder={'1 pcs'} />
           <FormSelect label={'Supplier'} options={suppliers} />
-          <FormButtons handleAdd={() => console.log('Add')} handleCancel={() => console.log('Cancel')} />
+          <FormButtons />
         </div>
       </div>
 

@@ -56,19 +56,9 @@ span.item-barcode,
   border-radius: 5px;
 }
 
-.form-btn-group .add-item,
 .form-btn-group .cancel-item {
   border: 0;
   outline: none;
-}
-
-.form-btn-group .add-item {
-  padding: 0.625rem 3.75rem;
-  margin-right: 1.875rem;
-  background-color: #00b2ff;
-  color: white;
-  font-size: 2.25rem;
-  font-weight: bold;
 }
 
 .form-btn-group .cancel-item {
