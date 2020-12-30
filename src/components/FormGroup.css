@@ -75,6 +75,7 @@ span.item-barcode,
   font-size: 1.5rem;
   color: rgba(255, 0, 0, 0.8);
   text-decoration: underline;
+  background-color: inherit;
 }
 
 .details-form p {
