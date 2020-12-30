@@ -8,6 +8,7 @@ import Home from '../pages/HomePage';
 import SelectionScreen from '../pages/SelectionPage';
 import Inventory from '../pages/InventoryPage';
 import { AppContext } from '../context/AppContext';
+import { getRoute } from '../routeConfig';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,9 +23,9 @@ class App extends React.Component {
           <div className="vh-100 vw-100" style={{ backgroundColor: '#F2F2F2' }}>
             <Container fluid className="d-flex flex-column h-100">
               <Switch>
-                <Route path="/" exact component={Home} />
-                <Route path="/selection" component={SelectionScreen} />
-                <Route path="/inventory" component={Inventory} />
+                <Route path={getRoute('home')} exact component={Home} />
+                <Route path={getRoute('selection')} component={SelectionScreen} />
+                <Route path={getRoute('inventory')} component={Inventory} />
 
                 <Route path="*">
                   <p>Invalid link</p>

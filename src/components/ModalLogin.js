@@ -9,6 +9,7 @@ import './ModalLogin.css';
 
 import { AppContext } from '../context/AppContext';
 import { useHistory } from "react-router-dom";
+import { getRoute } from '../routeConfig';
 
 function ModalLogin({ user, handleClose }) {
   const {isLoggedIn} = useContext(AppContext);
@@ -25,7 +26,7 @@ function ModalLogin({ user, handleClose }) {
           maxLength="4"
           autoFocus
         />
-        <Button onClick={() => history.push('/selection')} className="login-btn">Login</Button>
+        <Button onClick={() => history.push(getRoute('selection'))} className="login-btn">Login</Button>
       </ModalLayout>
     </>
   );
