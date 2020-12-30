@@ -1,10 +1,10 @@
 import React from 'react';
 
-function FormStaticText() {
+function FormStaticText({ text, textBelow }) {
   return (
     <div className="form-item">
-      <p>Item: Item 1</p>
-      <span className="item-barcode">5fe2ff51ab328745dc231241</span>
+      <p>Item: {text}</p>
+      <span className="item-barcode">{textBelow}</span>
     </div>
   );
 }

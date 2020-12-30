@@ -1,17 +1,17 @@
 import React from 'react';
 
-function InputText() {
+function FormInputText({ label, placeHolder }) {
   return (
     <div className="form-item">
-      <label htmlFor="item-label">Qty:</label>
+      <label htmlFor="item-label">{label}:</label>
       <input
         type="text"
         id="item-label"
         name="quantity"
-        placeholder="1 pc(s)"
+        placeholder={placeHolder}
       />
     </div>
   );
 }
 
-export default InputText;
+export default FormInputText;

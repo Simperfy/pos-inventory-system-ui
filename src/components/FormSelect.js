@@ -1,14 +1,15 @@
 import React from 'react';
 
-function FormSelect() {
+function FormSelect({ label, options }) {
   return (
     <div className="form-item">
-      <label htmlFor="supplier-label">Supplier:</label>
+      <label htmlFor="supplier-label">{label}:</label>
       <select name="supplier" id="supplier-label">
-        <option value="1">Supplier 1</option>
-        <option value="2">Supplier 2</option>
-        <option value="3">Supplier 3</option>
-        <option value="4">Supplier 4</option>
+        {options.map((s) => (
+          <option key={s.id} value={s.value}>
+            {s.name}
+          </option>
+        ))}
       </select>
     </div>
   );

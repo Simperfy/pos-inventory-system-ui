@@ -1,7 +1,8 @@
 import React from 'react';
 
 import MainLayout from '../layout/MainLayout';
-import MainForm from '../layout/MainFormLayout';
+import MainFormLayout from '../layout/MainFormLayout';
+import PendingItems from '../components/PendingItems';
 
 import './InventoryPage.css';
 
@@ -13,14 +14,10 @@ class Inventory extends React.Component {
           <div className="container-fluid">
             <div className="row h-100 pb-4">
               <div className="col-md-8">
-                <MainForm></MainForm>
+                <MainFormLayout></MainFormLayout>
               </div>
               <div className="col-md-4">
-                <div className="pending-items-container px-4">
-                  <p>Pending Items</p>
-                  <p>Pending Items</p>
-                  <p>Pending Items</p>
-                </div>
+                <PendingItems />
               </div>
             </div>
           </div>
