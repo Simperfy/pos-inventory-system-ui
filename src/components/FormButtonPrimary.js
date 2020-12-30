@@ -2,9 +2,9 @@ import React from 'react';
 
 import './FormButtonPrimary.css';
 
-function FormButtonPrimary({ text, handleAdd, style }) {
+function FormButtonPrimary({ text, handleClick, style }) {
   return (
-    <button onClick={handleAdd} style={style} type="button" className="add-btn">
+    <button onClick={handleClick} style={style} type="button" className="add-btn">
       {text}
     </button>
   );

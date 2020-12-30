@@ -6,7 +6,7 @@ import FormButtonCancel from './FormButtonCancel';
 function FormButtons() {
   return (
     <div className="form-btn-group">
-      <FormButtonPrimary text="Add" handleAdd={() => console.log('add')} />
+      <FormButtonPrimary text="Add" handleClick={() => console.log('add')} />
       <FormButtonCancel handleCancel={() => console.log('cancel')} />
     </div>
   );

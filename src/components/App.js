@@ -4,6 +4,9 @@ import Container from 'react-bootstrap/Container';
 import Home from '../pages/HomePage';
 import SelectionScreen from '../pages/SelectionPage';
 import Inventory from '../pages/InventoryPage';
+import ModalSuccess from './ModalSuccess';
+import ModalFailed from './ModalFailed';
+import ModalLogin from './ModalLogin';
 
 function App() {
   return (
@@ -11,7 +14,10 @@ function App() {
       <Container fluid className="d-flex flex-column h-100">
         {/* <Home /> */}
         {/* <SelectionScreen /> */}
-        <Inventory />
+        {/* <Inventory /> */}
+        {/* <ModalSuccess /> */}
+        <ModalFailed />
+        {/* <ModalLogin handleClose/> */}
       </Container>
     </div>
   );
