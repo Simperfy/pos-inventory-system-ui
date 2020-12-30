@@ -6,6 +6,8 @@
 
 ---
 
+![ScreenShot](src/assets/images/mockup.png)
+
 ## Features
 
 ### Inventory:
