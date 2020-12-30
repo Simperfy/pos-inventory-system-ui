@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './style.css';
+import './FormGroup.css';
 
 function FormGroup() {
   return (

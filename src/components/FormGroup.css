@@ -1,0 +1,96 @@
+span.item-barcode,
+.form-item select {
+  font-size: 1.125rem;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.form-item input[type='text'] {
+  border: 0;
+  outline: none;
+  max-width: 6.25rem;
+  text-align: center;
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 0, 0, 0.5);
+}
+
+.form-item select {
+  border: 0;
+}
+
+.form-item option {
+  font-size: 1.5rem;
+}
+
+.form-item p,
+.form-item label,
+.form-item input[type='text'],
+.form-item input[type='text']::placeholder,
+.form-item select {
+  font-size: 1.875rem;
+}
+
+.form-item label {
+  margin-right: 0.9375rem;
+}
+
+.form-item p,
+.details-form p {
+  margin: 0;
+}
+
+.form-item {
+  margin: 0;
+  margin-bottom: 1.875rem;
+}
+
+.main-form,
+.details-form {
+  margin-top: 1.875rem;
+}
+
+.form-btn-group {
+  margin-top: 2.8125rem;
+}
+
+.form-btn-group button {
+  border-radius: 5px;
+}
+
+.form-btn-group .add-item,
+.form-btn-group .cancel-item {
+  border: 0;
+  outline: none;
+}
+
+.form-btn-group .add-item {
+  padding: 0.625rem 3.75rem;
+  margin-right: 1.875rem;
+  background-color: #00b2ff;
+  color: white;
+  font-size: 2.25rem;
+  font-weight: bold;
+}
+
+.form-btn-group .cancel-item {
+  font-size: 1.5rem;
+  color: rgba(255, 0, 0, 0.8);
+  text-decoration: underline;
+}
+
+.details-form p {
+  font-size: 1.5rem;
+}
+
+.details-form span {
+  font-size: 0.75rem;
+  color: rgba(0, 0, 0, 0.5);
+  vertical-align: super;
+}
+
+.saturate-red {
+  color: #460000;
+}
+
+.saturate-green {
+  color: #004600;
+}

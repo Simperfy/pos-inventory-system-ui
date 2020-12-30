@@ -1,10 +1,10 @@
 import React from 'react';
 import Row from 'react-bootstrap/Row';
 
-import ModalLogin from '../../components/ModalLogin';
-import Card from '../../components/Card';
+import ModalLogin from '../components/ModalLogin';
+import Card from '../components/Card';
 
-import profilePic from '../../assets/images/profile_male.png';
+import profilePic from '../assets/images/profile_male.png';
 
 class Home extends React.Component {
   constructor(props) {

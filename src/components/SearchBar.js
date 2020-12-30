@@ -1,10 +1,10 @@
 import React from 'react';
-import SearchBarItem from '../SearchBarItem';
+import SearchBarItem from './SearchBarItem';
 
-import { ReactComponent as Magnify } from '../../assets/icons/magnify.svg';
+import { ReactComponent as Magnify } from '../assets/icons/magnify.svg';
 
-import './style.css';
-import '../../assets/css/global-style.css';
+import './SearchBar.css';
+import '../assets/css/global-style.css';
 
 class SearchBar extends React.Component {
   constructor(props) {

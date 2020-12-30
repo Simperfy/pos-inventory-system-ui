@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './style.css';
+import './Card.css';
 
 const Card = ({ img, label, noLink, noBotMargin, handleClick = () => null, className }) => {
 

@@ -3,11 +3,11 @@ import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 
-import Card from '../Card';
+import Card from './Card';
 
-import profilePic from '../../assets/images/profile_male.png';
-import CloseBtn from '../../assets/icons/close.svg';
-import './style.css';
+import profilePic from '../assets/images/profile_male.png';
+import CloseBtn from '../assets/icons/close.svg';
+import './ModalLogin.css';
 
 class ModalLogin extends React.Component {
 

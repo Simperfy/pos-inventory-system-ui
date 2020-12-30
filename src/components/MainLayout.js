@@ -2,9 +2,9 @@ import React from 'react';
 
 import Row from 'react-bootstrap/Row';
 
-import MainNav from '../../components/MainNav';
+import MainNav from './MainNav';
 
-import './style.css';
+import './MainLayout.css';
 
 class MainLayout extends React.Component {
   render() {

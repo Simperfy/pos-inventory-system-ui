@@ -1,9 +1,9 @@
 import React from 'react';
 
-import MainLayout from '../../components/MainLayout';
-import MainForm from '../../components/MainForm';
+import MainLayout from '../components/MainLayout';
+import MainForm from '../components/MainForm';
 
-import './style.css';
+import './InventoryPage.css';
 
 class Inventory extends React.Component {
   render() {

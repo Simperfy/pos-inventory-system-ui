@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './style.css';
+import './SearchBarItem.css';
 
 function SearchBarItem({ name, barcode }) {
   return (

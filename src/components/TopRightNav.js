@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './style.css';
+import './TopRightNav.css';
 
 const TopRightNav = ({ username, hasBackBtn }) => (
   <>
