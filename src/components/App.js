@@ -12,12 +12,12 @@ function App() {
   return (
     <div className="vh-100 vw-100" style={{backgroundColor: "#F2F2F2"}}>
       <Container fluid className="d-flex flex-column h-100">
-        {/* <Home /> */}
+        <Home />
         {/* <SelectionScreen /> */}
         {/* <Inventory /> */}
         {/* <ModalSuccess /> */}
-        <ModalFailed />
-        {/* <ModalLogin handleClose/> */}
+        {/* <ModalFailed /> */}
+        {/* <ModalLogin handleClose={() => console.log('close')}/> */}
       </Container>
     </div>
   );

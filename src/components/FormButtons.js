@@ -1,13 +1,12 @@
 import React from 'react';
 
-import FormButtonPrimary from './FormButtonPrimary';
-import FormButtonCancel from './FormButtonCancel';
+import FormButton from './FormButton';
 
 function FormButtons() {
   return (
     <div className="form-btn-group">
-      <FormButtonPrimary text="Add" handleClick={() => console.log('add')} />
-      <FormButtonCancel handleCancel={() => console.log('cancel')} />
+      <FormButton color="blue" solid text="Add" handleClick={() => console.log('add')} />
+      <FormButton color="red" text="Cancel" handleClick={() => console.log('cancel')} />
     </div>
   );
 }

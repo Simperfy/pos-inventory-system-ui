@@ -1,7 +1,7 @@
 import React from 'react';
 import ModalLayout from '../layout/ModalLayout';
 import { InventoryContext } from '../context/InventoryContext';
-import FormButtonPrimary from './FormButtonPrimary';
+import FormButton from './FormButton';
 import { ReactComponent as SuccessIcon } from '../assets/icons/tick.svg';
 
 class ModalSuccess extends React.Component {
@@ -18,7 +18,7 @@ class ModalSuccess extends React.Component {
             </div>
 
             <div className="d-flex justify-content-center">
-              <FormButtonPrimary style={{ margin: 0 }} text="Back to Home" handleClick={() => console.log('home')} />
+              <FormButton color="blue" solid style={{ margin: 0 }} text="Back to Home" handleClick={() => console.log('home')} />
             </div>
           </div>
         </ModalLayout>

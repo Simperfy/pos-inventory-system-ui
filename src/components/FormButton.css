@@ -1,25 +1,56 @@
-.danger-btn {
+.red-btn,
+.green-btn,
+.blue-btn {
   border: 0;
   outline: none;
   font-size: 1.5rem;
-  color: rgba(255, 0, 0, 0.8);
   text-decoration: underline;
   background-color: inherit;
 }
 
-.danger-btn-solid {
+.red-btn {
+  color: rgba(255, 0, 0, 0.8);
+}
+.green-btn {
+  color: #3BB54A
+}
+.blue-btn {
+  color: #00B2FF;
+}
+
+.red-btn-solid,
+.green-btn-solid,
+.blue-btn-solid {
   border: none;
   outline: none;
   border-radius: 5px;
   padding: 0.625rem 3.75rem;
   margin-right: 1.875rem;
-  background-color: rgba(255, 0, 0, 0.8);
   color: white;
   font-size: 2.25rem;
   font-weight: bold;
 }
 
-.danger-btn:focus, .danger-btn-solid:focus {
+.red-btn-solid {
+  background-color: rgba(255, 0, 0, 0.8);
+}
+
+.green-btn-solid {
+  background-color: #3BB54A
+}
+
+.blue-btn-solid {
+  background-color:#00B2FF;
+}
+
+.red-btn:focus,
+.red-btn-solid:focus,
+.green-btn-solid:focus .blue-btn-solid:focus {
   outline: none;
   opacity: 0.8;
 }
+
+button, button:focus {
+  outline: none
+}
+

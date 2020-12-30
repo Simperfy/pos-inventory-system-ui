@@ -1,11 +1,10 @@
 import React from 'react';
 import ModalLayout from '../layout/ModalLayout';
-import FormButtonCancel from './FormButtonCancel';
-import FormButtonConfirm from './FormButtonConfirm';
 
 import { InventoryContext } from '../context/InventoryContext';
 
 import './ModalConfirm.css';
+import FormButton from './FormButton';
 
 class ModalConfirm extends React.Component {
   static contextType = InventoryContext;
@@ -33,18 +32,23 @@ class ModalConfirm extends React.Component {
             </div>
 
             <div className="d-flex justify-content-between">
-              <FormButtonConfirm
-                handleConfirm={() =>
+              <FormButton
+                color="green"
+                text="Confirm"
+                solid
+                handleClick={() =>
                   this.context.setState({ showConfirmModal: false })
                 }
                 style={{ fontSize: '1rem', margin: 0 }}
               />
-              <FormButtonCancel
-                handleCancel={() =>
+              <FormButton
+                color="red"
+                text="Cancel"
+                solid
+                handleClick={() =>
                   this.context.setState({ showConfirmModal: false })
                 }
                 style={{ fontSize: '1rem', margin: 0 }}
-                solid
               />
             </div>
           </div>

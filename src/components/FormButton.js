@@ -2,9 +2,9 @@ import React from 'react';
 
 import './FormButton.css';
 
-function FormButton({ text, handleClick, style, danger }) {
+function FormButton({ text, handleClick, style, color, solid}) {
   return (
-    <button onClick={handleClick} style={style} type="button" className={ (danger && 'danger-btn-solid') }>
+    <button onClick={handleClick} style={style} type="button" className={ `${color}-btn${(solid ? '-solid' : '')}` }>
       {text}
     </button>
   );

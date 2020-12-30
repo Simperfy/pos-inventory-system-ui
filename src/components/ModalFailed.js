@@ -19,9 +19,10 @@ class ModalFailed extends React.Component {
 
             <div className="d-flex justify-content-center">
               <FormButton
-                danger
                 style={{ margin: 0 }}
-                text="Back to Home"
+                text="Try again"
+                color="red"
+                solid
                 handleClick={() => console.log('home')}
               />
             </div>
