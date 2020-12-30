@@ -2,7 +2,7 @@ import React from 'react';
 
 import MainLayout from '../layout/MainLayout';
 import MainFormLayout from '../layout/MainFormLayout';
-import PendingItems from '../components/PendingItems';
+import PendingItemsLayout from '../layout/PendingItemsLayout';
 
 import './InventoryPage.css';
 
@@ -17,7 +17,7 @@ class Inventory extends React.Component {
                 <MainFormLayout></MainFormLayout>
               </div>
               <div className="col-md-4">
-                <PendingItems />
+                <PendingItemsLayout />
               </div>
             </div>
           </div>

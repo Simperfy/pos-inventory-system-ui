@@ -1,0 +1,28 @@
+.pending-item {
+  margin-bottom: 1.875rem;
+}
+
+.pending-item p {
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.pending-item button {
+  color: red;
+  outline: none;
+  border: 0;
+  background-color: inherit;
+}
+
+.pending-item span {
+  vertical-align: super;
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.delete-icon {
+  height: 1.5rem;
+  width: 1.5rem;
+  fill: rgba(255, 0, 0, 0.8);
+}
