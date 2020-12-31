@@ -15,6 +15,7 @@ span.item-barcode,
 
 .form-item select {
   border: 0;
+  outline: none;
 }
 
 .form-item option {

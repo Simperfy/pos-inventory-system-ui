@@ -6,36 +6,13 @@ import FormButton from '../components/FormButton';
 import { InventoryContext } from '../context/InventoryContext';
 
 class PendingItemsLayout extends React.Component {
-  constructor(props) {
-    super(props);
-    this.pendingItems = [
-      {
-        id: 1,
-        name: 'item1',
-        quantity: 1,
-        textBelow: '5fe2ff51ab328745dc231241',
-      },
-      {
-        id: 2,
-        name: 'item2',
-        quantity: 1,
-        textBelow: '5fe2ff51ab328745dc231242',
-      },
-      {
-        id: 3,
-        name: 'item3',
-        quantity: 1,
-        textBelow: '5fe2ff51ab328745dc231243',
-      },
-    ];
-  }
   static contextType = InventoryContext;
 
   render() {
     return (
       <div className="pending-items-container px-4 d-flex flex-column justify-content-between">
         <div>
-          {this.pendingItems.map((pi) => (
+          {this.context.state.pendingItems.map((pi) => (
             <PendingItem
               key={pi.id}
               quantity={pi.quantity}

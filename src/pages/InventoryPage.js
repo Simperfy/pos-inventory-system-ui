@@ -14,6 +14,11 @@ class Inventory extends React.Component {
 
     this.state = {
       pendingItems: [],
+      suppliers: [
+        { id: 1, name: 'supplier 1', value: 'supplier 1' },
+        { id: 2, name: 'supplier 2', value: 'supplier 2' },
+        { id: 3, name: 'supplier 3', value: 'supplier 3' },
+      ],
       confirmItems: [],
       showConfirmModal: false,
     };
@@ -28,12 +33,31 @@ class Inventory extends React.Component {
     }
   }
 
+  counter = 0; // @TODO: DELETE AFTER MOCKING
 
+  addPendingItems = () => {
+    this.counter++;
+    this.setState((prevState, props) => ({
+      pendingItems: [
+        ...prevState.pendingItems,
+        {
+          id: this.counter,
+          name: `item ${this.counter}`,
+          quantity: 1,
+          textBelow: '5fe2ff51ab328745dc231243',
+        },
+      ],
+    }));
+  };
 
   render() {
     return (
       <InventoryContext.Provider
-        value={{ state: this.state, setState: this.setState.bind(this) }}
+        value={{
+          state: this.state,
+          setState: this.setState.bind(this),
+          addPendingItems: this.addPendingItems,
+        }}
       >
         <MainLayout>
           <div className="container-fluid">
