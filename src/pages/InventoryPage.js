@@ -21,7 +21,17 @@ class Inventory extends React.Component {
       ],
       confirmItems: [],
       showConfirmModal: false,
+      showForm: false,
+      searchResults: [],
+      showSearchResults: false,
     };
+
+    for (let i = 0; i < 50; i++)
+      this.state.searchResults.push({
+        id: `${i}`,
+        name: `item ${i}`,
+        barcode: `5fe2ff51ab328745dc2312${i.toString().padStart(2, '0')}`,
+      });
 
     for (let i = 0; i < 10; i++) {
       this.state.confirmItems.push({
@@ -53,16 +63,30 @@ class Inventory extends React.Component {
   };
 
   removePendingItem = (id) => {
-    this.setState((prevState, props) => {
-      return {
-        pendingItems: prevState.pendingItems.filter((pi) => pi.id !== id),
-      };
-    });
+    this.setState((prevState, props) => ({
+      pendingItems: prevState.pendingItems.filter((pi) => pi.id !== id),
+    }));
   };
 
   removeAllPendingItems = () => {
     if (window.confirm('Do you want to remove all items?'))
       this.setState({ pendingItems: [] });
+  };
+
+  closeForm = () => this.setState({ showForm: false });
+  showForm = () => this.setState({ showForm: true });
+
+  closeSearchResults = () => this.setState({ showSearchResults: false });
+  showSearchResults = () => this.setState({ showSearchResults: true });
+
+  handleSearchBarChange = (e) => {
+    if (e.target.value) this.showSearchResults();
+    else this.closeSearchResults();
+  };
+
+  handleSearchBarItemClick = (id) => {
+    this.closeSearchResults();
+    this.showForm();
   };
 
   render() {
@@ -74,6 +98,10 @@ class Inventory extends React.Component {
           addPendingItems: this.addPendingItems,
           removePendingItem: this.removePendingItem,
           removeAllPendingItems: this.removeAllPendingItems,
+          closeForm: this.closeForm,
+          showForm: this.showForm,
+          handleSearchBarChange: this.handleSearchBarChange,
+          handleSearchBarItemClick: this.handleSearchBarItemClick,
         }}
       >
         <MainLayout>

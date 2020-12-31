@@ -34,7 +34,7 @@ class FormGroup extends React.Component {
               <FormButton
                 color="red"
                 text="Cancel"
-                handleClick={() => console.log('cancel')}
+                handleClick={this.context.closeForm}
               />
             </div>
           </div>

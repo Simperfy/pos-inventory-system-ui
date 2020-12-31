@@ -2,31 +2,13 @@ import React from 'react';
 import SearchBarItem from './SearchBarItem';
 
 import { ReactComponent as Magnify } from '../assets/icons/magnify.svg';
+import { InventoryContext } from '../context/InventoryContext';
 
 import './SearchBar.css';
 import '../assets/css/global-style.css';
 
 class SearchBar extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      results: [],
-      showResults: false,
-    };
-
-    for (let i = 0; i < 50; i++)
-      this.state.results.push({
-        id: `${i}`,
-        name: `item ${i}`,
-        barcode: `5fe2ff51ab328745dc2312${i.toString().padStart(2, '0')}`,
-      });
-  }
-
-  handleChange = (e) => {
-    if (e.target.value) this.setState({ showResults: true });
-    else this.setState({ showResults: false });
-  };
+  static contextType = InventoryContext;
 
   render() {
     return (
@@ -37,20 +19,21 @@ class SearchBar extends React.Component {
               className="search-bar-input"
               type="text"
               placeholder="Item / 5fe2ff51ab328745dc231241"
-              onChange={this.handleChange}
+              onChange={this.context.handleSearchBarChange}
             />
             <button type="button" className="search-btn align-text-bottom">
               <Magnify className="search-icon" />
             </button>
           </div>
 
-          {this.state.showResults && (
+          {this.context.state.showSearchResults && (
             <div className="search-items-container">
-              {this.state.results.map((res) => (
+              {this.context.state.searchResults.map((res) => (
                 <SearchBarItem
                   key={res.id}
                   name={res.name}
                   barcode={res.barcode}
+                  onClick={() => this.context.handleSearchBarItemClick(res.id)}
                 />
               ))}
             </div>
