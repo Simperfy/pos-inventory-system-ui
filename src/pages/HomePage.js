@@ -15,15 +15,16 @@ class Home extends React.Component {
 
     this.state = {
       selectedUserGender: '',
-      showModal: false,
       selectedUser: null,
       selectedUserEmail: '',
+      selectedUserPassword: '',
+      showModal: false,
+      incorrectPassword: false,
       users: [],
     };
   }
 
   componentDidMount() {
-    console.log(env.API_URL);
     axios.get(`${env.API_URL}/users`).then(({ data }) => {
       const users = data.map((u) => ({ id: u.id, user: u.username, email: u.email, gender: u.gender }));
       this.setState({ users: users });
@@ -33,13 +34,23 @@ class Home extends React.Component {
   handleClose = () => this.setState({ showModal: false });
 
   handleClick = (user, email, gender) =>{
-    console.log(user, email)
     this.setState({ selectedUser: user, selectedUserEmail: email, selectedUserGender: gender, showModal: true });
   }
 
   handleLogin = () => {
-    this.props.history.push(getRoute('selection'))
+    this.setState({incorrectPassword: false});
+    axios.post(`${env.API_URL}/auth/local`, {
+      identifier: this.state.selectedUser,
+      password: this.state.selectedUserPassword
+    }).then(({data}) => console.log(data))
+    .catch((err) => {
+      const statusCode = err.response.data.statusCode;
+      if (statusCode >= 400 && statusCode < 500) this.setState({incorrectPassword: true});
+    });
+    // this.props.history.push(getRoute('selection'))
   }
+
+  handlePinChange = (e) => this.setState({selectedUserPassword: e.target.value});
 
   render() {
     return (
@@ -61,7 +72,8 @@ class Home extends React.Component {
         </Row>
         {this.state.showModal && (
           <ModalLogin
-            onChange={(e) => console.log(e.target.value)}
+            incorrectPassword={this.state.incorrectPassword}
+            onChange={this.handlePinChange}
             img={this.state.selectedUserGender === 'male' ? profileMalePic : profileFemalePic}
             user={this.state.selectedUser}
             handleLogin={this.handleLogin}

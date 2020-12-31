@@ -18,7 +18,6 @@ class ModalLogin extends React.Component {
     if (e.target.value === '' || regex.test(e.target.value))
       this.setState({ value: e.target.value });
 
-    console.log(e.target.value, this.state);
     this.props.onChange(e);
   };
 
@@ -27,17 +26,20 @@ class ModalLogin extends React.Component {
       <>
         <ModalLayout handleClose={this.props.handleClose}>
           <Card img={this.props.img} label={this.props.user} noLink noBotMargin />
-          <input
-            onChange={this.validatePassword}
-            value={this.state.value}
-            type="password"
-            placeholder="Enter pin"
-            className="login-input"
-            maxLength="4"
-            pattern="[0-9]*"
-            inputMode="numeric"
-            autoFocus
-          />
+          <div>
+            {this.props.incorrectPassword && <p className="text-center text-danger m-0">Incorrect pin</p>}
+            <input
+              onChange={this.validatePassword}
+              value={this.state.value}
+              type="password"
+              placeholder="Enter pin"
+              className="login-input"
+              maxLength="4"
+              pattern="[0-9]*"
+              inputMode="numeric"
+              autoFocus
+            />
+          </div>
           <Button onClick={this.props.handleLogin} className="login-btn">
             Login
           </Button>
