@@ -7,29 +7,45 @@ import Card from './Card';
 import profilePic from '../assets/images/profile_male.png';
 import './ModalLogin.css';
 
-import { AppContext } from '../context/AppContext';
-import { useHistory } from "react-router-dom";
-import { getRoute } from '../routeConfig';
+class ModalLogin extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: '' };
+  }
 
-function ModalLogin({ user, handleClose }) {
-  const {isLoggedIn} = useContext(AppContext);
-  const history = useHistory();
+  validatePassword = (e) => {
+    const regex = /^[0-9\b]+$/;
 
-  return (
-    <>
-      <ModalLayout handleClose={handleClose}>
-        <Card img={profilePic} label={user} noLink noBotMargin />
-        <input
-          type="password"
-          placeholder="Enter pin"
-          className="login-input"
-          maxLength="4"
-          autoFocus
-        />
-        <Button onClick={() => history.push(getRoute('selection'))} className="login-btn">Login</Button>
-      </ModalLayout>
-    </>
-  );
+    if (e.target.value === '' || regex.test(e.target.value))
+      this.setState({ value: e.target.value });
+
+    console.log(e.target.value, this.state);
+    this.props.onChange(e);
+  };
+
+  render() {
+    return (
+      <>
+        <ModalLayout handleClose={this.props.handleClose}>
+          <Card img={profilePic} label={this.props.user} noLink noBotMargin />
+          <input
+            onChange={this.validatePassword}
+            value={this.state.value}
+            type="password"
+            placeholder="Enter pin"
+            className="login-input"
+            maxLength="4"
+            pattern="[0-9]*"
+            inputMode="numeric"
+            autoFocus
+          />
+          <Button onClick={this.props.handleLogin} className="login-btn">
+            Login
+          </Button>
+        </ModalLayout>
+      </>
+    );
+  }
 }
 
 export default ModalLogin;
