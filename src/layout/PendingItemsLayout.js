@@ -8,13 +8,17 @@ import { InventoryContext } from '../context/InventoryContext';
 class PendingItemsLayout extends React.Component {
   static contextType = InventoryContext;
 
-  removeAllStyle = {
-    fontSize: '0.875rem',
-    opacity: 0.7,
-    float: 'right',
-    padding: 0,
-    marginBottom: '1.5rem',
-  };
+  constructor(props) {
+    super(props);
+
+    this.removeAllStyle = {
+      fontSize: '0.875rem',
+      opacity: 0.7,
+      float: 'right',
+      padding: 0,
+      marginBottom: '1.5rem',
+    }
+  }
 
   render() {
     return (
