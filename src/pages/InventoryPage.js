@@ -36,18 +36,28 @@ class Inventory extends React.Component {
   counter = 0; // @TODO: DELETE AFTER MOCKING
 
   addPendingItems = () => {
+    // @TODO: Prevent duplicates
+    // @TODO: Ask user if he wants to replace the existing item
     this.counter++;
     this.setState((prevState, props) => ({
       pendingItems: [
-        ...prevState.pendingItems,
         {
           id: this.counter,
           name: `item ${this.counter}`,
           quantity: 1,
           textBelow: '5fe2ff51ab328745dc231243',
         },
+        ...prevState.pendingItems,
       ],
     }));
+  };
+
+  removePendingItem = (id) => {
+    this.setState((prevState, props) => {
+      return {
+        pendingItems: prevState.pendingItems.filter((pi) => pi.id !== id),
+      };
+    });
   };
 
   render() {
@@ -57,6 +67,7 @@ class Inventory extends React.Component {
           state: this.state,
           setState: this.setState.bind(this),
           addPendingItems: this.addPendingItems,
+          removePendingItem: this.removePendingItem,
         }}
       >
         <MainLayout>

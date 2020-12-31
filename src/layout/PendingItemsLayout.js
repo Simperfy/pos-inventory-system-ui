@@ -10,11 +10,12 @@ class PendingItemsLayout extends React.Component {
 
   render() {
     return (
-      <div className="pending-items-container px-4 d-flex flex-column justify-content-between">
-        <div>
+      <div className="pending-items-container px-4 d-flex flex-column  justify-content-between">
+        <div className="pending-item-scrollable-inventory ">
           {this.context.state.pendingItems.map((pi) => (
             <PendingItem
               key={pi.id}
+              id={pi.id}
               quantity={pi.quantity}
               name={pi.name}
               textBelow={pi.textBelow}

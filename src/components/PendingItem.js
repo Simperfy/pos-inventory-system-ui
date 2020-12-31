@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { ReactComponent as DeleteIcon } from '../assets/icons/delete.svg';
+import { InventoryContext } from '../context/InventoryContext';
 
 import './PendingItem.css';
 
-function PendingItem({ quantity, name, textBelow }) {
+function PendingItem({ id, quantity, name, textBelow }) {
+  const { removePendingItem } = useContext(InventoryContext);
+
   return (
     <>
       <div className="pending-item">
@@ -12,7 +15,7 @@ function PendingItem({ quantity, name, textBelow }) {
           <p>
             {quantity} x {name}
           </p>
-          <button onClick={() => console.log('delete')} type="button">
+          <button onClick={() => removePendingItem(id)} type="button">
             <DeleteIcon className="delete-icon" />
           </button>
         </div>
