@@ -2,12 +2,12 @@ import React from 'react';
 
 import './Card.css';
 
-const Card = ({ img, label, noLink, noBotMargin, handleClick = () => null, className }) => {
+const Card = ({ img, label, noBotMargin, className, style, noLink, notAllowed, handleClick = () => null }) => {
 
   return (
     <div
       className={`card-container ${className}`}
-      style={{ cursor: noLink && 'auto', marginBottom: noBotMargin && '0 ' }}
+      style={{ ...style, cursor: ((noLink && 'auto') || (notAllowed && 'not-allowed')), marginBottom: noBotMargin && '0 ' }}
       onClick={() => handleClick(label)}
     >
       <div className="card-bg">

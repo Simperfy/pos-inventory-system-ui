@@ -17,8 +17,20 @@ const SelectionScreen = () => {
         <TopRightNav username="Juan 1" />
       </Row>
       <Row className="justify-content-center align-content-center h-75">
-        <Card img={InventoryLogo} handleClick={() => history.push(getRoute('inventory'))} label="Inventory" className="mr-4" />
-        <Card img={MoneyLogo} handleClick={() => console.log('sales')} label="Sales" className="ml-4" />
+        <Card
+          img={InventoryLogo}
+          handleClick={() => history.push(getRoute('inventory'))}
+          label="Inventory"
+          className="mr-4"
+        />
+        <Card
+          style={{ opacity: '0.2' }}
+          img={MoneyLogo}
+          handleClick={() => console.log('sales')}
+          label="Sales"
+          className="ml-4"
+          notAllowed
+        />
       </Row>
     </div>
   );
