@@ -9,21 +9,55 @@ import SelectionScreen from '../pages/SelectionPage';
 import Inventory from '../pages/InventoryPage';
 import { AppContext } from '../context/AppContext';
 import { getRoute } from '../routeConfig';
+import axios from 'axios';
+import env from 'react-dotenv';
 
 class App extends React.Component {
+  _isMounted = false;
+
   constructor(props) {
     super(props);
-    this.state = { isLoggedIn: false, user: null, jwt: null };
+    this.state = { isReady: true};
   }
 
-  login = (user, jwt) => this.setState({isLoggedIn: true, user: user, jwt: jwt });
+  componentDidMount() {
+    this._isMounted = true;
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) this.autoSignIn(jwt);
+    else this.setState({ isReady: true, isLoggedIn: false, user: null, jwt: null });
+  }
 
-  logout = () => this.setState({isLoggedIn: false, user: null, jwt: null });
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
+  autoSignIn = (jwt) => {
+    axios
+      .get(`${env.API_URL}/users/me`, {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      })
+      .then(
+        ({ data: { user } }) => this._isMounted && this.setState({ isLoggedIn: true, user: user, jwt: jwt }),
+        (err) => this._isMounted && this.setState({ isReady: true, isLoggedIn: false, user: null, jwt: null })
+      );
+  }
+
+  login = (user, jwt) => {
+    this.setState({isLoggedIn: true, user: user, jwt: jwt });
+    localStorage.setItem('jwt', jwt);
+  };
+
+  logout = () => {
+    this.setState({isLoggedIn: false, user: null, jwt: null });
+    localStorage.clear();
+  }
 
   PrivateRoute = ({ children, ...rest }) => <Route {...rest} render={() => this.state.isLoggedIn ? children : <Redirect to="/"/>} />;
 
   render() {
-    return (
+    return this.state.isReady && (
       <AppContext.Provider
         value={{
           isLoggedIn: this.state.isLoggedIn,
@@ -36,7 +70,9 @@ class App extends React.Component {
           <div className="vh-100 vw-100" style={{ backgroundColor: '#F2F2F2' }}>
             <Container fluid className="d-flex flex-column h-100">
               <Switch>
-                <Route path={getRoute('home')} exact component={Home} />
+                <Route path={getRoute('home')} exact >
+                  { !this.state.isLoggedIn ? <Home /> : <Redirect to={getRoute('selection')}/> }
+                </Route>
 
                 <this.PrivateRoute path={getRoute('selection')}>
                   <SelectionScreen/>

@@ -9,8 +9,10 @@ import axios from 'axios';
 import env from 'react-dotenv';
 import { getRoute } from '../routeConfig';
 import {AppContext} from '../context/AppContext';
+import { withRouter } from 'react-router-dom'
 
 class Home extends React.Component {
+  _isMounted = false;
   static contextType = AppContext;
 
   constructor(props) {
@@ -30,7 +32,7 @@ class Home extends React.Component {
   componentDidMount() {
     axios.get(`${env.API_URL}/users`).then(({ data }) => {
       const users = data.map((u) => ({ id: u.id, user: u.username, email: u.email, gender: u.gender }));
-      this.setState({ users: users });
+      this._isMounted && this.setState({ users: users });
     });
   }
 
@@ -54,7 +56,7 @@ class Home extends React.Component {
         },
         (err) => {
           const statusCode = err.response.data.statusCode;
-          if (statusCode >= 400 && statusCode < 500)
+          if (statusCode >= 400 && statusCode < 500 && this._isMounted)
             this.setState({ incorrectPassword: true });
         }
       );
@@ -95,4 +97,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default withRouter(Home);
