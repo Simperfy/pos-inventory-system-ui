@@ -17,7 +17,7 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { isReady: true};
+    this.state = { isReady: false, };
   }
 
   componentDidMount() {
@@ -34,12 +34,10 @@ class App extends React.Component {
   autoSignIn = (jwt) => {
     axios
       .get(`${env.API_URL}/users/me`, {
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-        },
+        headers: { Authorization: `Bearer ${jwt}` },
       })
       .then(
-        ({ data: { user } }) => this._isMounted && this.setState({ isLoggedIn: true, user: user, jwt: jwt }),
+        ({ data: { user } }) => this._isMounted && this.setState({ isReady: true, isLoggedIn: true, user: user, jwt: jwt }),
         (err) => this._isMounted && this.setState({ isReady: true, isLoggedIn: false, user: null, jwt: null })
       );
   }

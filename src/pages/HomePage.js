@@ -30,10 +30,15 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
+    this._isMounted = true;
     axios.get(`${env.API_URL}/users`).then(({ data }) => {
       const users = data.map((u) => ({ id: u.id, user: u.username, email: u.email, gender: u.gender }));
       this._isMounted && this.setState({ users: users });
     });
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   handleClose = () => this.setState({ showModal: false });
