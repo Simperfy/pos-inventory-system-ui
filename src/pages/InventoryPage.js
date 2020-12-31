@@ -60,6 +60,11 @@ class Inventory extends React.Component {
     });
   };
 
+  removeAllPendingItems = () => {
+    if (window.confirm('Do you want to remove all items?'))
+      this.setState({ pendingItems: [] });
+  };
+
   render() {
     return (
       <InventoryContext.Provider
@@ -68,6 +73,7 @@ class Inventory extends React.Component {
           setState: this.setState.bind(this),
           addPendingItems: this.addPendingItems,
           removePendingItem: this.removePendingItem,
+          removeAllPendingItems: this.removeAllPendingItems,
         }}
       >
         <MainLayout>
