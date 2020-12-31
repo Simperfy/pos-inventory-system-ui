@@ -22,7 +22,7 @@ class Inventory extends React.Component {
         quantity: null,
         kilo: null,
       },
-      confirmItems: [],
+      confirmItems: [], // TODO: Merge this with pending items
       showConfirmModal: false,
       showForm: false,
       searchResults: [],
@@ -42,6 +42,7 @@ class Inventory extends React.Component {
         id: `${i}`,
         name: `item ${i}`,
         barcode: `5fe2ff51ab328745dc2312${i.toString().padStart(2, '0')}`,
+        kiloAble: i > 10,
       });
     }
 
@@ -55,24 +56,62 @@ class Inventory extends React.Component {
     }
   }
 
-  counter = 0; // @TODO: DELETE AFTER MOCKING
+  counter = 0; // TODO: DELETE AFTER MOCKING
+
+  isValidForm() {
+    const mainForm = this.state.mainForm;
+    const nonEmptyFields = [
+      'itemText',
+      'itemBarcode',
+      // 'suppliers',
+      'supplierValue',
+      'quantity',
+      // 'kilo',
+    ];
+
+    for (const key of Object.keys(mainForm)) {
+      console.log(key + ' ' + mainForm[key], !mainForm[key]);
+      if (nonEmptyFields.includes(key) && !mainForm[key]) {
+        window.alert('There are invalid values');
+        return false;
+      }
+    }
+
+    return true;
+  }
 
   addPendingItems = () => {
-    // @TODO: Prevent duplicates
-    // @TODO: Ask user if he wants to replace the existing item
+    if (!this.isValidForm()) return;
+    // TODO: Prevent duplicates
+    // TODO: Ask user if he wants to replace the existing item
     this.counter++;
     this.setState((prevState, props) => ({
       pendingItems: [
         {
           id: this.counter,
           name: `item ${this.counter}`,
-          quantity: 1,
+          quantity: this.state.mainForm.quantity,
           textBelow: '5fe2ff51ab328745dc231243',
         },
         ...prevState.pendingItems,
       ],
     }));
+    this.closeForm();
+    // this.resetForm();
   };
+
+  resetForm = () =>
+    this.setState((prevState, props) => ({
+      mainForm: {
+        ...prevState.mainForm,
+        itemText: '',
+        itemBarcode: '',
+        // suppliers: [],
+        supplierValue: '',
+        quantity: null,
+        kilo: null,
+      },
+    }));
 
   removePendingItem = (id) => {
     this.setState((prevState, props) => ({
@@ -99,7 +138,7 @@ class Inventory extends React.Component {
   handleSearchBarItemClick = (newFormValue) => {
     this.closeSearchResults();
     this.setState((prevState, props) => ({
-      mainForm: { ...prevState.mainForm, ...newFormValue },
+      mainForm: { ...prevState.mainForm, ...newFormValue, supplierValue: prevState.mainForm.suppliers[0].value },
     }));
     this.showForm();
   };

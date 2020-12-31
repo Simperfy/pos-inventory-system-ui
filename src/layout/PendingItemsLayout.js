@@ -17,19 +17,21 @@ class PendingItemsLayout extends React.Component {
       float: 'right',
       padding: 0,
       marginBottom: '1.5rem',
-    }
+    };
   }
 
   render() {
     return (
       <div className="pending-items-container px-4 d-flex flex-column  justify-content-between">
         <div className="pending-item-scrollable-inventory ">
-          <FormButton
-            handleClick={this.context.removeAllPendingItems}
-            color="red"
-            style={this.removeAllStyle}
-            text="remove all"
-          />
+          {this.context.state.pendingItems.length > 0 && (
+            <FormButton
+              handleClick={this.context.removeAllPendingItems}
+              color="red"
+              style={this.removeAllStyle}
+              text="remove all"
+            />
+          )}
           <div style={{ clear: 'both' }}></div>
           {this.context.state.pendingItems.map((pi) => (
             <PendingItem
