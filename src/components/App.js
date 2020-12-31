@@ -18,13 +18,21 @@ class App extends React.Component {
 
   render() {
     return (
-      <AppContext.Provider value={{ isLoggedIn: this.state.isLoggedIn, history: this.props.history }}>
+      <AppContext.Provider
+        value={{
+          isLoggedIn: this.state.isLoggedIn,
+          history: this.props.history,
+        }}
+      >
         <Router>
           <div className="vh-100 vw-100" style={{ backgroundColor: '#F2F2F2' }}>
             <Container fluid className="d-flex flex-column h-100">
               <Switch>
                 <Route path={getRoute('home')} exact component={Home} />
-                <Route path={getRoute('selection')} component={SelectionScreen} />
+                <Route
+                  path={getRoute('selection')}
+                  component={SelectionScreen}
+                />
                 <Route path={getRoute('inventory')} component={Inventory} />
 
                 <Route path="*">
