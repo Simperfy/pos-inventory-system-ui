@@ -8,8 +8,11 @@ import profileFemalePic from '../assets/images/profile_female.jpg';
 import axios from 'axios';
 import env from 'react-dotenv';
 import { getRoute } from '../routeConfig';
+import {AppContext} from '../context/AppContext';
 
 class Home extends React.Component {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -38,16 +41,23 @@ class Home extends React.Component {
   }
 
   handleLogin = () => {
-    this.setState({incorrectPassword: false});
-    axios.post(`${env.API_URL}/auth/local`, {
-      identifier: this.state.selectedUser,
-      password: this.state.selectedUserPassword
-    }).then(({data}) => console.log(data))
-    .catch((err) => {
-      const statusCode = err.response.data.statusCode;
-      if (statusCode >= 400 && statusCode < 500) this.setState({incorrectPassword: true});
-    });
-    // this.props.history.push(getRoute('selection'))
+    this.setState({ incorrectPassword: false });
+    axios
+      .post(`${env.API_URL}/auth/local`, {
+        identifier: this.state.selectedUser,
+        password: this.state.selectedUserPassword,
+      })
+      .then(
+        ({ data: {user, jwt} }) => {
+          this.context.login(user, jwt)
+          this.props.history.push(getRoute('selection'))
+        },
+        (err) => {
+          const statusCode = err.response.data.statusCode;
+          if (statusCode >= 400 && statusCode < 500)
+            this.setState({ incorrectPassword: true });
+        }
+      );
   }
 
   handlePinChange = (e) => this.setState({selectedUserPassword: e.target.value});
@@ -70,7 +80,7 @@ class Home extends React.Component {
             />
           ))}
         </Row>
-        {this.state.showModal && (
+        {this.state.showModal &&
           <ModalLogin
             incorrectPassword={this.state.incorrectPassword}
             onChange={this.handlePinChange}
@@ -79,7 +89,7 @@ class Home extends React.Component {
             handleLogin={this.handleLogin}
             handleClose={this.handleClose}
           />
-        )}
+        }
       </>
     );
   }

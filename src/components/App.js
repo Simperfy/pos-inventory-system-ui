@@ -2,7 +2,7 @@ import React from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom';
 
 import Home from '../pages/HomePage';
 import SelectionScreen from '../pages/SelectionPage';
@@ -13,8 +13,14 @@ import { getRoute } from '../routeConfig';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isLoggedIn: false };
+    this.state = { isLoggedIn: false, user: null, jwt: null };
   }
+
+  login = (user, jwt) => this.setState({isLoggedIn: true, user: user, jwt: jwt });
+
+  logout = () => this.setState({isLoggedIn: false, user: null, jwt: null });
+
+  PrivateRoute = ({ children, ...rest }) => <Route {...rest} render={() => this.state.isLoggedIn ? children : <Redirect to="/"/>} />;
 
   render() {
     return (
@@ -22,6 +28,8 @@ class App extends React.Component {
         value={{
           isLoggedIn: this.state.isLoggedIn,
           history: this.props.history,
+          login: this.login,
+          logout: this.logout,
         }}
       >
         <Router>
@@ -29,11 +37,13 @@ class App extends React.Component {
             <Container fluid className="d-flex flex-column h-100">
               <Switch>
                 <Route path={getRoute('home')} exact component={Home} />
-                <Route
-                  path={getRoute('selection')}
-                  component={SelectionScreen}
-                />
-                <Route path={getRoute('inventory')} component={Inventory} />
+
+                <this.PrivateRoute path={getRoute('selection')}>
+                  <SelectionScreen/>
+                </this.PrivateRoute>
+                <this.PrivateRoute path={getRoute('inventory')}>
+                  <Inventory/>
+                </this.PrivateRoute>
 
                 <Route path="*">
                   <p>Invalid link</p>
@@ -46,4 +56,5 @@ class App extends React.Component {
     );
   }
 }
+
 export default App;
