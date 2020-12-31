@@ -1,7 +1,7 @@
 import React from 'react';
 
 import FormStaticText from './FormStaticText';
-import FormInputText from './FormInputText';
+import FormInput from './FormInput';
 import FormSelect from './FormSelect';
 import FormButton from './FormButton';
 import FormDetailText from './FormDetailText';
@@ -13,17 +13,47 @@ import './FormGroup.css';
 class FormGroup extends React.Component {
   static contextType = InventoryContext;
 
+  handleFormInput = (e) => {
+    const quantity = parseInt(e.target.value);
+    this.context.setState((prevState, props) => ({
+      mainForm: { ...prevState.mainForm, quantity: quantity },
+    }));
+  };
+
+  handleSelectChange = (e) => {
+    this.context.setState((prevState, props) => ({
+      mainForm: { ...prevState.mainForm, supplierValue: e.target.value },
+    }));
+  };
+
   render() {
+    const {
+      suppliers,
+      itemText,
+      itemBarcode,
+      supplierValue,
+      quantity,
+      kilo,
+    } = this.context.state.mainForm;
+
     return (
       <div className="row">
         <div className="col-md-6">
           <div className="d-flex flex-column main-form">
-            <FormStaticText
-              text={'Item 1'}
-              textBelow={'5fe2ff51ab328745dc231241'}
+            <FormStaticText text={itemText} textBelow={itemBarcode} />
+            <FormInput
+              formType="number"
+              onChange={this.handleFormInput}
+              label={'Qty'}
+              placeHolder={'1 pcs'}
+              min="1"
             />
-            <FormInputText label={'Qty'} placeHolder={'1 pcs'} />
-            <FormSelect label={'Supplier'} options={this.context.state.suppliers} />
+            <FormSelect
+              value={supplierValue}
+              onChange={this.handleSelectChange}
+              label={'Supplier'}
+              options={suppliers}
+            />
             <div className="form-btn-group">
               <FormButton
                 color="blue"

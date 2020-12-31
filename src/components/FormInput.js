@@ -1,17 +1,20 @@
 import React from 'react';
 
-function FormInputText({ label, placeHolder }) {
+function FormInput({ formType, label, placeHolder, onChange, max, min }) {
   return (
     <div className="form-item">
       <label htmlFor="item-label">{label}:</label>
       <input
-        type="text"
+        type={formType}
         id="item-label"
         name="quantity"
         placeholder={placeHolder}
+        onChange={onChange}
+        max={max}
+        min={min}
       />
     </div>
   );
 }
 
-export default FormInputText;
+export default FormInput;

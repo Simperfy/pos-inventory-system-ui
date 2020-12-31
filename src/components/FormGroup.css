@@ -4,7 +4,7 @@ span.item-barcode,
   color: rgba(0, 0, 0, 0.5);
 }
 
-.form-item input[type='text'] {
+.form-item input {
   border: 0;
   outline: none;
   max-width: 6.25rem;
@@ -24,8 +24,8 @@ span.item-barcode,
 
 .form-item p,
 .form-item label,
-.form-item input[type='text'],
-.form-item input[type='text']::placeholder,
+.form-item input,
+.form-item input::placeholder,
 .form-item select {
   font-size: 1.875rem;
 }

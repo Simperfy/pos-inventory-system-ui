@@ -14,11 +14,14 @@ class Inventory extends React.Component {
 
     this.state = {
       pendingItems: [],
-      suppliers: [
-        { id: 1, name: 'supplier 1', value: 'supplier 1' },
-        { id: 2, name: 'supplier 2', value: 'supplier 2' },
-        { id: 3, name: 'supplier 3', value: 'supplier 3' },
-      ],
+      mainForm: {
+        itemText: '',
+        itemBarcode: '',
+        suppliers: [],
+        supplierValue: '',
+        quantity: null,
+        kilo: null,
+      },
       confirmItems: [],
       showConfirmModal: false,
       showForm: false,
@@ -26,12 +29,21 @@ class Inventory extends React.Component {
       showSearchResults: false,
     };
 
-    for (let i = 0; i < 50; i++)
+    for (let i = 0; i < 3; i++) {
+      this.state.mainForm.suppliers.push({
+        id: i,
+        name: `Supplier ${i}`,
+        value: `supplier ${i}`,
+      });
+    }
+
+    for (let i = 0; i < 50; i++) {
       this.state.searchResults.push({
         id: `${i}`,
         name: `item ${i}`,
         barcode: `5fe2ff51ab328745dc2312${i.toString().padStart(2, '0')}`,
       });
+    }
 
     for (let i = 0; i < 10; i++) {
       this.state.confirmItems.push({
@@ -84,8 +96,11 @@ class Inventory extends React.Component {
     else this.closeSearchResults();
   };
 
-  handleSearchBarItemClick = (id) => {
+  handleSearchBarItemClick = (newFormValue) => {
     this.closeSearchResults();
+    this.setState((prevState, props) => ({
+      mainForm: { ...prevState.mainForm, ...newFormValue },
+    }));
     this.showForm();
   };
 
