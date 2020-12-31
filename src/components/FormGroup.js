@@ -3,12 +3,12 @@ import React from 'react';
 import FormStaticText from './FormStaticText';
 import FormInputText from './FormInputText';
 import FormSelect from './FormSelect';
-import FormButtons from './FormButtons';
+import FormButton from './FormButton';
 import FormDetailText from './FormDetailText';
 
 import './FormGroup.css';
 
-function FormGroup() {
+function FormGroup({ formDetail }) {
   const suppliers = [
     { id: 1, name: 'supplier 1', value: 'supplier 1' },
     { id: 2, name: 'supplier 2', value: 'supplier 2' },
@@ -25,13 +25,33 @@ function FormGroup() {
           />
           <FormInputText label={'Qty'} placeHolder={'1 pcs'} />
           <FormSelect label={'Supplier'} options={suppliers} />
-          <FormButtons />
+          <div className="form-btn-group">
+            <FormButton
+              color="blue"
+              solid
+              text="Add"
+              handleClick={() => console.log('add')}
+            />
+            <FormButton
+              color="red"
+              text="Cancel"
+              handleClick={() => console.log('cancel')}
+            />
+          </div>
         </div>
       </div>
 
-      <div className="col-md-6">
-        <FormDetailText price={"100.00"} discount={"10.00"} subTotal={"300.00"} discountTotal={"30.00"} total={"270.00"}/>
-      </div>
+      {formDetail && (
+        <div className="col-md-6">
+          <FormDetailText
+            price={'100.00'} // formDetail.price
+            discount={'10.00'} // formDetail.discount
+            subTotal={'300.00'} // formDetail.subTotal
+            discountTotal={'30.00'} // formDetail.discountTotal
+            total={'270.00'} // formDetail.total
+          />
+        </div>
+      )}
     </div>
   );
 }

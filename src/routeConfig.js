@@ -4,4 +4,6 @@ export const routes = [
   { name: 'inventory', path: '/inventory' },
 ];
 
-export const getRoute = (name) => routes.find((r) => r.name === name).path;
+export const getRoute = (name) => {
+    return routes.find((r) => r.name === name).path;
+};
