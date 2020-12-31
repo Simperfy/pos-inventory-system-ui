@@ -4,6 +4,8 @@ import MainLayout from '../layout/MainLayout';
 import MainFormLayout from '../layout/MainFormLayout';
 import PendingItemsLayout from '../layout/PendingItemsLayout';
 import ModalConfirm from '../components/ModalConfirm';
+import ModalLoading from '../components/ModalLoading';
+
 import { InventoryContext } from '../context/InventoryContext';
 
 import './InventoryPage.css';
@@ -13,6 +15,7 @@ class Inventory extends React.Component {
     super(props);
 
     this.state = {
+      isLoading: false,
       pendingItems: [],
       mainForm: {
         itemText: '',
@@ -171,6 +174,7 @@ class Inventory extends React.Component {
           </div>
         </MainLayout>
         {this.state.showConfirmModal && <ModalConfirm />}
+        {this.state.isLoading && <ModalLoading />}
       </InventoryContext.Provider>
     );
   }
