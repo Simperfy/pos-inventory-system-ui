@@ -38,6 +38,7 @@ class Home extends React.Component {
   handleLogin = () => {
     this.props.history.push(getRoute('selection'))
   }
+
   render() {
     return (
       <>
