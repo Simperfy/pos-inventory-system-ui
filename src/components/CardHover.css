@@ -1,0 +1,7 @@
+.hover-enlarge:hover {
+  transform: scale(1.02);
+}
+
+.hover-enlarge {
+  transition: all .2s ease-in-out;
+}

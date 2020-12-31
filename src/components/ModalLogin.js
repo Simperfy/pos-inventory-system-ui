@@ -4,7 +4,6 @@ import Button from 'react-bootstrap/Button';
 import ModalLayout from '../layout/ModalLayout';
 import Card from './Card';
 
-import profilePic from '../assets/images/profile_male.png';
 import './ModalLogin.css';
 
 class ModalLogin extends React.Component {
@@ -27,7 +26,7 @@ class ModalLogin extends React.Component {
     return (
       <>
         <ModalLayout handleClose={this.props.handleClose}>
-          <Card img={profilePic} label={this.props.user} noLink noBotMargin />
+          <Card img={this.props.img} label={this.props.user} noLink noBotMargin />
           <input
             onChange={this.validatePassword}
             value={this.state.value}
