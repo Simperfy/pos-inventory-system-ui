@@ -38,7 +38,7 @@ class PendingItemsLayout extends React.Component {
               text="remove all"
             />
           )}
-          <div style={{ clear: 'both' }}></div>
+          <div style={{ clear: 'both' }} />
           {this.context.state.pendingItems.map((pi) => (
             <PendingItem
               key={pi.id}
