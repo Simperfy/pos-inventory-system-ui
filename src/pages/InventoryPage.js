@@ -294,7 +294,7 @@ class Inventory extends React.Component {
           </div>
         </MainLayout>
         {this.state.showConfirmModal && <Modal.ModalConfirm
-          confirmItems={this.state.pendingItems.map((pi) => ({id: pi.id, leftText: `${pi.quantity} x ${pi.name}`, rightText: pi.supplierName}))}
+          confirmItems={this.state.pendingItems.map((pi) => ({id: pi.id, leftText: `${pi.quantity} x ${pi.name} ${pi.kilo > 0 && `(${pi.kilo} kg)`}`, rightText: pi.supplierName}))}
         />}
         {this.state.isLoading && <Modal.ModalLoading />}
       </InventoryContext.Provider>
