@@ -39,7 +39,7 @@ class PendingItemsLayout extends React.Component {
               id={pi.id}
               quantity={pi.quantity}
               name={pi.name}
-              textBelow={pi.textBelow}
+              textBelow={pi.barcode}
             />
           ))}
         </div>

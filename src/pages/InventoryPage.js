@@ -92,7 +92,7 @@ class Inventory extends React.Component {
       supplierValue,
     } = this.state.mainForm;
 
-    return pi.textBelow === itemBarcode && pi.supplier === supplierValue;
+    return pi.barcode === itemBarcode && pi.supplier === supplierValue;
   }
 
   filterDuplicate = (pi) => {
@@ -101,8 +101,8 @@ class Inventory extends React.Component {
       supplierValue,
     } = this.state.mainForm;
 
-    if (pi.textBelow !== itemBarcode) return true;
-    if (pi.textBelow === itemBarcode && pi.supplier !== supplierValue) return true;
+    if (pi.barcode !== itemBarcode) return true;
+    if (pi.barcode === itemBarcode && pi.supplier !== supplierValue) return true;
     return false;
   }
 
@@ -147,7 +147,7 @@ class Inventory extends React.Component {
           name: itemText,
           supplier: supplierValue,
           quantity: quantity,
-          textBelow: itemBarcode,
+          barcode: itemBarcode,
         },
         ...prevState.pendingItems,
       ],
