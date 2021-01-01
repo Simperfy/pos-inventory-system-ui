@@ -2,8 +2,9 @@ import React, {useContext} from 'react';
 
 import {Form, SearchBar} from '../components';
 import {InventoryContext} from '../context/InventoryContext';
+import formTypes from '../util/formTypes';
 
-function MainForm() {
+function MainFormLayoutInventory() {
     const {
         state: {
             showForm, showSearchResults,
@@ -24,12 +25,15 @@ function MainForm() {
                                       handleSearchBarItemClick={(res) => handleSearchBarItemClick({
                                           itemText: res.name,
                                           itemBarcode: res.id,
-                                          suppliers: res.suppliers
+                                          suppliers: res.suppliers,
+                                          sacks: res.sacks,
+                                          formType: res.kiloAble ? formTypes.inventoryPerSack : formTypes.inventoryPerQuantity
                                       })}/>
 
-            {showForm && <Form.FormGroupInventoryQuantity/>}
+            {(showForm && formType === formTypes.inventoryPerQuantity) && <Form.FormGroupInventoryQuantity/>}
+            {(showForm && formType === formTypes.inventoryPerSack) && <Form.FormGroupInventorySack/>}
         </>
     );
 }
 
-export default MainForm;
+export default MainFormLayoutInventory;

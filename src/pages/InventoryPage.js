@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Modal} from '../components';
 import MainLayout from '../layout/MainLayout';
-import MainFormLayout from '../layout/MainFormLayout';
+import MainFormLayoutInventory from '../layout/MainFormLayoutInventory';
 import PendingItemsLayout from '../layout/PendingItemsLayout';
 import Api from '../Api';
 import { InventoryContext } from '../context/InventoryContext';
@@ -22,10 +22,11 @@ class Inventory extends React.Component {
         itemText: '',
         itemBarcode: '',
         suppliers: [],
+        sacks: [],
         supplierId: '',
         supplierName: '',
-        quantity: null,
-        kilo: null,
+        quantity: 0,
+        kilo: 0,
       },
       showConfirmModal: false,
       showForm: false,
@@ -108,7 +109,7 @@ class Inventory extends React.Component {
       supplierName,
       supplierId,
       quantity,
-      // suppliers
+      kilo
     } = this.state.mainForm;
 
     this.setState((prevState, props) => ({
@@ -120,6 +121,7 @@ class Inventory extends React.Component {
           supplierId: supplierId,
           quantity: quantity,
           barcode: itemBarcode,
+          kilo: kilo
         },
         ...prevState.pendingItems,
       ],
@@ -131,14 +133,14 @@ class Inventory extends React.Component {
   resetForm = () => {
     this.setState((prevState, props) => ({
       mainForm: {
-        ...prevState.mainForm,
         itemText: '',
         itemBarcode: '',
-        // suppliers: [],
+        suppliers: [],
+        sacks: [],
         supplierId: '',
         supplierName: '',
-        quantity: null,
-        kilo: null,
+        quantity: 0,
+        kilo: 0,
       },
     }));
   }
@@ -166,6 +168,7 @@ class Inventory extends React.Component {
       barcode: d._id,
       name: d.item_name,
       kiloAble: d.kiloable,
+      sacks: d.item_kilos.map((ik) => ({sackId: ik.id, sackLabel: ik.label, sackValue: ik.value})),
       suppliers: d.suppliers.map((s) => ({
         id: s.id,
         supplierName: s.supplier_name,
@@ -213,7 +216,7 @@ class Inventory extends React.Component {
     }
 
     this.closeSearchResults();
-
+    this.resetForm();
     this.setState((prevState, props) => {
       return {
         mainForm: {
@@ -221,10 +224,11 @@ class Inventory extends React.Component {
           ...newFormValue,
           supplierName: newFormValue.suppliers[0].supplierName,
           supplierId: newFormValue.suppliers[0].id,
+          kilo: newFormValue.sacks[0]?.sackValue || 0
         },
       };
     });
-    this.showForm();
+    this.showForm(newFormValue.formType);
   };
 
   handleSubmitConfirm = (e) => {
@@ -249,6 +253,13 @@ class Inventory extends React.Component {
     }));
   }
 
+  handleSackSelectChange = (e) => {
+    const kilo = parseInt(e.target.value);
+    this.setState((prevState, props) => ({
+      mainForm: { ...prevState.mainForm, kilo: kilo },
+    }));
+  }
+
   render() {
     return (
       <InventoryContext.Provider
@@ -267,13 +278,14 @@ class Inventory extends React.Component {
           handleSubmitConfirm: this.handleSubmitConfirm,
           handleSupplierSelectChange: this.handleSupplierSelectChange,
           handleQuantityInputChange: this.handleQuantityInputChange,
+          handleSackSelectChange: this.handleSackSelectChange,
         }}
       >
         <MainLayout>
           <div className="container-fluid">
             <div className="row h-100 pb-4">
               <div className="col-md-8">
-                <MainFormLayout />
+                <MainFormLayoutInventory />
               </div>
               <div className="col-md-4">
                 <PendingItemsLayout />

@@ -6,7 +6,7 @@ import { InventoryContext } from '../../context/InventoryContext';
 
 import './FormGroup.css';
 
-class FormGroupInventoryQuantity extends React.Component {
+class FormGroupInventorySack extends React.Component {
   static contextType = InventoryContext;
 
   render() {
@@ -15,8 +15,8 @@ class FormGroupInventoryQuantity extends React.Component {
       itemText,
       itemBarcode,
       supplierId,
-      quantity,
-      // kilo,
+      sacks,
+      kilo,
     } = this.context.state.mainForm;
 
     return (
@@ -29,8 +29,13 @@ class FormGroupInventoryQuantity extends React.Component {
               onChange={this.context.handleQuantityInputChange}
               label={'Qty'}
               placeHolder={'1 pcs'}
-              value={quantity}
               min="1"
+            />
+            <Form.FormSelect
+                value={kilo}
+                onChange={this.context.handleSackSelectChange}
+                label={'Sack'}
+                options={sacks.map((s) => ({id: s.id, value: s.sackValue, name: s.sackLabel}))}
             />
             <Form.FormSelect
               value={supplierId}
@@ -69,4 +74,4 @@ class FormGroupInventoryQuantity extends React.Component {
     );
   }
 }
-export default FormGroupInventoryQuantity;
+export default FormGroupInventorySack;
