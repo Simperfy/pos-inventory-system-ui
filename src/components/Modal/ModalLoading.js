@@ -1,9 +1,8 @@
 import React from 'react';
 
-import ModalLayout from '../layout/ModalLayout';
-import { InventoryContext } from '../context/InventoryContext';
-import FormButton from './FormButton';
-import { ReactComponent as LoopIcon } from '../assets/icons/loop.svg';
+import ModalLayout from '../../layout/ModalLayout';
+import { InventoryContext } from '../../context/InventoryContext';
+import { ReactComponent as LoopIcon } from '../../assets/icons/loop.svg';
 
 import './ModalLoading.css';
 

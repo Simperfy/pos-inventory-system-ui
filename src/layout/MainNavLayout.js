@@ -1,13 +1,12 @@
 import React from 'react';
 
-import TopLeftNav from '../components/TopLeftNav';
-import TopRightNav from '../components/TopRightNav';
+import c from '../components';
 
 const MainNav = () => (
   <>
-    <TopLeftNav />
+    <c.Nav.TopLeftNav />
     <div>
-      <TopRightNav username="Juan 1" hasBackBtn />
+      <c.Nav.TopRightNav username="Juan 1" hasBackBtn />
     </div>
   </>
 );

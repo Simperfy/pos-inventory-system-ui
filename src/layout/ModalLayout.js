@@ -3,7 +3,6 @@ import React from 'react';
 import Row from 'react-bootstrap/Row';
 
 import CloseBtn from '../assets/icons/close.svg';
-
 import './ModalLayout.css';
 
 function ModalLayout({ handleClose, children }) {

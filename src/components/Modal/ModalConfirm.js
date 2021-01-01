@@ -1,10 +1,10 @@
 import React from 'react';
-import ModalLayout from '../layout/ModalLayout';
+import ModalLayout from '../../layout/ModalLayout';
 
-import { InventoryContext } from '../context/InventoryContext';
+import { InventoryContext } from '../../context/InventoryContext';
 
 import './ModalConfirm.css';
-import FormButton from './FormButton';
+import FormButton from '../Form/FormButton';
 
 class ModalConfirm extends React.Component {
   static contextType = InventoryContext;

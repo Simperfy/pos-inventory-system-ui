@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 
 import Button from 'react-bootstrap/Button';
-import ModalLayout from '../layout/ModalLayout';
-import Card from './Card';
+import ModalLayout from '../../layout/ModalLayout';
+import Card from '../Card/Card';
 
 import './ModalLogin.css';
 

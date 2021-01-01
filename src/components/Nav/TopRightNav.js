@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 
 import { useHistory } from 'react-router-dom';
-import { getRoute } from '../routeConfig';
+import { getRoute } from '../../routeConfig';
 
-import { AppContext } from '../context/AppContext';
+import { AppContext } from '../../context/AppContext';
 
 import './TopRightNav.css';
 

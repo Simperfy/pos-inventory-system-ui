@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
 
+import c from '../components'
 import SearchBar from '../components/SearchBar';
-import FormGroup from '../components/FormGroup';
-
 import { InventoryContext } from '../context/InventoryContext';
 
 function MainForm() {
@@ -11,7 +10,7 @@ function MainForm() {
     <>
       <SearchBar />
 
-      { showForm && <FormGroup />}
+      { showForm && <c.Form.FormGroup />}
     </>
   );
 }

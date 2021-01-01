@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { useHistory } from 'react-router-dom';
-import { getRoute } from '../routeConfig';
+import { getRoute } from '../../routeConfig';
 
-import { ReactComponent as LeftArrowIcon } from '../assets/icons/left-arrow.svg';
-import { ReactComponent as InventoryIcon } from '../assets/icons/inventory.svg';
+import { ReactComponent as LeftArrowIcon } from '../../assets/icons/left-arrow.svg';
+import { ReactComponent as InventoryIcon } from '../../assets/icons/inventory.svg';
 
 import './TopLeftNav.css';
 

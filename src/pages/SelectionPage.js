@@ -1,10 +1,11 @@
 import React from 'react';
 
+import c from '../components';
+
 import Row from 'react-bootstrap/Row';
-import TopRightNav from '../components/TopRightNav';
-import Card from '../components/Card';
 import InventoryLogo from '../assets/icons/inventory.svg';
 import MoneyLogo from '../assets/icons/money.svg';
+
 import { useHistory } from 'react-router-dom';
 import { getRoute } from '../routeConfig';
 
@@ -14,16 +15,16 @@ const SelectionScreen = () => {
   return (
     <div className="vh-100">
       <Row className="justify-content-end">
-        <TopRightNav username="Juan 1" />
+        <c.Nav.TopRightNav username="Juan 1" />
       </Row>
       <Row className="justify-content-center align-content-center h-75">
-        <Card
+        <c.Card.Card
           img={InventoryLogo}
           handleClick={() => history.push(getRoute('inventory'))}
           label="Inventory"
           className="mr-4"
         />
-        <Card
+        <c.Card.Card
           style={{ opacity: '0.2' }}
           img={MoneyLogo}
           handleClick={() => console.log('sales')}

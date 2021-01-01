@@ -4,14 +4,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom';
 
-import Home from '../pages/HomePage';
-import SelectionScreen from '../pages/SelectionPage';
-import Inventory from '../pages/InventoryPage';
-import { AppContext } from '../context/AppContext';
-import { getRoute } from '../routeConfig';
-import axios from 'axios';
-import env from 'react-dotenv';
-import Api from '../Api';
+import Home from './pages/HomePage';
+import SelectionScreen from './pages/SelectionPage';
+import Inventory from './pages/InventoryPage';
+import { AppContext } from './context/AppContext';
+import { getRoute } from './routeConfig';
+import Api from './Api';
 
 class App extends React.Component {
   _isMounted = false;

@@ -20,6 +20,14 @@ export default class Api {
     });
   }
 
+  // static async getItemsByNameOrId(jwt, query) {
+  //   const url = `${env.API_URL}/items?_where[_or][0][item_name_contains]=${query}&_where[_or][1][id_in]=${query}`;
+  //
+  //   return axios.get(url, {
+  //     headers: { Authorization: `Bearer ${jwt}` },
+  //   });
+  // }
+
   // static async getSuppliers(jwt) {
   //   return axios.get(`${env.API_URL}/suppliers`, {
   //     headers: { Authorization: `Bearer ${jwt}` },

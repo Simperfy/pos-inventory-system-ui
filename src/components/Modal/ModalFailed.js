@@ -1,8 +1,8 @@
 import React from 'react';
-import ModalLayout from '../layout/ModalLayout';
-import { InventoryContext } from '../context/InventoryContext';
-import FormButton from './FormButton';
-import { ReactComponent as FailedIcon } from '../assets/icons/exclamation-mark.svg';
+import ModalLayout from '../../layout/ModalLayout';
+import { InventoryContext } from '../../context/InventoryContext';
+import FormButton from '../Form/FormButton';
+import { ReactComponent as FailedIcon } from '../../assets/icons/exclamation-mark.svg';
 
 class ModalFailed extends React.Component {
   static contextType = InventoryContext;

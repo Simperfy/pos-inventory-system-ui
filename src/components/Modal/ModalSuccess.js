@@ -1,8 +1,8 @@
 import React from 'react';
-import ModalLayout from '../layout/ModalLayout';
-import { InventoryContext } from '../context/InventoryContext';
-import FormButton from './FormButton';
-import { ReactComponent as SuccessIcon } from '../assets/icons/tick.svg';
+import ModalLayout from '../../layout/ModalLayout';
+import { InventoryContext } from '../../context/InventoryContext';
+import FormButton from '../Form/FormButton';
+import { ReactComponent as SuccessIcon } from '../../assets/icons/tick.svg';
 
 class ModalSuccess extends React.Component {
   static contextType = InventoryContext;

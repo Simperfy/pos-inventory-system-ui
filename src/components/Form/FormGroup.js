@@ -1,12 +1,8 @@
 import React from 'react';
 
-import FormStaticText from './FormStaticText';
-import FormInput from './FormInput';
-import FormSelect from './FormSelect';
-import FormButton from './FormButton';
-import FormDetailText from './FormDetailText';
+import c from '../index';
 
-import { InventoryContext } from '../context/InventoryContext';
+import { InventoryContext } from '../../context/InventoryContext';
 
 import './FormGroup.css';
 
@@ -27,28 +23,28 @@ class FormGroup extends React.Component {
       <div className="row form-group-container" ref={this.context.state.formGroupRef}>
         <div className="col-md-6">
           <div className="d-flex flex-column main-form">
-            <FormStaticText text={itemText} textBelow={itemBarcode} />
-            <FormInput
+            <c.Form.FormStaticText text={itemText} textBelow={itemBarcode} />
+            <c.Form.FormInput
               formType="number"
               onChange={this.context.handleQuantityInputChange}
               label={'Qty'}
               placeHolder={'1 pcs'}
               min="1"
             />
-            <FormSelect
+            <c.Form.FormSelect
               value={supplierId}
               onChange={this.context.handleSupplierSelectChange}
               label={'Supplier'}
               options={suppliers.map((s) => ({id: s.id, value: s.id, name: s.supplierName}))}
             />
             <div className="form-btn-group">
-              <FormButton
+              <c.Form.FormButton
                 color="blue"
                 solid
                 text="Add"
                 handleClick={this.context.addPendingItems}
               />
-              <FormButton
+              <c.Form.FormButton
                 color="red"
                 text="Cancel"
                 handleClick={this.context.closeForm}
@@ -59,7 +55,7 @@ class FormGroup extends React.Component {
 
         {this.props.formDetail && (
           <div className="col-md-6">
-            <FormDetailText
+            <c.Form.FormDetailText
               price={'100.00'} // formDetail.price
               discount={'10.00'} // formDetail.discount
               subTotal={'300.00'} // formDetail.subTotal
