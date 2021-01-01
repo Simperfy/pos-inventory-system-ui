@@ -1,6 +1,6 @@
 import React from 'react';
 
-import c from '../index';
+import {Form} from '../index';
 
 import { InventoryContext } from '../../context/InventoryContext';
 
@@ -23,28 +23,28 @@ class FormGroup extends React.Component {
       <div className="row form-group-container" ref={this.context.state.formGroupRef}>
         <div className="col-md-6">
           <div className="d-flex flex-column main-form">
-            <c.Form.FormStaticText text={itemText} textBelow={itemBarcode} />
-            <c.Form.FormInput
+            <Form.FormStaticText text={itemText} textBelow={itemBarcode} />
+            <Form.FormInput
               formType="number"
               onChange={this.context.handleQuantityInputChange}
               label={'Qty'}
               placeHolder={'1 pcs'}
               min="1"
             />
-            <c.Form.FormSelect
+            <Form.FormSelect
               value={supplierId}
               onChange={this.context.handleSupplierSelectChange}
               label={'Supplier'}
               options={suppliers.map((s) => ({id: s.id, value: s.id, name: s.supplierName}))}
             />
             <div className="form-btn-group">
-              <c.Form.FormButton
+              <Form.FormButton
                 color="blue"
                 solid
                 text="Add"
                 handleClick={this.context.addPendingItems}
               />
-              <c.Form.FormButton
+              <Form.FormButton
                 color="red"
                 text="Cancel"
                 handleClick={this.context.closeForm}
@@ -55,7 +55,7 @@ class FormGroup extends React.Component {
 
         {this.props.formDetail && (
           <div className="col-md-6">
-            <c.Form.FormDetailText
+            <Form.FormDetailText
               price={'100.00'} // formDetail.price
               discount={'10.00'} // formDetail.discount
               subTotal={'300.00'} // formDetail.subTotal

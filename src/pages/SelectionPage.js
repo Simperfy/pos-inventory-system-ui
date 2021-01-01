@@ -1,6 +1,6 @@
 import React from 'react';
 
-import c from '../components';
+import {Card, Nav} from '../components';
 
 import Row from 'react-bootstrap/Row';
 import InventoryLogo from '../assets/icons/inventory.svg';
@@ -15,16 +15,16 @@ const SelectionScreen = () => {
   return (
     <div className="vh-100">
       <Row className="justify-content-end">
-        <c.Nav.TopRightNav username="Juan 1" />
+        <Nav.TopRightNav username="Juan 1" />
       </Row>
       <Row className="justify-content-center align-content-center h-75">
-        <c.Card.Card
+        <Card.Card
           img={InventoryLogo}
           handleClick={() => history.push(getRoute('inventory'))}
           label="Inventory"
           className="mr-4"
         />
-        <c.Card.Card
+        <Card.Card
           style={{ opacity: '0.2' }}
           img={MoneyLogo}
           handleClick={() => console.log('sales')}

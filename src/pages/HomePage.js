@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Row from 'react-bootstrap/Row';
-import c from '../components';
+import {Card, Modal} from '../components';
 import profileMalePic from '../assets/images/profile_male.png';
 import profileFemalePic from '../assets/images/profile_female.jpg';
 import axios from 'axios';
@@ -77,7 +77,7 @@ class Home extends React.Component {
           style={{ marginTop: '3.75rem' }}
         >
           {this.state.users.map((u) => (
-            <c.Card.CardProfile
+            <Card.CardProfile
               key={u.id}
               img={u.gender === 'male' ? profileMalePic : profileFemalePic}
               gender={u.gender}
@@ -88,7 +88,7 @@ class Home extends React.Component {
           ))}
         </Row>
         {this.state.showModal &&
-          <c.Modal.ModalLogin
+          <Modal.ModalLogin
             incorrectPassword={this.state.incorrectPassword}
             onChange={this.handlePinChange}
             img={this.state.selectedUserGender === 'male' ? profileMalePic : profileFemalePic}

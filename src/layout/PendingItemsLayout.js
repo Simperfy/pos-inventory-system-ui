@@ -1,6 +1,6 @@
 import React from 'react';
 
-import c from '../components';
+import {Form} from '../components';
 import PendingItem from '../components/PendingItem';
 
 import { InventoryContext } from '../context/InventoryContext';
@@ -26,7 +26,7 @@ class PendingItemsLayout extends React.Component {
       <div className="pending-items-container px-4 d-flex flex-column  justify-content-between">
         <div className="pending-item-scrollable-inventory ">
           {this.context.state.pendingItems.length > 0 && (
-            <c.Form.FormButton
+            <Form.FormButton
               handleClick={this.context.removeAllPendingItems}
               color="red"
               style={this.removeAllStyle}
@@ -47,7 +47,7 @@ class PendingItemsLayout extends React.Component {
         </div>
 
         {this.context.state.pendingItems.length > 0 &&
-         <c.Form.FormButton
+         <Form.FormButton
           color="blue"
           solid
           style={{ padding: 0, width: '100%' }}

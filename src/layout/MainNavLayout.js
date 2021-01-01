@@ -1,12 +1,12 @@
 import React from 'react';
 
-import c from '../components';
+import {Nav} from '../components';
 
 const MainNav = () => (
   <>
-    <c.Nav.TopLeftNav />
+    <Nav.TopLeftNav />
     <div>
-      <c.Nav.TopRightNav username="Juan 1" hasBackBtn />
+      <Nav.TopRightNav username="Juan 1" hasBackBtn />
     </div>
   </>
 );

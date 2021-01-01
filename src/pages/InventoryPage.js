@@ -1,7 +1,6 @@
 import React from 'react';
 
-import c from '../components';
-
+import {Modal} from '../components';
 import MainLayout from '../layout/MainLayout';
 import MainFormLayout from '../layout/MainFormLayout';
 import PendingItemsLayout from '../layout/PendingItemsLayout';
@@ -292,10 +291,10 @@ class Inventory extends React.Component {
             </div>
           </div>
         </MainLayout>
-        {this.state.showConfirmModal && <c.Modal.ModalConfirm
+        {this.state.showConfirmModal && <Modal.ModalConfirm
           confirmItems={this.state.pendingItems.map((pi) => ({id: pi.id, leftText: `${pi.quantity} x ${pi.name}`, rightText: pi.supplierName}))}
         />}
-        {this.state.isLoading && <c.Modal.ModalLoading />}
+        {this.state.isLoading && <Modal.ModalLoading />}
       </InventoryContext.Provider>
     );
   }

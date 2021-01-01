@@ -6,4 +6,4 @@ import PendingItem from "./PendingItem";
 import SearchBar from "./SearchBar";
 import SearchBarItem from "./SearchBarItem";
 
-export default {Card, Form, Modal, Nav};
+export {Card, Form, Modal, Nav};
