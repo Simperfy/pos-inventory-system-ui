@@ -86,36 +86,36 @@ class Inventory extends React.Component {
     return true;
   }
 
-  removeDuplicate() {
+  checkDuplicate = (pi) => {
     const {
       itemBarcode,
       supplierValue,
     } = this.state.mainForm;
 
-    const isDuplicated = this.state.pendingItems.some((pi) => pi.textBelow === itemBarcode && pi.supplier === supplierValue);
+    return pi.textBelow === itemBarcode && pi.supplier === supplierValue;
+  }
+
+  filterDuplicate = (pi) => {
+    const {
+      itemBarcode,
+      supplierValue,
+    } = this.state.mainForm;
+
+    if (pi.textBelow !== itemBarcode) return true;
+    if (pi.textBelow === itemBarcode && pi.supplier !== supplierValue) return true;
+    return false;
+  }
+
+  removeDuplicate() {
+    const isDuplicated = this.state.pendingItems.some(this.checkDuplicate);
 
     if (isDuplicated) {
       const isConfirmed = window.confirm("Item already added, do you want to replace the item?");
 
       if (isConfirmed) {
         this.setState((prevState, props) => {
-          console.log(prevState.pendingItems);
-          console.log(itemBarcode);
-          console.log(supplierValue);
-
-          const newPendingItems = prevState.pendingItems.filter(
-            (pi) => {
-              console.log(pi);
-              if (pi.textBelow !== itemBarcode) return true;
-              if (pi.textBelow === itemBarcode && pi.supplier !== supplierValue) return true;
-              return false;
-            }
-          );
-          console.log(newPendingItems);
-
-          return {
-            pendingItems: newPendingItems,
-          };
+          const newPendingItems = prevState.pendingItems.filter(this.filterDuplicate);
+          return {pendingItems: newPendingItems}
         });
 
         return true; // if there's duplicate and already replace, update state
