@@ -18,14 +18,14 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { isReady: false, };
+    this.state = { isReady: false, isLoggedIn: false, user: null, jwt: null };
   }
 
   componentDidMount() {
     this._isMounted = true;
     const jwt = localStorage.getItem('jwt');
     if (jwt) this.autoSignIn(jwt);
-    else this.setState({ isReady: true, isLoggedIn: false, user: null, jwt: null });
+    else this.setState({ isReady: true });
   }
 
   componentWillUnmount() {
@@ -47,9 +47,6 @@ class App extends React.Component {
         this._isMounted &&
           this.setState({
             isReady: true,
-            isLoggedIn: false,
-            user: null,
-            jwt: null,
           });
       }
     );
@@ -71,6 +68,8 @@ class App extends React.Component {
     return this.state.isReady && (
       <AppContext.Provider
         value={{
+          state: this.state,
+          setState: this.setState,
           isLoggedIn: this.state.isLoggedIn,
           history: this.props.history,
           login: this.login,

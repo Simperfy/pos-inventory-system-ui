@@ -5,12 +5,15 @@ import MainFormLayout from '../layout/MainFormLayout';
 import PendingItemsLayout from '../layout/PendingItemsLayout';
 import ModalConfirm from '../components/ModalConfirm';
 import ModalLoading from '../components/ModalLoading';
-
+import Api from '../Api';
 import { InventoryContext } from '../context/InventoryContext';
+import { AppContext } from '../context/AppContext';
 
 import './InventoryPage.css';
 
 class Inventory extends React.Component {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -40,14 +43,14 @@ class Inventory extends React.Component {
       });
     }
 
-    for (let i = 0; i < 50; i++) {
+    /* for (let i = 0; i < 50; i++) {
       this.state.searchResults.push({
         id: `${i}`,
         name: `item ${i}`,
         barcode: `5fe2ff51ab328745dc2312${i.toString().padStart(2, '0')}`,
         kiloAble: i > 10,
       });
-    }
+    } */
 
     for (let i = 0; i < 10; i++) {
       this.state.confirmItems.push({
@@ -134,8 +137,17 @@ class Inventory extends React.Component {
   showSearchResults = () => this.setState({ showSearchResults: true });
 
   handleSearchBarChange = (e) => {
-    if (e.target.value) this.showSearchResults();
-    else this.closeSearchResults();
+    const val = e.target.value;
+
+    if (val) {
+      Api.getItems(this.context.state.jwt, {item_name_contains: val}).then(({ data }) => {
+        data = data.map((d) => ({id: d._id, barcode: d._id, name: d.item_name, kiloAble: d.kiloable}));
+        this.setState({searchResults: data});
+        this.showSearchResults();
+      });
+    } else {
+      this.closeSearchResults();
+    }
   };
 
   handleSearchBarItemClick = (newFormValue) => {
