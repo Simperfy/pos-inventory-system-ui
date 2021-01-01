@@ -21,8 +21,6 @@ class PendingItemsLayout extends React.Component {
   }
 
   render() {
-    console.log('this.context.state.pendingItems');
-    console.log(this.context.state.pendingItems);
 
     return (
       <div className="pending-items-container px-4 d-flex flex-column  justify-content-between">

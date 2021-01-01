@@ -113,8 +113,6 @@ class Inventory extends React.Component {
     if (!this.isValidForm()) return;
     if(!this.removeDuplicate()) return;
 
-    // TODO: Prevent duplicates
-    // TODO: Ask user if he wants to replace the existing item
     const {
       itemText,
       itemBarcode,
@@ -123,9 +121,6 @@ class Inventory extends React.Component {
       quantity,
       suppliers
     } = this.state.mainForm;
-
-    console.log('suppliers');
-    console.log(suppliers);
 
     this.setState((prevState, props) => ({
       pendingItems: [
