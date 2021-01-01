@@ -151,6 +151,7 @@ class Inventory extends React.Component {
         itemText: '',
         itemBarcode: '',
         // suppliers: [],
+        supplierId: '',
         supplierValue: '',
         quantity: null,
         kilo: null,
@@ -227,9 +228,17 @@ class Inventory extends React.Component {
     }
 
     this.closeSearchResults();
-    this.setState((prevState, props) => ({
-      mainForm: { ...prevState.mainForm, ...newFormValue, supplierValue: newFormValue.suppliers[0].supplierName, supplierId: newFormValue.suppliers[0].id },
-    }));
+
+    this.setState((prevState, props) => {
+      return {
+        mainForm: {
+          ...prevState.mainForm,
+          ...newFormValue,
+          supplierValue: newFormValue.suppliers[0].supplierName,
+          supplierId: newFormValue.suppliers[0].id,
+        },
+      };
+    });
     this.showForm();
   };
 
