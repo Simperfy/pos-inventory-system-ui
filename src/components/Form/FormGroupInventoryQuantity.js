@@ -4,9 +4,9 @@ import {Form} from '../index';
 
 import { InventoryContext } from '../../context/InventoryContext';
 
-import './FormGroup.css';
+import './FormGroupInventoryQuantity.css';
 
-class FormGroup extends React.Component {
+class FormGroupInventoryQuantity extends React.Component {
   static contextType = InventoryContext;
 
   render() {
@@ -68,4 +68,4 @@ class FormGroup extends React.Component {
     );
   }
 }
-export default FormGroup;
+export default FormGroupInventoryQuantity;

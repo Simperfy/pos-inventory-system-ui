@@ -34,14 +34,6 @@ class Inventory extends React.Component {
       searchResults: [],
       showSearchResults: false,
       formGroupRef: React.createRef()
-    };
-
-    for (let i = 0; i < 3; i++) {
-      this.state.mainForm.suppliers.push({
-        id: i,
-        name: `Supplier ${i}`,
-        value: `supplier ${i}`,
-      });
     }
   }
 
@@ -83,8 +75,7 @@ class Inventory extends React.Component {
     } = this.state.mainForm;
 
     if (pi.barcode !== itemBarcode) return true;
-    if (pi.barcode === itemBarcode && pi.supplierId !== supplierId) return true;
-    return false;
+    return pi.barcode === itemBarcode && pi.supplierId !== supplierId;
   }
 
   removeDuplicate = () => {
