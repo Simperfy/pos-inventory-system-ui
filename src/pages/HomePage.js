@@ -10,6 +10,7 @@ import env from 'react-dotenv';
 import { getRoute } from '../routeConfig';
 import {AppContext} from '../context/AppContext';
 import { withRouter } from 'react-router-dom'
+import Api from '../Api';
 
 class Home extends React.Component {
   _isMounted = false;
@@ -31,7 +32,7 @@ class Home extends React.Component {
 
   componentDidMount() {
     this._isMounted = true;
-    axios.get(`${env.API_URL}/users`).then(({ data }) => {
+    Api.getUsers().then(({ data }) => {
       const users = data.map((u) => ({ id: u.id, user: u.username, email: u.email, gender: u.gender }));
       this._isMounted && this.setState({ users: users });
     });
