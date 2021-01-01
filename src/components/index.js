@@ -2,8 +2,7 @@ import Card from './Card';
 import Form from './Form';
 import Modal from './Modal';
 import Nav from './Nav';
-import PendingItem from "./PendingItem";
 import SearchBar from "./SearchBar";
-import SearchBarItem from "./SearchBarItem";
+import PendingItem from "./PendingItem";
 
-export {Card, Form, Modal, Nav};
+export {Card, Form, Modal, Nav, SearchBar};

@@ -1,13 +1,13 @@
 import React from 'react';
 import SearchBarItem from './SearchBarItem';
 
-import { ReactComponent as Magnify } from '../assets/icons/magnify.svg';
-import { InventoryContext } from '../context/InventoryContext';
+import { ReactComponent as Magnify } from '../../assets/icons/magnify.svg';
+import { InventoryContext } from '../../context/InventoryContext';
 
-import './SearchBar.css';
-import '../assets/css/global-style.css';
+import './SearchBarGroup.css';
+import '../../assets/css/global-style.css';
 
-class SearchBar extends React.Component {
+class SearchBarGroup extends React.Component {
   static contextType = InventoryContext;
 
   render() {
@@ -46,4 +46,4 @@ class SearchBar extends React.Component {
   }
 }
 
-export default SearchBar;
+export default SearchBarGroup;

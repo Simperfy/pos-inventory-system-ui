@@ -1,14 +1,13 @@
 import React, { useContext } from 'react';
 
-import {Form} from '../components'
-import SearchBar from '../components/SearchBar';
+import {Form, SearchBar} from '../components';
 import { InventoryContext } from '../context/InventoryContext';
 
 function MainForm() {
   const {state: {showForm} } = useContext(InventoryContext);
   return (
     <>
-      <SearchBar />
+      <SearchBar.SearchBarGroup />
 
       { showForm && <Form.FormGroup />}
     </>
