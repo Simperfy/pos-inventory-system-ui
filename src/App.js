@@ -3,10 +3,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom';
-
-import Home from './pages/HomePage';
-import SelectionScreen from './pages/SelectionPage';
-import Inventory from './pages/InventoryPage';
+import { HomePage, InventoryPage, SelectionPage } from './pages';
 import { AppContext } from './context/AppContext';
 import { getRoute } from './routeConfig';
 import Api from './Api';
@@ -79,14 +76,14 @@ class App extends React.Component {
             <Container fluid className="d-flex flex-column h-100">
               <Switch>
                 <Route path={getRoute('home')} exact >
-                  { !this.state.isLoggedIn ? <Home /> : <Redirect to={getRoute('selection')}/> }
+                  { !this.state.isLoggedIn ? <HomePage /> : <Redirect to={getRoute('selection')}/> }
                 </Route>
 
                 <this.PrivateRoute path={getRoute('selection')}>
-                  <SelectionScreen/>
+                  <SelectionPage/>
                 </this.PrivateRoute>
                 <this.PrivateRoute path={getRoute('inventory')}>
-                  <Inventory/>
+                  <InventoryPage/>
                 </this.PrivateRoute>
 
                 <Route path="*">
