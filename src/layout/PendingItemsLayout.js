@@ -21,6 +21,9 @@ class PendingItemsLayout extends React.Component {
   }
 
   render() {
+    console.log('this.context.state.pendingItems');
+    console.log(this.context.state.pendingItems);
+
     return (
       <div className="pending-items-container px-4 d-flex flex-column  justify-content-between">
         <div className="pending-item-scrollable-inventory ">
@@ -40,7 +43,7 @@ class PendingItemsLayout extends React.Component {
               quantity={pi.quantity}
               name={pi.name}
               textBelow={pi.barcode}
-              textBelow2={pi.supplier}
+              textBelow2={pi.supplierName}
             />
           ))}
         </div>

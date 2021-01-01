@@ -25,6 +25,7 @@ class Inventory extends React.Component {
         itemText: '',
         itemBarcode: '',
         suppliers: [],
+        supplierId: '',
         supplierValue: '',
         quantity: null,
         kilo: null,
@@ -118,15 +119,21 @@ class Inventory extends React.Component {
       itemText,
       itemBarcode,
       supplierValue,
+      supplierId,
       quantity,
+      suppliers
     } = this.state.mainForm;
+
+    console.log('suppliers');
+    console.log(suppliers);
 
     this.setState((prevState, props) => ({
       pendingItems: [
         {
           id: itemBarcode + this.pendingItemsCounter++,
           name: itemText,
-          supplier: supplierValue,
+          supplierName: supplierValue,
+          supplierId: supplierId,
           quantity: quantity,
           barcode: itemBarcode,
         },
@@ -221,7 +228,7 @@ class Inventory extends React.Component {
 
     this.closeSearchResults();
     this.setState((prevState, props) => ({
-      mainForm: { ...prevState.mainForm, ...newFormValue, supplierValue: newFormValue.suppliers[0].supplierName },
+      mainForm: { ...prevState.mainForm, ...newFormValue, supplierValue: newFormValue.suppliers[0].supplierName, supplierId: newFormValue.suppliers[0].id },
     }));
     this.showForm();
   };
@@ -262,7 +269,7 @@ class Inventory extends React.Component {
           </div>
         </MainLayout>
         {this.state.showConfirmModal && <ModalConfirm
-          confirmItems={this.state.pendingItems.map((pi) => ({id: pi.id, leftText: `${pi.quantity} x ${pi.name}`, rightText: pi.supplier}))}
+          confirmItems={this.state.pendingItems.map((pi) => ({id: pi.id, leftText: `${pi.quantity} x ${pi.name}`, rightText: pi.supplierName}))}
         />}
         {this.state.isLoading && <ModalLoading />}
       </InventoryContext.Provider>
