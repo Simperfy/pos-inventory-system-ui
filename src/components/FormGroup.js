@@ -13,27 +13,14 @@ import './FormGroup.css';
 class FormGroup extends React.Component {
   static contextType = InventoryContext;
 
-  handleFormInput = (e) => {
-    const quantity = parseInt(e.target.value);
-    this.context.setState((prevState, props) => ({
-      mainForm: { ...prevState.mainForm, quantity: quantity },
-    }));
-  };
-
-  handleSelectChange = (e) => {
-    this.context.setState((prevState, props) => ({
-      mainForm: { ...prevState.mainForm, supplierValue: e.target.value },
-    }));
-  };
-
   render() {
     const {
       suppliers,
       itemText,
       itemBarcode,
-      supplierValue,
-      quantity,
-      kilo,
+      supplierId,
+      // quantity,
+      // kilo,
     } = this.context.state.mainForm;
 
     return (
@@ -43,14 +30,14 @@ class FormGroup extends React.Component {
             <FormStaticText text={itemText} textBelow={itemBarcode} />
             <FormInput
               formType="number"
-              onChange={this.handleFormInput}
+              onChange={this.context.handleQuantityInputChange}
               label={'Qty'}
               placeHolder={'1 pcs'}
               min="1"
             />
             <FormSelect
-              value={supplierValue}
-              onChange={this.handleSelectChange}
+              value={supplierId}
+              onChange={this.context.handleSupplierSelectChange}
               label={'Supplier'}
               options={suppliers.map((s) => ({id: s.id, value: s.id, name: s.supplierName}))}
             />

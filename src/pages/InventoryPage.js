@@ -26,7 +26,7 @@ class Inventory extends React.Component {
         itemBarcode: '',
         suppliers: [],
         supplierId: '',
-        supplierValue: '',
+        supplierName: '',
         quantity: null,
         kilo: null,
       },
@@ -47,13 +47,13 @@ class Inventory extends React.Component {
   }
 
 
-  isValidForm() {
+  isValidForm = () => {
     const mainForm = this.state.mainForm;
     const nonEmptyFields = [
       'itemText',
       'itemBarcode',
       // 'suppliers',
-      'supplierValue',
+      'supplierName',
       'quantity',
       // 'kilo',
     ];
@@ -71,24 +71,24 @@ class Inventory extends React.Component {
   checkDuplicate = (pi) => {
     const {
       itemBarcode,
-      supplierValue,
+      supplierId
     } = this.state.mainForm;
 
-    return pi.barcode === itemBarcode && pi.supplier === supplierValue;
+    return pi.barcode === itemBarcode && pi.supplierId === supplierId;
   }
 
   filterDuplicate = (pi) => {
     const {
       itemBarcode,
-      supplierValue,
+      supplierId,
     } = this.state.mainForm;
 
     if (pi.barcode !== itemBarcode) return true;
-    if (pi.barcode === itemBarcode && pi.supplier !== supplierValue) return true;
+    if (pi.barcode === itemBarcode && pi.supplierId !== supplierId) return true;
     return false;
   }
 
-  removeDuplicate() {
+  removeDuplicate = () => {
     const isDuplicated = this.state.pendingItems.some(this.checkDuplicate);
 
     if (isDuplicated) {
@@ -116,10 +116,10 @@ class Inventory extends React.Component {
     const {
       itemText,
       itemBarcode,
-      supplierValue,
+      supplierName,
       supplierId,
       quantity,
-      suppliers
+      // suppliers
     } = this.state.mainForm;
 
     this.setState((prevState, props) => ({
@@ -127,7 +127,7 @@ class Inventory extends React.Component {
         {
           id: itemBarcode + this.pendingItemsCounter++,
           name: itemText,
-          supplierName: supplierValue,
+          supplierName: supplierName,
           supplierId: supplierId,
           quantity: quantity,
           barcode: itemBarcode,
@@ -139,7 +139,7 @@ class Inventory extends React.Component {
     this.resetForm();
   };
 
-  resetForm = () =>
+  resetForm = () => {
     this.setState((prevState, props) => ({
       mainForm: {
         ...prevState.mainForm,
@@ -147,11 +147,12 @@ class Inventory extends React.Component {
         itemBarcode: '',
         // suppliers: [],
         supplierId: '',
-        supplierValue: '',
+        supplierName: '',
         quantity: null,
         kilo: null,
       },
     }));
+  }
 
   removePendingItem = (id) => {
     this.setState((prevState, props) => ({
@@ -229,7 +230,7 @@ class Inventory extends React.Component {
         mainForm: {
           ...prevState.mainForm,
           ...newFormValue,
-          supplierValue: newFormValue.suppliers[0].supplierName,
+          supplierName: newFormValue.suppliers[0].supplierName,
           supplierId: newFormValue.suppliers[0].id,
         },
       };
@@ -240,6 +241,23 @@ class Inventory extends React.Component {
   handleSubmitConfirm = (e) => {
     console.log('submit')
     console.log(this.state.pendingItems);
+  }
+
+  handleSupplierSelectChange = (e) => {
+    this.setState((prevState, props) => {
+      const supplierName = prevState.mainForm.suppliers.find(s=>s.id === e.target.value).supplierName;
+
+      return {
+        mainForm: { ...prevState.mainForm, supplierId: e.target.value, supplierName: supplierName },
+      };
+    });
+  }
+
+  handleQuantityInputChange = (e) => {
+    const quantity = parseInt(e.target.value);
+    this.setState((prevState, props) => ({
+      mainForm: { ...prevState.mainForm, quantity: quantity },
+    }));
   }
 
   render() {
@@ -258,13 +276,15 @@ class Inventory extends React.Component {
           handleSearchBarFocus: this.handleSearchBarFocus,
           handleSearchBarBlur: this.handleSearchBarBlur,
           handleSubmitConfirm: this.handleSubmitConfirm,
+          handleSupplierSelectChange: this.handleSupplierSelectChange,
+          handleQuantityInputChange: this.handleQuantityInputChange,
         }}
       >
         <MainLayout>
           <div className="container-fluid">
             <div className="row h-100 pb-4">
               <div className="col-md-8">
-                <MainFormLayout></MainFormLayout>
+                <MainFormLayout />
               </div>
               <div className="col-md-4">
                 <PendingItemsLayout />
