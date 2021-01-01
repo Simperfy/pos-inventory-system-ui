@@ -5,7 +5,7 @@ import { InventoryContext } from '../context/InventoryContext';
 
 import './PendingItem.css';
 
-function PendingItem({ id, quantity, name, textBelow }) {
+function PendingItem({ id, quantity, name, textBelow, textBelow2, textRight }) {
   const { removePendingItem } = useContext(InventoryContext);
 
   return (
@@ -15,11 +15,14 @@ function PendingItem({ id, quantity, name, textBelow }) {
           <p>
             {quantity} x {name}
           </p>
-          <button onClick={() => removePendingItem(id)} type="button">
-            <DeleteIcon className="delete-icon" />
-          </button>
+          <div className="d-flex" style={{ maxWidth: "10rem", }}>
+            <p className="text-right">{ textRight }</p>
+            <button onClick={() => removePendingItem(id)} type="button">
+              <DeleteIcon className="delete-icon" />
+            </button>
+          </div>
         </div>
-        <span className="barcode">{textBelow}</span>
+        <span style={{lineHeight: 1}} className="barcode">{textBelow} {textBelow2 && <br/>} {textBelow2}</span>
       </div>
     </>
   );

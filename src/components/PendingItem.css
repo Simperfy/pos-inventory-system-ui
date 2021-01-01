@@ -19,6 +19,12 @@
   overflow-y: auto;
   max-height: 35rem;
 }
+
+.pending-item span, .pending-item p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .pending-item p {
   font-size: 1.5rem;
   margin: 0;
@@ -42,4 +48,15 @@
   height: 1.5rem;
   width: 1.5rem;
   fill: rgba(255, 0, 0, 0.8);
+}
+
+.pending-item .text-right {
+  font-size: 0.8rem;
+  display: inline-block;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.pending-item button {
+  display: inline-block;
+  color: rgba(0, 0, 0, 0.7);
 }
