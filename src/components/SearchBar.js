@@ -35,7 +35,7 @@ class SearchBar extends React.Component {
                   key={res.id}
                   name={res.name}
                   barcode={res.barcode}
-                  onClick={() => this.context.handleSearchBarItemClick({itemText: res.name, itemBarcode: res.id})}
+                  onClick={() => this.context.handleSearchBarItemClick({ itemText: res.name, itemBarcode: res.id, suppliers: res.suppliers })}
                 />
               ))}
             </div>

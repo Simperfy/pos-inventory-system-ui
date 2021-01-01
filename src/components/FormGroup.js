@@ -52,7 +52,7 @@ class FormGroup extends React.Component {
               value={supplierValue}
               onChange={this.handleSelectChange}
               label={'Supplier'}
-              options={suppliers}
+              options={suppliers.map((s) => ({id: s.id, value: s.id, name: s.supplierName}))}
             />
             <div className="form-btn-group">
               <FormButton

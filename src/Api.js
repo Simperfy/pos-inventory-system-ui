@@ -20,6 +20,12 @@ export default class Api {
     });
   }
 
+  // static async getSuppliers(jwt) {
+  //   return axios.get(`${env.API_URL}/suppliers`, {
+  //     headers: { Authorization: `Bearer ${jwt}` },
+  //   });
+  // }
+
   static async createStocks(jwt, data) {}
 
   static setParams = (url, params) => {

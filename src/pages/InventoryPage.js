@@ -167,12 +167,26 @@ class Inventory extends React.Component {
   closeSearchResults = () => this.setState({ showSearchResults: false });
   showSearchResults = () => this.setState({ showSearchResults: true });
 
+  mapItems = (d) => {
+    return {
+      id: d._id,
+      barcode: d._id,
+      name: d.item_name,
+      kiloAble: d.kiloable,
+      suppliers: d.suppliers.map((s) => ({
+        id: s.id,
+        supplierName: s.supplier_name,
+      })),
+    }
+  }
+
   handleSearchBarChange = (e) => {
     const val = e.target.value;
 
     if (val) {
       Api.getItems(this.context.state.jwt, {item_name_contains: val}).then(({ data }) => {
-        data = data.map((d) => ({id: d._id, barcode: d._id, name: d.item_name, kiloAble: d.kiloable}));
+        data = data.map(this.mapItems);
+
         this.setState({searchResults: data});
         this.showSearchResults();
       });
@@ -187,12 +201,7 @@ class Inventory extends React.Component {
     const val = e.target.value;
     if (!val) {
       Api.getItems(this.context.state.jwt, { _limit: 10 }).then(({ data }) => {
-        data = data.map((d) => ({
-          id: d._id,
-          barcode: d._id,
-          name: d.item_name,
-          kiloAble: d.kiloable,
-        }));
+        data = data.map(this.mapItems);
         this.setState({ searchResults: data });
         this.showSearchResults();
       });
@@ -204,6 +213,8 @@ class Inventory extends React.Component {
   }
 
   handleSearchBarItemClick = (newFormValue) => {
+    console.log('newFormValue');
+    console.log(newFormValue);
     const fGRef = this.state.formGroupRef.current;
     if (fGRef) {
       fGRef.classList.remove('form-group-container');
@@ -212,7 +223,7 @@ class Inventory extends React.Component {
 
     this.closeSearchResults();
     this.setState((prevState, props) => ({
-      mainForm: { ...prevState.mainForm, ...newFormValue, supplierValue: prevState.mainForm.suppliers[0].value },
+      mainForm: { ...prevState.mainForm, ...newFormValue, supplierValue: newFormValue.suppliers[0].supplierName },
     }));
     this.showForm();
   };
