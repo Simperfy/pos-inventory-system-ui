@@ -44,13 +44,15 @@ class PendingItemsLayout extends React.Component {
             />
           ))}
         </div>
-        <FormButton
+
+        {this.context.state.pendingItems.length > 0 &&
+         <FormButton
           color="blue"
           solid
           style={{ padding: 0, width: '100%' }}
           text="Submit Inventory"
           handleClick={() => this.context.setState({ showConfirmModal: true })}
-        />
+        />}
       </div>
     );
   }

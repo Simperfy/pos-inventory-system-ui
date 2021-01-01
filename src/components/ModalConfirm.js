@@ -17,15 +17,17 @@ class ModalConfirm extends React.Component {
             <div>
               <h4>Adding Items to inventory:</h4>
               <div className="confirm-item-scrollable">
-                {this.context.state.confirmItems.map((ci) => (
+                {this.props.confirmItems.map((ci) => (
                   <div
                     key={ci.id}
                     className="d-flex justify-content-between confirm-item"
                   >
                     <span className="confirm-item-text">
-                      {ci.quantity} x {ci.item}
+                      {ci.leftText}
                     </span>
-                    <span className="confirm-item-info">{ci.info}</span>
+                    <span className="confirm-item-info">
+                      {ci.rightText}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -36,9 +38,7 @@ class ModalConfirm extends React.Component {
                 color="green"
                 text="Confirm"
                 solid
-                handleClick={() =>
-                  this.context.setState({ showConfirmModal: false })
-                }
+                handleClick={this.context.handleSubmitConfirm}
                 style={{ fontSize: '1rem', margin: 0 }}
               />
               <FormButton

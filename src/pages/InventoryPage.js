@@ -29,7 +29,6 @@ class Inventory extends React.Component {
         quantity: null,
         kilo: null,
       },
-      confirmItems: [], // TODO: Merge this with pending items
       showConfirmModal: false,
       showForm: false,
       searchResults: [],
@@ -42,24 +41,6 @@ class Inventory extends React.Component {
         id: i,
         name: `Supplier ${i}`,
         value: `supplier ${i}`,
-      });
-    }
-
-    /* for (let i = 0; i < 50; i++) {
-      this.state.searchResults.push({
-        id: `${i}`,
-        name: `item ${i}`,
-        barcode: `5fe2ff51ab328745dc2312${i.toString().padStart(2, '0')}`,
-        kiloAble: i > 10,
-      });
-    } */
-
-    for (let i = 0; i < 10; i++) {
-      this.state.confirmItems.push({
-        id: i,
-        quantity: i,
-        item: `item ${i}`,
-        info: `5fe2ff51ab328745dc23124${i}`,
       });
     }
   }
@@ -234,6 +215,11 @@ class Inventory extends React.Component {
     this.showForm();
   };
 
+  handleSubmitConfirm = (e) => {
+    console.log('submit')
+    console.log(this.state.pendingItems);
+  }
+
   render() {
     return (
       <InventoryContext.Provider
@@ -249,6 +235,7 @@ class Inventory extends React.Component {
           handleSearchBarItemClick: this.handleSearchBarItemClick,
           handleSearchBarFocus: this.handleSearchBarFocus,
           handleSearchBarBlur: this.handleSearchBarBlur,
+          handleSubmitConfirm: this.handleSubmitConfirm,
         }}
       >
         <MainLayout>
@@ -263,7 +250,9 @@ class Inventory extends React.Component {
             </div>
           </div>
         </MainLayout>
-        {this.state.showConfirmModal && <ModalConfirm />}
+        {this.state.showConfirmModal && <ModalConfirm
+          confirmItems={this.state.pendingItems.map((pi) => ({id: pi.id, leftText: `${pi.quantity} x ${pi.name}`, rightText: pi.supplier}))}
+        />}
         {this.state.isLoading && <ModalLoading />}
       </InventoryContext.Provider>
     );
