@@ -25,7 +25,7 @@ class Inventory extends React.Component {
         sacks: [],
         supplierId: '',
         supplierName: '',
-        quantity: 0,
+        quantity: '',
         kilo: 0,
       },
       showConfirmModal: false,
@@ -139,7 +139,7 @@ class Inventory extends React.Component {
         sacks: [],
         supplierId: '',
         supplierName: '',
-        quantity: 0,
+        quantity: '',
         kilo: 0,
       },
     }));

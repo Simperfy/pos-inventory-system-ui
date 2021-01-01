@@ -16,6 +16,7 @@ class FormGroupInventorySack extends React.Component {
       itemBarcode,
       supplierId,
       sacks,
+      quantity,
       kilo,
     } = this.context.state.mainForm;
 
@@ -25,6 +26,7 @@ class FormGroupInventorySack extends React.Component {
           <div className="d-flex flex-column main-form">
             <Form.FormStaticText text={itemText} textBelow={itemBarcode} />
             <Form.FormInput
+              value={quantity}
               formType="number"
               onChange={this.context.handleQuantityInputChange}
               label={'Qty'}
