@@ -2,14 +2,11 @@ import React from 'react';
 import SearchBarItem from './SearchBarItem';
 
 import { ReactComponent as Magnify } from '../../assets/icons/magnify.svg';
-import { InventoryContext } from '../../context/InventoryContext';
 
 import './SearchBarGroup.css';
 import '../../assets/css/global-style.css';
 
 class SearchBarGroup extends React.Component {
-  static contextType = InventoryContext;
-
   render() {
     return (
       <div className="row">
@@ -19,23 +16,23 @@ class SearchBarGroup extends React.Component {
               className="search-bar-input"
               type="text"
               placeholder="Item / 5fe2ff51ab328745dc231241"
-              onChange={this.context.handleSearchBarChange}
-              onFocus={this.context.handleSearchBarFocus}
-              onBlur={this.context.handleSearchBarBlur}
+              onChange={this.props.handleSearchBarChange}
+              onFocus={this.props.handleSearchBarFocus}
+              onBlur={this.props.handleSearchBarBlur}
             />
             <button type="button" className="search-btn align-text-bottom">
               <Magnify className="search-icon" />
             </button>
           </div>
 
-          {this.context.state.showSearchResults && (
+          {this.props.showSearchResults && (
             <div className="search-items-container">
-              {this.context.state.searchResults.map((res) => (
+              {this.props.searchResults.map((res) => (
                 <SearchBarItem
                   key={res.id}
                   name={res.name}
                   barcode={res.barcode}
-                  onClick={() => this.context.handleSearchBarItemClick({ itemText: res.name, itemBarcode: res.id, suppliers: res.suppliers })}
+                  onClick={() => this.props.handleSearchBarItemClick(res)}
                 />
               ))}
             </div>

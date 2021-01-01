@@ -29,6 +29,7 @@ class Inventory extends React.Component {
       },
       showConfirmModal: false,
       showForm: false,
+      formType: null,
       searchResults: [],
       showSearchResults: false,
       formGroupRef: React.createRef()
@@ -154,7 +155,7 @@ class Inventory extends React.Component {
   };
 
   closeForm = () => this.setState({ showForm: false });
-  showForm = () => this.setState({ showForm: true });
+  showForm = (type) => this.setState({ showForm: true, formType: type });
 
   closeSearchResults = () => this.setState({ showSearchResults: false });
   showSearchResults = () => this.setState({ showSearchResults: true });
