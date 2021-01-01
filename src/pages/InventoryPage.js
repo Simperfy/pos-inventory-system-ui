@@ -213,8 +213,6 @@ class Inventory extends React.Component {
   }
 
   handleSearchBarItemClick = (newFormValue) => {
-    console.log('newFormValue');
-    console.log(newFormValue);
     const fGRef = this.state.formGroupRef.current;
     if (fGRef) {
       fGRef.classList.remove('form-group-container');
