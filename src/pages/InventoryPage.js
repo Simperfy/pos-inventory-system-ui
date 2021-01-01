@@ -99,22 +99,37 @@ class Inventory extends React.Component {
 
       if (isConfirmed) {
         this.setState((prevState, props) => {
+          console.log(prevState.pendingItems);
+          console.log(itemBarcode);
+          console.log(supplierValue);
+
           const newPendingItems = prevState.pendingItems.filter(
-            (pi) => pi.id !== itemBarcode && pi.supplier !== supplierValue
+            (pi) => {
+              console.log(pi);
+              if (pi.textBelow !== itemBarcode) return true;
+              if (pi.textBelow === itemBarcode && pi.supplier !== supplierValue) return true;
+              return false;
+            }
           );
+          console.log(newPendingItems);
 
           return {
             pendingItems: newPendingItems,
           };
         });
+
+        return true; // if there's duplicate and already replace, update state
       }
+
+      return false; // if there's duplicate and confirm = no, don't update state
     }
+
+    return true; // if no duplicate update state
   }
 
   addPendingItems = () => {
     if (!this.isValidForm()) return;
-
-    this.removeDuplicate();
+    if(!this.removeDuplicate()) return;
 
     // TODO: Prevent duplicates
     // TODO: Ask user if he wants to replace the existing item
