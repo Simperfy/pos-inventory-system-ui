@@ -33,6 +33,7 @@ class Inventory extends React.Component {
       showForm: false,
       searchResults: [],
       showSearchResults: false,
+      formGroupRef: React.createRef()
     };
 
     for (let i = 0; i < 3; i++) {
@@ -88,6 +89,7 @@ class Inventory extends React.Component {
 
   addPendingItems = () => {
     if (!this.isValidForm()) return;
+
     // TODO: Prevent duplicates
     // TODO: Ask user if he wants to replace the existing item
     this.counter++;
@@ -150,7 +152,34 @@ class Inventory extends React.Component {
     }
   };
 
+  handleSearchBarFocus = (e) => {
+    const val = e.target.value;
+    if (!val) {
+      Api.getItems(this.context.state.jwt, { _limit: 10 }).then(({ data }) => {
+        data = data.map((d) => ({
+          id: d._id,
+          barcode: d._id,
+          name: d.item_name,
+          kiloAble: d.kiloable,
+        }));
+        this.setState({ searchResults: data });
+        this.showSearchResults();
+      });
+    } else if (val && this.state.searchResults.length > 0 && !this.state.showSearchResults) this.showSearchResults();
+  }
+
+  handleSearchBarBlur = (e) => {
+    setTimeout(() => this.closeSearchResults(), 100);
+  }
+
   handleSearchBarItemClick = (newFormValue) => {
+    const fGRef = this.state.formGroupRef.current;
+    if (fGRef) {
+      console.log(fGRef);
+      fGRef.classList.remove('form-group-container');
+      setTimeout(() => fGRef.classList.add('form-group-container'), 100)
+    }
+
     this.closeSearchResults();
     this.setState((prevState, props) => ({
       mainForm: { ...prevState.mainForm, ...newFormValue, supplierValue: prevState.mainForm.suppliers[0].value },
@@ -171,6 +200,8 @@ class Inventory extends React.Component {
           showForm: this.showForm,
           handleSearchBarChange: this.handleSearchBarChange,
           handleSearchBarItemClick: this.handleSearchBarItemClick,
+          handleSearchBarFocus: this.handleSearchBarFocus,
+          handleSearchBarBlur: this.handleSearchBarBlur,
         }}
       >
         <MainLayout>

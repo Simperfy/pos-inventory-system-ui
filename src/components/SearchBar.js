@@ -20,6 +20,8 @@ class SearchBar extends React.Component {
               type="text"
               placeholder="Item / 5fe2ff51ab328745dc231241"
               onChange={this.context.handleSearchBarChange}
+              onFocus={this.context.handleSearchBarFocus}
+              onBlur={this.context.handleSearchBarBlur}
             />
             <button type="button" className="search-btn align-text-bottom">
               <Magnify className="search-icon" />

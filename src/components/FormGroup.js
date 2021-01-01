@@ -37,7 +37,7 @@ class FormGroup extends React.Component {
     } = this.context.state.mainForm;
 
     return (
-      <div className="row">
+      <div className="row form-group-container" ref={this.context.state.formGroupRef}>
         <div className="col-md-6">
           <div className="d-flex flex-column main-form">
             <FormStaticText text={itemText} textBelow={itemBarcode} />
