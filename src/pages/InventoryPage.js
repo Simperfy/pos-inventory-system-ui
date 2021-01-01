@@ -8,8 +8,6 @@ import Api from '../Api';
 import { InventoryContext } from '../context/InventoryContext';
 import { AppContext } from '../context/AppContext';
 
-import './InventoryPage.css';
-
 class Inventory extends React.Component {
   static contextType = AppContext;
 

@@ -18,12 +18,17 @@ class PendingItemsLayout extends React.Component {
       padding: 0,
       marginBottom: '1.5rem',
     };
+
+    this.pendingItemsContainerStyle = {
+      borderLeft: "0.5px solid rgba(0, 0, 0, 0.2)",
+      height: "100%"
+    }
   }
 
   render() {
 
     return (
-      <div className="pending-items-container px-4 d-flex flex-column  justify-content-between">
+      <div style={this.pendingItemsContainerStyle} className="px-4 d-flex flex-column justify-content-between">
         <div className="pending-item-scrollable-inventory ">
           {this.context.state.pendingItems.length > 0 && (
             <Form.FormButton
