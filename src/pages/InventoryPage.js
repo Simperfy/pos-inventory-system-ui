@@ -16,6 +16,7 @@ class Inventory extends React.Component {
 
   constructor(props) {
     super(props);
+    this.pendingItemsCounter = 0;
 
     this.state = {
       isLoading: false,
@@ -63,7 +64,6 @@ class Inventory extends React.Component {
     }
   }
 
-  counter = 0; // TODO: DELETE AFTER MOCKING
 
   isValidForm() {
     const mainForm = this.state.mainForm;
@@ -77,7 +77,6 @@ class Inventory extends React.Component {
     ];
 
     for (const key of Object.keys(mainForm)) {
-      console.log(key + ' ' + mainForm[key], !mainForm[key]);
       if (nonEmptyFields.includes(key) && !mainForm[key]) {
         window.alert('There are invalid values');
         return false;
@@ -87,25 +86,59 @@ class Inventory extends React.Component {
     return true;
   }
 
+  removeDuplicate() {
+    const {
+      itemBarcode,
+      supplierValue,
+    } = this.state.mainForm;
+
+    const isDuplicated = this.state.pendingItems.some((pi) => pi.textBelow === itemBarcode && pi.supplier === supplierValue);
+
+    if (isDuplicated) {
+      const isConfirmed = window.confirm("Item already added, do you want to replace the item?");
+
+      if (isConfirmed) {
+        this.setState((prevState, props) => {
+          const newPendingItems = prevState.pendingItems.filter(
+            (pi) => pi.id !== itemBarcode && pi.supplier !== supplierValue
+          );
+
+          return {
+            pendingItems: newPendingItems,
+          };
+        });
+      }
+    }
+  }
+
   addPendingItems = () => {
     if (!this.isValidForm()) return;
 
+    this.removeDuplicate();
+
     // TODO: Prevent duplicates
     // TODO: Ask user if he wants to replace the existing item
-    this.counter++;
+    const {
+      itemText,
+      itemBarcode,
+      supplierValue,
+      quantity,
+    } = this.state.mainForm;
+
     this.setState((prevState, props) => ({
       pendingItems: [
         {
-          id: this.counter,
-          name: `item ${this.counter}`,
-          quantity: this.state.mainForm.quantity,
-          textBelow: '5fe2ff51ab328745dc231243',
+          id: itemBarcode + this.pendingItemsCounter++,
+          name: itemText,
+          supplier: supplierValue,
+          quantity: quantity,
+          textBelow: itemBarcode,
         },
         ...prevState.pendingItems,
       ],
     }));
     this.closeForm();
-    // this.resetForm();
+    this.resetForm();
   };
 
   resetForm = () =>
@@ -175,7 +208,6 @@ class Inventory extends React.Component {
   handleSearchBarItemClick = (newFormValue) => {
     const fGRef = this.state.formGroupRef.current;
     if (fGRef) {
-      console.log(fGRef);
       fGRef.classList.remove('form-group-container');
       setTimeout(() => fGRef.classList.add('form-group-container'), 100)
     }
