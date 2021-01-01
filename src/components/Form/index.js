@@ -8,7 +8,7 @@ import FormStaticText from "./FormStaticText";
 export default {
     FormButton,
     FormDetailText,
-    FormGroup: FormGroupInventoryQuantity,
+    FormGroupInventoryQuantity,
     FormInput,
     FormSelect,
     FormStaticText

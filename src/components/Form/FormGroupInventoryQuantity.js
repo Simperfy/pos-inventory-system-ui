@@ -4,7 +4,7 @@ import {Form} from '../index';
 
 import { InventoryContext } from '../../context/InventoryContext';
 
-import './FormGroupInventoryQuantity.css';
+import './FormGroup.css';
 
 class FormGroupInventoryQuantity extends React.Component {
   static contextType = InventoryContext;

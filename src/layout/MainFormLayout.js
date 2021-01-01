@@ -9,7 +9,7 @@ function MainForm() {
     <>
       <SearchBar.SearchBarGroup />
 
-      { showForm && <Form.FormGroup />}
+      { showForm && <Form.FormGroupInventoryQuantity />}
     </>
   );
 }
