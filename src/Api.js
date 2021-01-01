@@ -20,6 +20,8 @@ export default class Api {
     });
   }
 
+  static async createStocks(jwt, data) {}
+
   static setParams = (url, params) => {
     url = new URL(url);
     const search_params = url.searchParams;

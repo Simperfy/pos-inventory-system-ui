@@ -176,6 +176,8 @@ class Inventory extends React.Component {
         this.setState({searchResults: data});
         this.showSearchResults();
       });
+    } else if (!val && this.state.searchResults.length > 0) {
+      this.showSearchResults();
     } else {
       this.closeSearchResults();
     }
