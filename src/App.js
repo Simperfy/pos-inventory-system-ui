@@ -13,7 +13,18 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { isReady: false, isLoggedIn: false, user: null, jwt: null };
+    this.state = {
+      isReady: false,
+      isLoggedIn: false,
+      user: null,
+      jwt: null,
+      isDisconnected: false
+    };
+
+    this.style = {
+      noInternetDiv: {backgroundColor: '#ff8100', width: '100vw', position: 'fixed'},
+      noInternetP: {textAlign: 'center', fontSize: '1.5rem', color: 'white', margin: 'auto'}
+    }
   }
 
   componentDidMount() {
@@ -21,10 +32,39 @@ class App extends React.Component {
     const jwt = localStorage.getItem('jwt');
     if (jwt) this.autoSignIn(jwt);
     else this.setState({ isReady: true });
+
+    // Handle internet disconnection
+    this.handleConnectionChange();
+    window.addEventListener('online', this.handleConnectionChange);
+    window.addEventListener('offline', this.handleConnectionChange);
   }
 
   componentWillUnmount() {
     this._isMounted = false;
+
+    // Handle internet disconnection
+    window.removeEventListener('online', this.handleConnectionChange);
+    window.removeEventListener('offline', this.handleConnectionChange);
+  }
+
+  handleConnectionChange = () => {
+    const condition = navigator.onLine ? 'online' : 'offline';
+    if (condition === 'online') {
+      const webPing = setInterval(
+          () => {
+            fetch('//google.com', {
+              mode: 'no-cors',
+            })
+                .then(() => {
+                  this.setState({ isDisconnected: false }, () => {
+                    return clearInterval(webPing)
+                  });
+                }).catch(() => this.setState({ isDisconnected: true }) )
+          }, 2000);
+      return;
+    }
+
+    return this.setState({ isDisconnected: true });
   }
 
   autoSignIn = (jwt) => {
@@ -73,6 +113,11 @@ class App extends React.Component {
       >
         <Router>
           <div className="vh-100 vw-100" style={{ backgroundColor: '#F2F2F2' }}>
+              { this.state.isDisconnected && (
+              <div style={this.style.noInternetDiv}>
+                <p style={this.style.noInternetP}>Internet connection lost</p>
+              </div>)
+              }
             <Container fluid className="d-flex flex-column h-100">
               <Switch>
                 <Route path={getRoute('home')} exact >

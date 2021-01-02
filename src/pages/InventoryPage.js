@@ -192,7 +192,7 @@ class Inventory extends React.Component {
 
         this.setState({searchResults: data});
         this.showSearchResults();
-      }, (err) => window.alert('No internet connection'));
+      });
     } else if (!val && this.state.searchResults.length > 0) {
       this.showSearchResults();
     } else {
