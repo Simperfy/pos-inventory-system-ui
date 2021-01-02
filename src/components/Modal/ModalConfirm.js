@@ -46,7 +46,7 @@ class ModalConfirm extends React.Component {
                 text="Cancel"
                 solid
                 handleClick={() =>
-                  this.context.setState({ showConfirmModal: false })
+                  this.context.setState({ isConfirming: false })
                 }
                 style={{ fontSize: '1rem', margin: 0 }}
               />

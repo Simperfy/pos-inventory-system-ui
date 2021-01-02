@@ -9,7 +9,7 @@ import env from 'react-dotenv';
 import { getRoute } from '../routeConfig';
 import {AppContext} from '../context/AppContext';
 import { withRouter } from 'react-router-dom'
-import Api from '../Api';
+import Api from '../api/Api';
 
 class Home extends React.Component {
   _isMounted = false;

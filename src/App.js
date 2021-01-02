@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-ro
 import { HomePage, InventoryPage, SelectionPage } from './pages';
 import { AppContext } from './context/AppContext';
 import { getRoute } from './routeConfig';
-import Api from './Api';
+import Api from './api/Api';
 
 class App extends React.Component {
   _isMounted = false;
@@ -29,12 +29,12 @@ class App extends React.Component {
 
   autoSignIn = (jwt) => {
     Api.getCurrentUser(jwt).then(
-      ({ data: { user } }) => {
+      ({ data }) => {
         this._isMounted &&
           this.setState({
             isReady: true,
             isLoggedIn: true,
-            user: user,
+            user: data,
             jwt: jwt,
           });
       },

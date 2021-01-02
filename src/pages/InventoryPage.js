@@ -4,9 +4,12 @@ import {Modal} from '../components';
 import MainLayout from '../layout/MainLayout';
 import MainFormLayoutInventory from '../layout/MainFormLayoutInventory';
 import PendingItemsLayout from '../layout/PendingItemsLayout';
-import Api from '../Api';
+import Api from '../api/Api';
+import {ModelStocks} from "../api/models";
+import { withRouter } from 'react-router-dom'
 import { InventoryContext } from '../context/InventoryContext';
 import { AppContext } from '../context/AppContext';
+import {getRoute} from "../routeConfig";
 
 class Inventory extends React.Component {
   static contextType = AppContext;
@@ -16,7 +19,12 @@ class Inventory extends React.Component {
     this.pendingItemsCounter = 0;
 
     this.state = {
+      /*Modals*/
+      isSuccess: false,
+      isFailed: false,
       isLoading: false,
+      isConfirming: false,
+      /*Forms*/
       pendingItems: [],
       mainForm: {
         itemText: '',
@@ -28,12 +36,11 @@ class Inventory extends React.Component {
         quantity: '',
         kilo: 0,
       },
-      showConfirmModal: false,
       showForm: false,
+      formGroupRef: React.createRef(),
       formType: null,
       searchResults: [],
-      showSearchResults: false,
-      formGroupRef: React.createRef()
+      showSearchResults: false
     }
   }
 
@@ -51,7 +58,7 @@ class Inventory extends React.Component {
 
     for (const key of Object.keys(mainForm)) {
       if (nonEmptyFields.includes(key) && !mainForm[key]) {
-        window.alert('There are invalid values');
+        window.alert(`Invalid "${key.toUpperCase()}" values`);
         return false;
       }
     }
@@ -232,8 +239,16 @@ class Inventory extends React.Component {
   };
 
   handleSubmitConfirm = (e) => {
-    console.log('submit')
-    console.log(this.state.pendingItems);
+    console.log('submit');
+    this.setState({isConfirming: false, isLoading: true});
+
+    const jwt = this.context.state.jwt;
+    const id = this.context.state.user.id;
+    const pendingItems = this.state.pendingItems;
+    ModelStocks.createBatch(jwt, id, pendingItems)
+        .then((data) =>
+          setTimeout(() => this.setState({isSuccess: true, pendingItems: []}), 1000),
+            (err) => setTimeout(() => this.setState({isFailed: true}), 1000));
   }
 
   handleSupplierSelectChange = (e) => {
@@ -258,6 +273,10 @@ class Inventory extends React.Component {
     this.setState((prevState, props) => ({
       mainForm: { ...prevState.mainForm, kilo: kilo },
     }));
+  }
+
+  handleModalSuccessClick = (e) => {
+    this.props.history.push(getRoute('selection'))
   }
 
   render() {
@@ -293,13 +312,15 @@ class Inventory extends React.Component {
             </div>
           </div>
         </MainLayout>
-        {this.state.showConfirmModal && <Modal.ModalConfirm
+        {this.state.isConfirming && <Modal.ModalConfirm
           confirmItems={this.state.pendingItems.map((pi) => ({id: pi.id, leftText: `${pi.quantity} x ${pi.name} ${pi.kilo > 0 ? `(${pi.kilo} kg)` : ''}`, rightText: pi.supplierName}))}
         />}
         {this.state.isLoading && <Modal.ModalLoading />}
+        {this.state.isSuccess && <Modal.ModalSuccess handleClick={this.handleModalSuccessClick} />}
+        {this.state.isFailed && <Modal.ModalFailed />}
       </InventoryContext.Provider>
     );
   }
 }
 
-export default Inventory;
+export default withRouter(Inventory);

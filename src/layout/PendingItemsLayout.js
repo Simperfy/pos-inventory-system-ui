@@ -57,7 +57,7 @@ class PendingItemsLayout extends React.Component {
           solid
           style={{ padding: 0, width: '100%' }}
           text="Submit Inventory"
-          handleClick={() => this.context.setState({ showConfirmModal: true })}
+          handleClick={() => this.context.setState({ isConfirming: true })}
         />}
       </div>
     );
