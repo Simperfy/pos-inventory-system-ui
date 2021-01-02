@@ -10,7 +10,7 @@ class ModalFailed extends React.Component {
   render() {
     return (
       <>
-        <ModalLayout handleClose={() => console.log('close')}>
+        <ModalLayout handleClose={this.props.handleClose}>
           <div className="d-flex flex-column h-75 w-100 px-3 confirm-item-container justify-content-between align-items-center text-center">
             <div>
               <FailedIcon width="16rem" />
@@ -23,7 +23,7 @@ class ModalFailed extends React.Component {
                 text="Try again"
                 color="red"
                 solid
-                handleClick={() => console.log('home')}
+                handleClick={this.props.handleClick}
               />
             </div>
           </div>

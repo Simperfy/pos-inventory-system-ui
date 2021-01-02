@@ -2,7 +2,7 @@ import React from 'react';
 
 import Row from 'react-bootstrap/Row';
 
-import CloseBtn from '../assets/icons/close.svg';
+import { ReactComponent as CloseBtn } from '../assets/icons/close.svg';
 import './ModalLayout.css';
 
 function ModalLayout({ handleClose, children }) {
@@ -12,8 +12,8 @@ function ModalLayout({ handleClose, children }) {
       <div className="modal-container">
         <Row className="flex-column align-items-center justify-content-between h-100">
           {handleClose && (
-            <a href="/#" className="modal-close" onClick={() => handleClose()}>
-              <img src={CloseBtn} style={{ width: 36 }} alt="close button" />
+            <a href="/#" className="modal-close" onClick={handleClose}>
+                <CloseBtn width="36"/>
             </a>
           )}
 

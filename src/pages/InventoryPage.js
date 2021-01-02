@@ -192,7 +192,7 @@ class Inventory extends React.Component {
 
         this.setState({searchResults: data});
         this.showSearchResults();
-      });
+      }, (err) => window.alert('No internet connection'));
     } else if (!val && this.state.searchResults.length > 0) {
       this.showSearchResults();
     } else {
@@ -279,6 +279,17 @@ class Inventory extends React.Component {
     this.props.history.push(getRoute('selection'))
   }
 
+  handleModalFailedClose = (e) => {
+    e.preventDefault();
+    // this.handleSubmitConfirm();
+    this.setState({ isFailed: false, isLoading: false });
+  }
+
+  handleModalFailedClick = (e) => {
+    this.setState({ isFailed: false, isLoading: false });
+    setTimeout(() => this.handleSubmitConfirm(), 250);
+  }
+
   render() {
     return (
       <InventoryContext.Provider
@@ -317,7 +328,7 @@ class Inventory extends React.Component {
         />}
         {this.state.isLoading && <Modal.ModalLoading />}
         {this.state.isSuccess && <Modal.ModalSuccess handleClick={this.handleModalSuccessClick} />}
-        {this.state.isFailed && <Modal.ModalFailed />}
+        {this.state.isFailed && <Modal.ModalFailed handleClick={this.handleModalFailedClick} handleClose={this.handleModalFailedClose}/>}
       </InventoryContext.Provider>
     );
   }
