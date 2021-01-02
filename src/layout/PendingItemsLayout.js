@@ -44,7 +44,7 @@ class PendingItemsLayout extends React.Component {
               key={pi.id}
               id={pi.id}
               quantity={pi.quantity}
-              name={`${pi.name} ${pi.kilo > 0 && `(${pi.kilo} kg)`}`}
+              name={`${pi.name} ${pi.kilo > 0 ? `(${pi.kilo} kg)` : ''}`}
               textBelow={pi.barcode}
               textBelow2={pi.supplierName}
             />
