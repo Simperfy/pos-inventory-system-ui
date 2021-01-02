@@ -37,7 +37,7 @@ class FormGroupInventorySack extends React.Component {
                 value={kilo}
                 onChange={this.context.handleSackSelectChange}
                 label={'Sack'}
-                options={sacks.map((s) => ({id: s.id, value: s.sackValue, name: s.sackLabel}))}
+                options={sacks.map((s) => ({id: s.sackId, value: s.sackValue, name: s.sackLabel}))}
             />
             <Form.FormSelect
               value={supplierId}
