@@ -61,7 +61,7 @@ class FormGroupInventorySack extends React.Component {
           </div>
         </div>
 
-        {this.props.formDetail && (
+        {/*{this.props.formDetail && (
           <div className="col-md-6">
             <Form.FormDetailText
               price={'100.00'} // formDetail.price
@@ -71,7 +71,7 @@ class FormGroupInventorySack extends React.Component {
               total={'270.00'} // formDetail.total
             />
           </div>
-        )}
+        )}*/}
       </div>
     );
   }
