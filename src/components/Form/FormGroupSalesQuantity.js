@@ -11,13 +11,22 @@ class FormGroupSalesQuantity extends React.Component {
 
   render() {
     const {
-      suppliers,
+      // suppliers,
       itemText,
       itemBarcode,
-      supplierId,
+      // supplierId,
       quantity,
       // kilo,
     } = this.context.state.mainForm;
+
+    const {
+      formDetail,
+      formDetailShow
+    } = this.context.state;
+
+    const subTotal = quantity * formDetail.price;
+    const discountTotal = quantity * formDetail.discount;
+    const total = subTotal - discountTotal;
 
     return (
       <div className="row form-group-container" ref={this.context.state.formGroupRef}>
@@ -31,12 +40,16 @@ class FormGroupSalesQuantity extends React.Component {
               placeHolder={'1 pcs'}
               value={quantity}
               min="1"
+              hideZero
             />
-            <Form.FormSelect
-              value={supplierId}
-              onChange={this.context.handleSupplierSelectChange}
-              label={'Supplier'}
-              options={suppliers.map((s) => ({id: s.id, value: s.id, name: s.supplierName}))}
+            <Form.FormInput
+                formType="number"
+                onChange={this.context.handleDiscountInputChange}
+                label={'Discount'}
+                placeHolder={'0.00'}
+                value={formDetail.discount}
+                min="0"
+                hideZero
             />
             <div className="form-btn-group">
               <Form.FormButton
@@ -54,14 +67,14 @@ class FormGroupSalesQuantity extends React.Component {
           </div>
         </div>
 
-        {this.props.formDetail && (
+        {quantity > 0 && (
           <div className="col-md-6">
             <Form.FormDetailText
-              price={'100.00'} // formDetail.price
-              discount={'10.00'} // formDetail.discount
-              subTotal={'300.00'} // formDetail.subTotal
-              discountTotal={'30.00'} // formDetail.discountTotal
-              total={'270.00'} // formDetail.total
+              price={formDetail.price?.toFixed(2)}
+              discount={formDetail.discount?.toFixed(2)}
+              subTotal={subTotal?.toFixed(2)}
+              discountTotal={discountTotal?.toFixed(2)}
+              total={total?.toFixed(2)}
             />
           </div>
         )}

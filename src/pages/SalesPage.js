@@ -34,6 +34,7 @@ class SalesPage extends AbstractPage {
           handleSupplierSelectChange: this.handleSupplierSelectChange,
           handleQuantityInputChange: this.handleQuantityInputChange,
           handleSackSelectChange: this.handleSackSelectChange,
+          handleDiscountInputChange: this.handleDiscountInputChange,
         }}
       >
         <MainLayout type="sales">

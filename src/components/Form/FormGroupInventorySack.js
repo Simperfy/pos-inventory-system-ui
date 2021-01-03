@@ -32,6 +32,7 @@ class FormGroupInventorySack extends React.Component {
               label={'Qty'}
               placeHolder={'1 pcs'}
               min="1"
+              hideZero
             />
             <Form.FormSelect
                 value={kilo}

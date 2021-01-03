@@ -19,6 +19,10 @@ export class AbstractPage extends React.Component{
             isConfirming: false,
             /*Forms*/
             pendingItems: [],
+            formDetail: {
+                price: 100.00,
+                discount: 0
+            },
             mainForm: {
                 itemText: '',
                 itemBarcode: '',
@@ -28,6 +32,7 @@ export class AbstractPage extends React.Component{
                 supplierName: '',
                 quantity: '',
                 kilo: 0,
+                discount: 0,
             },
             showForm: false,
             formGroupRef: React.createRef(),
@@ -140,6 +145,10 @@ export class AbstractPage extends React.Component{
                 supplierName: '',
                 quantity: '',
                 kilo: 0,
+            },
+            formDetail: {
+                price: 100.00,
+                discount: 0
             },
         }));
     }
@@ -254,9 +263,23 @@ export class AbstractPage extends React.Component{
     }
 
     handleQuantityInputChange = (e) => {
-        const quantity = parseInt(e.target.value);
+        let quantity = parseInt(e.target.value);
+        quantity = isNaN(quantity) ? 0 : quantity;
+
         this.setState((prevState, props) => ({
             mainForm: { ...prevState.mainForm, quantity: quantity },
+            formDetail: { price: prevState.formDetail.price, discount: quantity <= 0 ? 0 : prevState.formDetail.discount }
+        }));
+    }
+
+    handleDiscountInputChange = (e) => {
+        let discount = parseFloat(e.target.value);
+        discount = isNaN(discount) ? 0 : discount;
+
+        if (this.state.mainForm.quantity <= 0) return;
+        if (discount >= this.state.formDetail.price) discount = this.state.formDetail.price;
+        this.setState((prevState, props) => ({
+            formDetail: { ...prevState.formDetail, discount: discount }
         }));
     }
 
@@ -280,5 +303,26 @@ export class AbstractPage extends React.Component{
     handleModalFailedClick = (e) => {
         this.setState({ isFailed: false, isLoading: false });
         setTimeout(() => this.handleSubmitConfirm(), 250);
+    }
+
+    providerFunctions = () => {
+        return {
+            state: this.state,
+            setState: this.setState.bind(this),
+            addPendingItems: this.addPendingItems,
+            removePendingItem: this.removePendingItem,
+            removeAllPendingItems: this.removeAllPendingItems,
+            closeForm: this.closeForm,
+            showForm: this.showForm,
+            handleSearchBarChange: this.handleSearchBarChange,
+            handleSearchBarItemClick: this.handleSearchBarItemClick,
+            handleSearchBarFocus: this.handleSearchBarFocus,
+            handleSearchBarBlur: this.handleSearchBarBlur,
+            handleSubmitConfirm: this.handleSubmitConfirm,
+            handleSupplierSelectChange: this.handleSupplierSelectChange,
+            handleQuantityInputChange: this.handleQuantityInputChange,
+            handleSackSelectChange: this.handleSackSelectChange,
+            handleDiscountInputChange: this.handleDiscountInputChange,
+        }
     }
 }

@@ -12,7 +12,7 @@ function FormDetailText({ price, discount, subTotal, discountTotal, total }) {
       <br />
       <p className="saturate-green">Subtotal: ₱{subTotal}</p>
       <p className="saturate-red">Discount: -₱{discountTotal}</p>
-      <p>Total: ₱{total}</p>
+      <p style={{textDecoration: total <= 0 ? "line-through" : "none"}}>Total: ₱{total}</p>
     </div>
   );
 }
