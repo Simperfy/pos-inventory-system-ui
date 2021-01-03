@@ -41,6 +41,6 @@
     ]
   },
   "react-dotenv": {
-    "whitelist": ["API_URL"]
+    "whitelist": ["API_URL", "APP_ENV"]
   }
 }

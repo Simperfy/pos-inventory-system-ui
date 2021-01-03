@@ -16,8 +16,7 @@ function MainFormLayoutSales() {
     } = useContext(SalesContext);
 
     return (
-        <h1>Main Form layout Sales</h1>
-        /*<>
+        <>
             <SearchBar.SearchBarGroup handleSearchBarChange={handleSearchBarChange}
                                       handleSearchBarFocus={handleSearchBarFocus}
                                       handleSearchBarBlur={handleSearchBarBlur}
@@ -28,12 +27,13 @@ function MainFormLayoutSales() {
                                           itemBarcode: res.id,
                                           suppliers: res.suppliers,
                                           sacks: res.sacks,
-                                          formType: res.kiloAble ? formTypes.inventoryPerSack : formTypes.inventoryPerQuantity
+                                          // formType: res.kiloAble ? formTypes.salesPerSack : formTypes.salesPerQuantity
+                                          formType: formTypes.salesPerQuantity
                                       })}/>
 
-            {(showForm && formType === formTypes.inventoryPerQuantity) && <Form.FormGroupSalesQuantity/>}
-            {(showForm && formType === formTypes.inventoryPerSack) && <Form.FormGroupSalesSack/>}
-        </>*/
+            {(showForm && formType === formTypes.salesPerQuantity) && <Form.FormGroupSalesQuantity/>}
+            {/*{(showForm && formType === formTypes.inventoryPerSack) && <Form.FormGroupSalesSack/>}*/}
+        </>
     );
 }
 

@@ -2,11 +2,12 @@ import React from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
-import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { HomePage, InventoryPage, SelectionPage, SalesPage } from './pages';
 import { AppContext } from './context/AppContext';
 import { getRoute } from './routeConfig';
 import Api from './api/Api';
+import env from 'react-dotenv';
 
 class App extends React.Component {
   _isMounted = false;
@@ -25,6 +26,7 @@ class App extends React.Component {
       noInternetDiv: {backgroundColor: '#ff8100', width: '100vw', position: 'fixed'},
       noInternetP: {textAlign: 'center', fontSize: '1.5rem', color: 'white', margin: 'auto'}
     }
+
   }
 
   componentDidMount() {
@@ -33,21 +35,40 @@ class App extends React.Component {
     if (jwt) this.autoSignIn(jwt);
     else this.setState({ isReady: true });
 
+    // @TODO: Don't remove, useful if server is in the cloud
     // Handle internet disconnection
-    this.handleConnectionChange();
+    /*this.handleConnectionChange();
     window.addEventListener('online', this.handleConnectionChange);
-    window.addEventListener('offline', this.handleConnectionChange);
+    window.addEventListener('offline', this.handleConnectionChange);*/
+
+    if (!env.APP_ENV) {
+      if (env.APP_ENV === 'development') return;
+      console.log('pinging')
+      console.log(env.APP_ENV);
+      this.handleLocalServerConnectionPings();
+    }
+  }
+
+  handleLocalServerConnectionPings = () => {
+    this.serverPing = setInterval(() => {
+      fetch(env.API_URL)
+          .then(() => this.setState({isDisconnected: false}))
+          .catch(() => this.setState({isDisconnected: true}))
+    }, 3000);
   }
 
   componentWillUnmount() {
     this._isMounted = false;
+    clearInterval(this.serverPing);
 
+    // @TODO: Don't remove, useful if server is in the cloud
     // Handle internet disconnection
-    window.removeEventListener('online', this.handleConnectionChange);
-    window.removeEventListener('offline', this.handleConnectionChange);
+    /*window.removeEventListener('online', this.handleConnectionChange);
+    window.removeEventListener('offline', this.handleConnectionChange);*/
   }
 
-  handleConnectionChange = () => {
+  // @TODO: Don't remove, useful if server is in the cloud
+  /* handleConnectionChange = () => {
     const condition = navigator.onLine ? 'online' : 'offline';
     if (condition === 'online') {
       const webPing = setInterval(
@@ -65,7 +86,7 @@ class App extends React.Component {
     }
 
     return this.setState({ isDisconnected: true });
-  }
+  }*/
 
   autoSignIn = (jwt) => {
     Api.getCurrentUser(jwt).then(
@@ -115,7 +136,7 @@ class App extends React.Component {
           <div className="vh-100 vw-100" style={{ backgroundColor: '#F2F2F2' }}>
               { this.state.isDisconnected && (
               <div style={this.style.noInternetDiv}>
-                <p style={this.style.noInternetP}>Internet connection lost</p>
+                <p style={this.style.noInternetP}>Server connection lost</p>
               </div>)
               }
             <Container fluid className="d-flex flex-column h-100">
