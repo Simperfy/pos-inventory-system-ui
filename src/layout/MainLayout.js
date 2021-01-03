@@ -2,21 +2,18 @@ import React from 'react';
 
 import Row from 'react-bootstrap/Row';
 
-import MainNav from './MainNavLayout';
+import MainLayoutNav from './MainLayoutNav';
 
 import './MainLayout.css';
 
-class MainLayout extends React.Component {
-  render() {
-    return (
-      <>
+const MainLayout = ({type, children}) => (
+    <>
         <Row className="justify-content-between mb-5">
-          <MainNav />
+            <MainLayoutNav type={type}/>
         </Row>
-        <Row className="mx-0 flex-grow-1">{this.props.children}</Row>
-      </>
-    );
-  }
-}
+        <Row className="mx-0 flex-grow-1">{children}</Row>
+    </>
+);
+
 
 export default MainLayout;

@@ -2,16 +2,16 @@ import React from 'react';
 
 import {Modal} from '../components';
 import MainLayout from '../layout/MainLayout';
-import MainFormLayoutInventory from '../layout/MainFormLayoutInventory';
+import MainFormLayoutSales from '../layout/MainFormLayoutSales';
 import PendingItemsLayout from '../layout/PendingItemsLayout';
 import Api from '../api/Api';
 import {ModelStocks} from "../api/models";
 import { withRouter } from 'react-router-dom'
-import { InventoryContext } from '../context/InventoryContext';
+import { SalesContext } from '../context/SalesContext';
 import { AppContext } from '../context/AppContext';
 import {getRoute} from "../routeConfig";
 
-class Inventory extends React.Component {
+class Sales extends React.Component {
   static contextType = AppContext;
 
   constructor(props) {
@@ -292,7 +292,7 @@ class Inventory extends React.Component {
 
   render() {
     return (
-      <InventoryContext.Provider
+      <SalesContext.Provider
         value={{
           state: this.state,
           setState: this.setState.bind(this),
@@ -311,27 +311,27 @@ class Inventory extends React.Component {
           handleSackSelectChange: this.handleSackSelectChange,
         }}
       >
-        <MainLayout type="inventory">
+        <MainLayout type="sales">
           <div className="container-fluid">
             <div className="row h-100 pb-4">
               <div className="col-md-8">
-                <MainFormLayoutInventory />
+                <MainFormLayoutSales />
               </div>
               <div className="col-md-4">
-                <PendingItemsLayout />
+                {/*<PendingItemsLayout />*/}
               </div>
             </div>
           </div>
         </MainLayout>
-        {this.state.isConfirming && <Modal.ModalConfirm
+        {/*{this.state.isConfirming && <Modal.ModalConfirm
           confirmItems={this.state.pendingItems.map((pi) => ({id: pi.id, leftText: `${pi.quantity} x ${pi.name} ${pi.kilo > 0 ? `(${pi.kilo} kg)` : ''}`, rightText: pi.supplierName}))}
         />}
         {this.state.isLoading && <Modal.ModalLoading />}
         {this.state.isSuccess && <Modal.ModalSuccess handleClick={this.handleModalSuccessClick} />}
-        {this.state.isFailed && <Modal.ModalFailed handleClick={this.handleModalFailedClick} handleClose={this.handleModalFailedClose}/>}
-      </InventoryContext.Provider>
+        {this.state.isFailed && <Modal.ModalFailed handleClick={this.handleModalFailedClick} handleClose={this.handleModalFailedClose}/>}*/}
+      </SalesContext.Provider>
     );
   }
 }
 
-export default withRouter(Inventory);
+export default withRouter(Sales);

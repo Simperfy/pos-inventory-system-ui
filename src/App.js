@@ -3,7 +3,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom';
-import { HomePage, InventoryPage, SelectionPage } from './pages';
+import { HomePage, InventoryPage, SelectionPage, SalesPage } from './pages';
 import { AppContext } from './context/AppContext';
 import { getRoute } from './routeConfig';
 import Api from './api/Api';
@@ -129,6 +129,9 @@ class App extends React.Component {
                 </this.PrivateRoute>
                 <this.PrivateRoute path={getRoute('inventory')}>
                   <InventoryPage/>
+                </this.PrivateRoute>
+                <this.PrivateRoute path={getRoute('sales')}>
+                  <SalesPage/>
                 </this.PrivateRoute>
 
                 <Route path="*">

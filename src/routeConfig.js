@@ -1,7 +1,8 @@
 export const routes = [
-  { name: 'home', path: '/' },
-  { name: 'selection', path: '/selection' },
-  { name: 'inventory', path: '/inventory' },
+    {name: 'home', path: '/'},
+    {name: 'inventory', path: '/inventory'},
+    {name: 'selection', path: '/selection'},
+    {name: 'sales', path: '/sales'},
 ];
 
 export const getRoute = (name) => {
