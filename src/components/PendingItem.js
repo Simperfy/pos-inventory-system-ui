@@ -26,7 +26,7 @@ function PendingItem({ id, quantity, name, textBelow, textBelow2, textRight, tex
             <br/>
             <span style={{lineHeight: 1}} className="barcode">{textBelow} {textBelow2 && <br/>} {textBelow2}</span>
           </p>
-          <div className="d-flex" style={{ maxWidth: "10rem", }}>
+          <div className="d-flex align-items-start" style={{ maxWidth: "10rem", }}>
             <div>
               <p className="text-right" style={textRightStyle}>
                 { textRight }
