@@ -2,6 +2,7 @@ import React from "react";
 import Api from "../api/Api";
 import {ModelStocks} from "../api/models";
 import {getRoute} from "../routeConfig";
+import enumKiloType from "../util/enumKiloType";
 
 export class AbstractPage extends React.Component{
     constructor(props) {
@@ -24,10 +25,10 @@ export class AbstractPage extends React.Component{
                 discount: 0
             },
             mainForm: {
-                itemType: 'kilo',
-                itemTypes: [
-                    {id: 1, value: 'kilo', name: 'per kilo'},
-                    {id: 2, value: 'sack', name: 'per sack'}
+                kiloType: enumKiloType.kilo,
+                kiloTypes: [
+                    {id: 1, value: enumKiloType.kilo, name: 'per kilo'},
+                    {id: 2, value: enumKiloType.sack, name: 'per sack'}
                 ],
                 itemText: '',
                 itemBarcode: '',
@@ -50,10 +51,10 @@ export class AbstractPage extends React.Component{
     resetForm = () => {
         this.setState((prevState, props) => ({
             mainForm: {
-                itemType: 'kilo',
-                itemTypes: [
-                    {id: 1, value: 'kilo', name: 'per kilo'},
-                    {id: 2, value: 'sack', name: 'per sack'}
+                kiloType: enumKiloType.kilo,
+                kiloTypes: [
+                    {id: 1, value: enumKiloType.kilo, name: 'per kilo'},
+                    {id: 2, value: enumKiloType.sack, name: 'per sack'}
                 ],
                 itemText: '',
                 itemBarcode: '',
@@ -270,7 +271,7 @@ export class AbstractPage extends React.Component{
     }
 
     handleItemTypeSelectChange = (e) => {
-        this.setState((prevState, props) => ({mainForm: {...prevState.mainForm, itemType: e.target.value}}));
+        this.setState((prevState, props) => ({mainForm: {...prevState.mainForm, kiloType: parseInt(e.target.value)}}));
     }
 
     providerFunctions = () => {

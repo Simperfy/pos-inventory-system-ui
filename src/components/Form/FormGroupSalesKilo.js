@@ -5,6 +5,7 @@ import {Form} from '../index';
 import { SalesContext } from '../../context/SalesContext';
 
 import './FormGroup.css';
+import enumKiloType from "../../util/enumKiloType";
 
 class FormGroupSalesKilo extends React.Component {
   static contextType = SalesContext;
@@ -18,8 +19,8 @@ class FormGroupSalesKilo extends React.Component {
       quantity,
       sacks,
       kilo,
-      itemType,
-      itemTypes
+      kiloType,
+      kiloTypes
     } = this.context.state.mainForm;
 
     const {
@@ -37,27 +38,29 @@ class FormGroupSalesKilo extends React.Component {
           <div className="d-flex flex-column main-form">
             <Form.FormStaticText text={itemText} textBelow={itemBarcode} />
             <Form.FormSelect
-                value={itemType}
+                value={kiloType}
                 onChange={this.context.handleItemTypeSelectChange}
                 label={'Type'}
-                options={itemTypes.map((s) => ({id: s.id, value: s.value, name: s.name}))}
-                // options={[]}
+                options={kiloTypes.map((s) => ({id: s.id, value: s.value, name: s.name}))}
             />
-            <Form.FormInput
-              formType="number"
-              onChange={this.context.handleQuantityInputChange}
-              label={'Qty'}
-              placeHolder={'1 pcs'}
-              value={quantity}
-              min="1"
-              hideZero
-            />
-            <Form.FormSelect
-                value={kilo}
-                onChange={this.context.handleSackSelectChange}
-                label={'Sack'}
-                options={sacks.map((s) => ({id: s.sackId, value: s.sackValue, name: s.sackLabel}))}
-            />
+            { kiloType ===  enumKiloType.kilo &&
+            <>
+              <Form.FormInput
+                  formType="number"
+                  onChange={this.context.handleQuantityInputChange}
+                  label={'Qty'}
+                  placeHolder={'1 pcs'}
+                  value={quantity}
+                  min="1"
+                  hideZero
+              />
+              <Form.FormSelect
+                  value={kilo}
+                  onChange={this.context.handleSackSelectChange}
+                  label={'Sack'}
+                  options={sacks.map((s) => ({id: s.sackId, value: s.sackValue, name: s.sackLabel}))}
+              />
+            </>}
             <div className="form-btn-group">
               <Form.FormButton
                 color="blue"
