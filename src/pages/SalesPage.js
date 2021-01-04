@@ -69,7 +69,8 @@ class SalesPage extends AbstractPage {
           kilo: newFormValue.sacks[0]?.sackValue || 0
         },
         formDetail: {
-          price: newFormValue.price
+          price: newFormValue.price,
+          discount: prevState.formDetail.discount
         }
       };
     });

@@ -43,7 +43,7 @@ export class AbstractPage extends React.Component{
             },
             showForm: false,
             formGroupRef: React.createRef(),
-            formType: null,
+            formType: '',
             searchResults: [],
             showSearchResults: false
         }
@@ -254,7 +254,7 @@ export class AbstractPage extends React.Component{
 
         this.setState((prevState, props) => {
                 let discount = quantity <= 0 ? 0 : prevState.formDetail.discount
-                if (isNaN(discount)) discount = 0;
+                if (isNaN(discount) || !discount) discount = 0;
 
                 return {
                     mainForm: {...prevState.mainForm, quantity: quantity},
