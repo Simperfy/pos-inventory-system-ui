@@ -3,7 +3,7 @@ import Api from "../api/Api";
 import {ModelStocks} from "../api/models";
 import {getRoute} from "../routeConfig";
 import enumKiloType from "../util/enumKiloType";
-import formTypes from "../util/formTypes";
+import formTypes from "../util/enumFormTypes";
 
 export class AbstractPage extends React.Component{
     constructor(props) {

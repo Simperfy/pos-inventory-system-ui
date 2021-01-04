@@ -8,6 +8,8 @@ import { AppContext } from '../context/AppContext';
 import {AbstractPage} from "./AbstractPage";
 import PendingItemsLayout from "../layout/PendingItemsLayout";
 import pendingItemTypes from "../util/pendingItemTypes";
+import enumKiloType from "../util/enumKiloType";
+import enumFormTypes from "../util/enumFormTypes";
 
 class SalesPage extends AbstractPage {
   static contextType = AppContext;
@@ -60,12 +62,13 @@ class SalesPage extends AbstractPage {
     console.log(newFormValue);
 
     this.setState((prevState, props) => {
+      const quantity = this.state.formType === enumFormTypes.salesPerKilo ? 1 : prevState.mainForm.quantity;
+
       return {
         mainForm: {
           ...prevState.mainForm,
           ...newFormValue,
-          // supplierName: newFormValue.suppliers[0].supplierName,
-          // supplierId: newFormValue.suppliers[0].id,
+          quantity: quantity,
           kilo: newFormValue.sacks[0]?.sackValue || 0
         },
         formDetail: {

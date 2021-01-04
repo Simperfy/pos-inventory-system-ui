@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 
 import {Form, SearchBar} from '../components';
 import {InventoryContext} from '../context/InventoryContext';
-import formTypes from '../util/formTypes';
+import formTypes from '../util/enumFormTypes';
 
 function MainFormLayoutInventory() {
     const {
