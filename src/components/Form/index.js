@@ -1,6 +1,7 @@
 import FormButton from "./FormButton";
 import FormDetailText from "./FormDetailText";
 import FormGroupSalesQuantity from "./FormGroupSalesQuantity";
+import FormGroupSalesKilo from "./FormGroupSalesKilo";
 import FormGroupInventoryQuantity from "./FormGroupInventoryQuantity";
 import FormGroupInventorySack from "./FormGroupInventorySack";
 import FormInput from "./FormInput";
@@ -15,5 +16,6 @@ export default {
     FormInput,
     FormSelect,
     FormStaticText,
-    FormGroupSalesQuantity
+    FormGroupSalesQuantity,
+    FormGroupSalesKilo
 }

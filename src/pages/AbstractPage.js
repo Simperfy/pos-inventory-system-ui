@@ -24,7 +24,11 @@ export class AbstractPage extends React.Component{
                 discount: 0
             },
             mainForm: {
-                itemType: '',
+                itemType: 'kilo',
+                itemTypes: [
+                    {id: 1, value: 'kilo', name: 'per kilo'},
+                    {id: 2, value: 'sack', name: 'per sack'}
+                ],
                 itemText: '',
                 itemBarcode: '',
                 suppliers: [],
@@ -46,7 +50,11 @@ export class AbstractPage extends React.Component{
     resetForm = () => {
         this.setState((prevState, props) => ({
             mainForm: {
-                itemType: '',
+                itemType: 'kilo',
+                itemTypes: [
+                    {id: 1, value: 'kilo', name: 'per kilo'},
+                    {id: 2, value: 'sack', name: 'per sack'}
+                ],
                 itemText: '',
                 itemBarcode: '',
                 suppliers: [],
@@ -261,6 +269,10 @@ export class AbstractPage extends React.Component{
         }
     }
 
+    handleItemTypeSelectChange = (e) => {
+        this.setState((prevState, props) => ({mainForm: {...prevState.mainForm, itemType: e.target.value}}));
+    }
+
     providerFunctions = () => {
         return {
             state: this.state,
@@ -279,6 +291,7 @@ export class AbstractPage extends React.Component{
             handleQuantityInputChange: this.handleQuantityInputChange,
             handleSackSelectChange: this.handleSackSelectChange,
             handleDiscountInputChange: this.handleDiscountInputChange,
+            handleItemTypeSelectChange: this.handleItemTypeSelectChange
         }
     }
 }

@@ -55,17 +55,19 @@ class SalesPage extends AbstractPage {
 
     this.closeSearchResults();
     this.resetForm();
+
     this.setState((prevState, props) => {
       return {
         mainForm: {
           ...prevState.mainForm,
           ...newFormValue,
-          supplierName: newFormValue.suppliers[0].supplierName,
-          supplierId: newFormValue.suppliers[0].id,
+          // supplierName: newFormValue.suppliers[0].supplierName,
+          // supplierId: newFormValue.suppliers[0].id,
           kilo: newFormValue.sacks[0]?.sackValue || 0
         },
       };
     });
+
     this.showForm(newFormValue.formType);
   };
 

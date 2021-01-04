@@ -28,11 +28,11 @@ function MainFormLayoutSales() {
                                           suppliers: res.suppliers,
                                           sacks: res.sacks,
                                           // formType: res.kiloAble ? formTypes.salesPerSack : formTypes.salesPerQuantity
-                                          formType: formTypes.salesPerQuantity
+                                          formType: res.kiloAble ? formTypes.salesPerKilo : formTypes.salesPerQuantity
                                       })}/>
 
             {(showForm && formType === formTypes.salesPerQuantity) && <Form.FormGroupSalesQuantity/>}
-            {/*{(showForm && formType === formTypes.inventoryPerSack) && <Form.FormGroupSalesSack/>}*/}
+            {(showForm && formType === formTypes.salesPerKilo) && <Form.FormGroupSalesKilo/>}
         </>
     );
 }
