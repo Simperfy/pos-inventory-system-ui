@@ -14,7 +14,7 @@ class InventoryPage extends AbstractPage {
   static contextType = AppContext;
 
   addPendingItems = () => {
-    if (!this.isValidForm()) return;
+    if (!this.isValidFormInventory()) return;
     if(!this.removeDuplicate()) return;
 
     const {

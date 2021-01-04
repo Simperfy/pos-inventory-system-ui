@@ -33,7 +33,7 @@ class FormGroupSalesKilo extends React.Component {
     } = this.context.state;
 
     const subTotal = quantity * formDetail.price;
-    const discountTotal = quantity * formDetail.discount;
+    const discountTotal = quantity * (isNaN(formDetail.discount)  ? 0 : formDetail.discount);
     const total = subTotal - discountTotal;
 
     return (

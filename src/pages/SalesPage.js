@@ -13,7 +13,7 @@ class SalesPage extends AbstractPage {
   static contextType = AppContext;
 
   addPendingItems = () => {
-    if (!this.isValidForm()) return;
+    if (!this.isValidFormSales()) return;
     if(!this.removeDuplicate()) return;
 
     const {
@@ -30,13 +30,13 @@ class SalesPage extends AbstractPage {
       discount
     } = this.state.formDetail;
 
+    // @TODO: check itemType
+    // @TODO: check whether sack or kilo
     this.setState((prevState, props) => ({
       pendingItems: [
         {
           id: itemBarcode + this.pendingItemsCounter++,
           name: itemText,
-          // supplierName: supplierName,
-          // supplierId: supplierId,
           quantity: quantity,
           barcode: itemBarcode,
           kilo: kilo,
@@ -56,6 +56,9 @@ class SalesPage extends AbstractPage {
     this.closeSearchResults();
     this.resetForm();
 
+    console.log('newFormValue');
+    console.log(newFormValue);
+
     this.setState((prevState, props) => {
       return {
         mainForm: {
@@ -65,6 +68,9 @@ class SalesPage extends AbstractPage {
           // supplierId: newFormValue.suppliers[0].id,
           kilo: newFormValue.sacks[0]?.sackValue || 0
         },
+        formDetail: {
+          price: newFormValue.price
+        }
       };
     });
 

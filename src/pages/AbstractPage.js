@@ -3,6 +3,7 @@ import Api from "../api/Api";
 import {ModelStocks} from "../api/models";
 import {getRoute} from "../routeConfig";
 import enumKiloType from "../util/enumKiloType";
+import formTypes from "../util/formTypes";
 
 export class AbstractPage extends React.Component{
     constructor(props) {
@@ -21,7 +22,7 @@ export class AbstractPage extends React.Component{
             /*Forms*/
             pendingItems: [],
             formDetail: {
-                price: 100.00,
+                price: 0,
                 discount: 0
             },
             mainForm: {
@@ -66,13 +67,13 @@ export class AbstractPage extends React.Component{
                 kilo: 0,
             },
             formDetail: {
-                price: 100.00,
+                price: 0,
                 discount: 0
             },
         }));
     }
 
-    isValidForm = () => {
+    isValidFormInventory = () => {
         const mainForm = this.state.mainForm;
         const nonEmptyFields = [
             'itemText',
@@ -82,6 +83,33 @@ export class AbstractPage extends React.Component{
             'quantity',
             // 'kilo',
         ];
+
+        for (const key of Object.keys(mainForm)) {
+            if (nonEmptyFields.includes(key) && !mainForm[key]) {
+                window.alert(`Invalid "${key.toUpperCase()}" values`);
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    isValidFormSales = () => {
+        const mainForm = this.state.mainForm;
+        let nonEmptyFields = [
+            'itemText',
+            'itemBarcode'
+        ];
+
+
+        if ( (mainForm.formType === formTypes.salesPerKilo) && (mainForm.kiloType !== enumKiloType.kilo)) {
+            nonEmptyFields = [
+                'itemText',
+                'itemBarcode',
+                'quantity',
+                // 'kilo',
+            ]
+        }
 
         for (const key of Object.keys(mainForm)) {
             if (nonEmptyFields.includes(key) && !mainForm[key]) {
@@ -161,6 +189,7 @@ export class AbstractPage extends React.Component{
                 id: s.id,
                 supplierName: s.supplier_name,
             })),
+            price: d.price,
         }
     }
 
@@ -223,10 +252,19 @@ export class AbstractPage extends React.Component{
         let quantity = parseInt(e.target.value);
         quantity = isNaN(quantity) ? 0 : quantity;
 
-        this.setState((prevState, props) => ({
-            mainForm: { ...prevState.mainForm, quantity: quantity },
-            formDetail: { price: prevState.formDetail.price, discount: quantity <= 0 ? 0 : prevState.formDetail.discount }
-        }));
+        this.setState((prevState, props) => {
+                let discount = quantity <= 0 ? 0 : prevState.formDetail.discount
+                if (isNaN(discount)) discount = 0;
+
+                return {
+                    mainForm: {...prevState.mainForm, quantity: quantity},
+                    formDetail: {
+                        price: prevState.formDetail.price,
+                        discount: discount
+                    }
+                }
+            }
+        );
     }
 
     handleKiloInputChange = (e) => {

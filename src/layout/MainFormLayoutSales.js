@@ -27,7 +27,7 @@ function MainFormLayoutSales() {
                                           itemBarcode: res.id,
                                           suppliers: res.suppliers,
                                           sacks: res.sacks,
-                                          // formType: res.kiloAble ? formTypes.salesPerSack : formTypes.salesPerQuantity
+                                          price: res.price,
                                           formType: res.kiloAble ? formTypes.salesPerKilo : formTypes.salesPerQuantity
                                       })}/>
 
