@@ -24,6 +24,7 @@ export class AbstractPage extends React.Component{
                 discount: 0
             },
             mainForm: {
+                itemType: '',
                 itemText: '',
                 itemBarcode: '',
                 suppliers: [],
@@ -40,6 +41,26 @@ export class AbstractPage extends React.Component{
             searchResults: [],
             showSearchResults: false
         }
+    }
+
+    resetForm = () => {
+        this.setState((prevState, props) => ({
+            mainForm: {
+                itemType: '',
+                itemText: '',
+                itemBarcode: '',
+                suppliers: [],
+                sacks: [],
+                supplierId: '',
+                supplierName: '',
+                quantity: '',
+                kilo: 0,
+            },
+            formDetail: {
+                price: 100.00,
+                discount: 0
+            },
+        }));
     }
 
     isValidForm = () => {
@@ -101,25 +122,6 @@ export class AbstractPage extends React.Component{
         }
 
         return true; // if no duplicate update state
-    }
-
-    resetForm = () => {
-        this.setState((prevState, props) => ({
-            mainForm: {
-                itemText: '',
-                itemBarcode: '',
-                suppliers: [],
-                sacks: [],
-                supplierId: '',
-                supplierName: '',
-                quantity: '',
-                kilo: 0,
-            },
-            formDetail: {
-                price: 100.00,
-                discount: 0
-            },
-        }));
     }
 
     removePendingItem = (id) => {
@@ -185,29 +187,6 @@ export class AbstractPage extends React.Component{
         setTimeout(() => this.closeSearchResults(), 100);
     }
 
-    handleSearchBarItemClick = (newFormValue) => {
-        const fGRef = this.state.formGroupRef.current;
-        if (fGRef) {
-            fGRef.classList.remove('form-group-container');
-            setTimeout(() => fGRef.classList.add('form-group-container'), 100)
-        }
-
-        this.closeSearchResults();
-        this.resetForm();
-        this.setState((prevState, props) => {
-            return {
-                mainForm: {
-                    ...prevState.mainForm,
-                    ...newFormValue,
-                    supplierName: newFormValue.suppliers[0].supplierName,
-                    supplierId: newFormValue.suppliers[0].id,
-                    kilo: newFormValue.sacks[0]?.sackValue || 0
-                },
-            };
-        });
-        this.showForm(newFormValue.formType);
-    };
-
     handleSubmitConfirm = (e) => {
         console.log('submit');
         this.setState({isConfirming: false, isLoading: true});
@@ -272,6 +251,14 @@ export class AbstractPage extends React.Component{
     handleModalFailedClick = (e) => {
         this.setState({ isFailed: false, isLoading: false });
         setTimeout(() => this.handleSubmitConfirm(), 250);
+    }
+
+    addOpacityBlur = () => {
+        const fGRef = this.state.formGroupRef.current;
+        if (fGRef) {
+            fGRef.classList.remove('form-group-container');
+            setTimeout(() => fGRef.classList.add('form-group-container'), 100)
+        }
     }
 
     providerFunctions = () => {
