@@ -229,6 +229,15 @@ export class AbstractPage extends React.Component{
         }));
     }
 
+    handleKiloInputChange = (e) => {
+        let kilo = parseInt(e.target.value);
+        kilo = isNaN(kilo) ? 0 : kilo;
+
+        this.setState((prevState, props) => ({
+            mainForm: { ...prevState.mainForm, kilo: kilo },
+        }));
+    }
+
     handleDiscountInputChange = (e) => {
         let discount = parseFloat(e.target.value);
         discount = isNaN(discount) ? 0 : discount;
@@ -271,7 +280,12 @@ export class AbstractPage extends React.Component{
     }
 
     handleItemTypeSelectChange = (e) => {
-        this.setState((prevState, props) => ({mainForm: {...prevState.mainForm, kiloType: parseInt(e.target.value)}}));
+        const kiloType = parseInt(e.target.value);
+
+        if (kiloType === enumKiloType.kilo) {
+
+        }
+        this.setState((prevState, props) => ({mainForm: {...prevState.mainForm, kiloType: kiloType, kilo: kiloType === enumKiloType.kilo ? 0: prevState.mainForm?.sacks[0]?.sackValue || 0}}));
     }
 
     providerFunctions = () => {
@@ -292,7 +306,8 @@ export class AbstractPage extends React.Component{
             handleQuantityInputChange: this.handleQuantityInputChange,
             handleSackSelectChange: this.handleSackSelectChange,
             handleDiscountInputChange: this.handleDiscountInputChange,
-            handleItemTypeSelectChange: this.handleItemTypeSelectChange
+            handleItemTypeSelectChange: this.handleItemTypeSelectChange,
+            handleKiloInputChange: this.handleKiloInputChange
         }
     }
 }

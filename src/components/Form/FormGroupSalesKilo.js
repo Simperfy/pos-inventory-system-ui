@@ -10,6 +10,10 @@ import enumKiloType from "../../util/enumKiloType";
 class FormGroupSalesKilo extends React.Component {
   static contextType = SalesContext;
 
+  componentDidMount() {
+    this.context.setState((prevState, props) => ({ mainForm: {...prevState.mainForm, kilo: 0} }) );
+  }
+
   render() {
     const {
       // suppliers,
@@ -43,7 +47,7 @@ class FormGroupSalesKilo extends React.Component {
                 label={'Type'}
                 options={kiloTypes.map((s) => ({id: s.id, value: s.value, name: s.name}))}
             />
-            { kiloType ===  enumKiloType.kilo &&
+            { kiloType ===  enumKiloType.sack &&
             <>
               <Form.FormInput
                   formType="number"
@@ -61,6 +65,28 @@ class FormGroupSalesKilo extends React.Component {
                   options={sacks.map((s) => ({id: s.sackId, value: s.sackValue, name: s.sackLabel}))}
               />
             </>}
+
+            { kiloType ===  enumKiloType.kilo &&
+            <>
+              <Form.FormInput
+                  formType="number"
+                  onChange={this.context.handleKiloInputChange}
+                  label={'Kilo'}
+                  placeHolder={'1.0'}
+                  value={kilo}
+                  min="1"
+                  hideZero
+              />
+            </>}
+            <Form.FormInput
+                formType="number"
+                onChange={this.context.handleDiscountInputChange}
+                label={'Discount'}
+                placeHolder={'0.00'}
+                value={formDetail.discount}
+                min="0"
+                hideZero
+            />
             <div className="form-btn-group">
               <Form.FormButton
                 color="blue"

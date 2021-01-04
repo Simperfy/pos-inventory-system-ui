@@ -28,7 +28,7 @@ span.item-barcode,
 }
 
 .form-item option {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 .form-item p,
@@ -36,7 +36,7 @@ span.item-barcode,
 .form-item input,
 .form-item input::placeholder,
 .form-item select {
-  font-size: 1.875rem;
+  font-size: 1.5rem;
 }
 
 .form-item label {
@@ -49,8 +49,7 @@ span.item-barcode,
 }
 
 .form-item {
-  margin: 0;
-  margin-bottom: 1.875rem;
+  margin: 0 0 1.875rem;
 }
 
 .main-form,
