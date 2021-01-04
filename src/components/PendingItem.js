@@ -1,12 +1,21 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import { ReactComponent as DeleteIcon } from '../assets/icons/delete.svg';
-import { InventoryContext } from '../context/InventoryContext';
 
 import './PendingItem.css';
 
-function PendingItem({ id, quantity, name, textBelow, textBelow2, textRight }) {
-  const { removePendingItem } = useContext(InventoryContext);
+function PendingItem({ id, quantity, name, textBelow, textBelow2, textRight, textRightStyle, textRightBelow, removePendingItem }) {
+
+  const style = {
+    textRightBelow: {
+      lineHeight: 1,
+      overflow: "hidden",
+      maxWidth: "5rem",
+      display: "inline-block",
+      textOverflow: "ellipsis",
+      textDecoration: "line-through"
+    }
+  }
 
   return (
     <>
@@ -14,15 +23,23 @@ function PendingItem({ id, quantity, name, textBelow, textBelow2, textRight }) {
         <div className="d-flex justify-content-between">
           <p>
             {quantity} x {name}
+            <br/>
+            <span style={{lineHeight: 1}} className="barcode">{textBelow} {textBelow2 && <br/>} {textBelow2}</span>
           </p>
           <div className="d-flex" style={{ maxWidth: "10rem", }}>
-            <p className="text-right">{ textRight }</p>
+            <div>
+              <p className="text-right" style={textRightStyle}>
+                { textRight }
+                <br/>
+                <span style={style.textRightBelow} className="barcode">{textRightBelow}</span>
+              </p>
+            </div>
             <button onClick={() => removePendingItem(id)} type="button">
               <DeleteIcon className="delete-icon" />
             </button>
           </div>
         </div>
-        <span style={{lineHeight: 1}} className="barcode">{textBelow} {textBelow2 && <br/>} {textBelow2}</span>
+        {/*<span style={{lineHeight: 1}} className="barcode">{textBelow} {textBelow2 && <br/>} {textBelow2}</span>*/}
       </div>
     </>
   );

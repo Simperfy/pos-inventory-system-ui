@@ -4,16 +4,45 @@ import {Modal} from '../components';
 import MainLayout from '../layout/MainLayout';
 import MainFormLayoutInventory from '../layout/MainFormLayoutInventory';
 import PendingItemsLayout from '../layout/PendingItemsLayout';
-// import Api from '../api/Api';
-// import {ModelStocks} from "../api/models";
 import { withRouter } from 'react-router-dom'
 import { InventoryContext } from '../context/InventoryContext';
 import { AppContext } from '../context/AppContext';
-// import {getRoute} from "../routeConfig";
 import {AbstractPage} from "./AbstractPage";
+import pendingItemTypes from "../util/pendingItemTypes";
 
 class InventoryPage extends AbstractPage {
   static contextType = AppContext;
+
+  addPendingItems = () => {
+    if (!this.isValidForm()) return;
+    if(!this.removeDuplicate()) return;
+
+    const {
+      itemText,
+      itemBarcode,
+      supplierName,
+      supplierId,
+      quantity,
+      kilo
+    } = this.state.mainForm;
+
+    this.setState((prevState, props) => ({
+      pendingItems: [
+        {
+          id: itemBarcode + this.pendingItemsCounter++,
+          name: itemText,
+          supplierName: supplierName,
+          supplierId: supplierId,
+          quantity: quantity,
+          barcode: itemBarcode,
+          kilo: kilo
+        },
+        ...prevState.pendingItems,
+      ],
+    }));
+    this.closeForm();
+    this.resetForm();
+  };
 
   render() {
     return (
@@ -29,7 +58,10 @@ class InventoryPage extends AbstractPage {
               <div className="col-md-4">
                 <PendingItemsLayout pendingItems={this.state.pendingItems}
                                     removeAllPendingItems={this.removeAllPendingItems}
-                                    setState={this.setState.bind(this)} />
+                                    removePendingItem={this.removePendingItem}
+                                    setState={this.setState.bind(this)}
+                                    pendingItemTypes={pendingItemTypes.inventory}
+                />
               </div>
             </div>
           </div>

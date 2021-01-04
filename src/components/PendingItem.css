@@ -17,7 +17,7 @@
 /* Decrease max-height for sales because of Total Sales text */
 .pending-item-scrollable-inventory {
   overflow-y: auto;
-  max-height: 35rem;
+  max-height: 30rem;
 }
 
 .pending-item span, .pending-item p {

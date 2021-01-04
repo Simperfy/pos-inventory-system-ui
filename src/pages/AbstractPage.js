@@ -103,37 +103,6 @@ export class AbstractPage extends React.Component{
         return true; // if no duplicate update state
     }
 
-    addPendingItems = () => {
-        if (!this.isValidForm()) return;
-        if(!this.removeDuplicate()) return;
-
-        const {
-            itemText,
-            itemBarcode,
-            supplierName,
-            supplierId,
-            quantity,
-            kilo
-        } = this.state.mainForm;
-
-        this.setState((prevState, props) => ({
-            pendingItems: [
-                {
-                    id: itemBarcode + this.pendingItemsCounter++,
-                    name: itemText,
-                    supplierName: supplierName,
-                    supplierId: supplierId,
-                    quantity: quantity,
-                    barcode: itemBarcode,
-                    kilo: kilo
-                },
-                ...prevState.pendingItems,
-            ],
-        }));
-        this.closeForm();
-        this.resetForm();
-    };
-
     resetForm = () => {
         this.setState((prevState, props) => ({
             mainForm: {

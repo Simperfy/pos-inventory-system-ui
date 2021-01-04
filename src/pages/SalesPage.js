@@ -1,19 +1,54 @@
 import React from 'react';
 
-// import {Modal} from '../components';
 import MainLayout from '../layout/MainLayout';
 import MainFormLayoutSales from '../layout/MainFormLayoutSales';
-// import PendingItemsLayout from '../layout/PendingItemsLayout';
-// import Api from '../api/Api';
-// import {ModelStocks} from "../api/models";
 import { withRouter } from 'react-router-dom'
 import { SalesContext } from '../context/SalesContext';
 import { AppContext } from '../context/AppContext';
 import {AbstractPage} from "./AbstractPage";
-// import {getRoute} from "../routeConfig";
+import PendingItemsLayout from "../layout/PendingItemsLayout";
+import pendingItemTypes from "../util/pendingItemTypes";
 
 class SalesPage extends AbstractPage {
   static contextType = AppContext;
+
+  addPendingItems = () => {
+    if (!this.isValidForm()) return;
+    if(!this.removeDuplicate()) return;
+
+    const {
+      itemText,
+      itemBarcode,
+      // supplierName,
+      // supplierId,
+      quantity,
+      kilo
+    } = this.state.mainForm;
+
+    const {
+      price,
+      discount
+    } = this.state.formDetail;
+
+    this.setState((prevState, props) => ({
+      pendingItems: [
+        {
+          id: itemBarcode + this.pendingItemsCounter++,
+          name: itemText,
+          // supplierName: supplierName,
+          // supplierId: supplierId,
+          quantity: quantity,
+          barcode: itemBarcode,
+          kilo: kilo,
+          discount: discount,
+          price: price
+        },
+        ...prevState.pendingItems,
+      ],
+    }));
+    this.closeForm();
+    this.resetForm();
+  };
 
   render() {
     return (
@@ -27,7 +62,12 @@ class SalesPage extends AbstractPage {
                 <MainFormLayoutSales />
               </div>
               <div className="col-md-4">
-                {/*<PendingItemsLayout />*/}
+                <PendingItemsLayout pendingItems={this.state.pendingItems}
+                                    removeAllPendingItems={this.removeAllPendingItems}
+                                    removePendingItem={this.removePendingItem}
+                                    setState={this.setState.bind(this)}
+                                    pendingItemTypes={pendingItemTypes.sales}
+                />
               </div>
             </div>
           </div>
