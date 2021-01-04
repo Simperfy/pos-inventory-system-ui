@@ -2,16 +2,16 @@ import React from 'react';
 
 import {Form} from '../index';
 
-import { SalesContext } from '../../context/SalesContext';
+import {SalesContext} from '../../context/SalesContext';
 
 import './FormGroup.css';
-import enumKiloType from "../../util/enumKiloType";
+import enumKiloType from '../../enums/enumKiloType';
 
 class FormGroupSalesKilo extends React.Component {
   static contextType = SalesContext;
 
   componentDidMount() {
-    this.context.setState((prevState, props) => ({ mainForm: {...prevState.mainForm, kilo: 0} }) );
+    this.context.setState((prevState, props) => ({mainForm: {...prevState.mainForm, kilo: 0}}) );
   }
 
   render() {
@@ -24,16 +24,16 @@ class FormGroupSalesKilo extends React.Component {
       sacks,
       kilo,
       kiloType,
-      kiloTypes
+      kiloTypes,
     } = this.context.state.mainForm;
 
     const {
       formDetail,
-      formDetailShow
+      // formDetailShow,
     } = this.context.state;
 
     const subTotal = quantity * formDetail.price;
-    const discountTotal = quantity * (isNaN(formDetail.discount)  ? 0 : formDetail.discount);
+    const discountTotal = quantity * (isNaN(formDetail.discount) ? 0 : formDetail.discount);
     const total = subTotal - discountTotal;
 
     return (
@@ -42,50 +42,50 @@ class FormGroupSalesKilo extends React.Component {
           <div className="d-flex flex-column main-form">
             <Form.FormStaticText text={itemText} textBelow={itemBarcode} />
             <Form.FormSelect
-                value={kiloType}
-                onChange={this.context.handleItemTypeSelectChange}
-                label={'Type'}
-                options={kiloTypes.map((s) => ({id: s.id, value: s.value, name: s.name}))}
+              value={kiloType}
+              onChange={this.context.handleItemTypeSelectChange}
+              label={'Type'}
+              options={kiloTypes.map((s) => ({id: s.id, value: s.value, name: s.name}))}
             />
-            { kiloType ===  enumKiloType.sack &&
+            { kiloType === enumKiloType.sack &&
             <>
               <Form.FormInput
-                  formType="number"
-                  onChange={this.context.handleQuantityInputChange}
-                  label={'Qty'}
-                  placeHolder={'1 pcs'}
-                  value={quantity}
-                  min="1"
-                  hideZero
+                formType="number"
+                onChange={this.context.handleQuantityInputChange}
+                label={'Qty'}
+                placeHolder={'1 pcs'}
+                value={quantity}
+                min="1"
+                hideZero
               />
               <Form.FormSelect
-                  value={kilo}
-                  onChange={this.context.handleSackSelectChange}
-                  label={'Sack'}
-                  options={sacks.map((s) => ({id: s.sackId, value: s.sackValue, name: s.sackLabel}))}
+                value={kilo}
+                onChange={this.context.handleSackSelectChange}
+                label={'Sack'}
+                options={sacks.map((s) => ({id: s.sackId, value: s.sackValue, name: s.sackLabel}))}
               />
             </>}
 
-            { kiloType ===  enumKiloType.kilo &&
+            { kiloType === enumKiloType.kilo &&
             <>
               <Form.FormInput
-                  formType="number"
-                  onChange={this.context.handleKiloInputChange}
-                  label={'Kilo'}
-                  placeHolder={'1.0'}
-                  value={kilo}
-                  min="1"
-                  hideZero
+                formType="number"
+                onChange={this.context.handleKiloInputChange}
+                label={'Kilo'}
+                placeHolder={'1.0'}
+                value={kilo}
+                min="1"
+                hideZero
               />
             </>}
             <Form.FormInput
-                formType="number"
-                onChange={this.context.handleDiscountInputChange}
-                label={'Discount'}
-                placeHolder={'0.00'}
-                value={formDetail.discount}
-                min="0"
-                hideZero
+              formType="number"
+              onChange={this.context.handleDiscountInputChange}
+              label={'Discount'}
+              placeHolder={'0.00'}
+              value={formDetail.discount}
+              min="0"
+              hideZero
             />
             <div className="form-btn-group">
               <Form.FormButton

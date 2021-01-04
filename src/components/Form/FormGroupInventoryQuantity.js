@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Form} from '../index';
 
-import { InventoryContext } from '../../context/InventoryContext';
+import {InventoryContext} from '../../context/InventoryContext';
 
 import './FormGroup.css';
 
@@ -54,7 +54,7 @@ class FormGroupInventoryQuantity extends React.Component {
           </div>
         </div>
 
-        {/*{this.props.formDetail && (
+        {/* {this.props.formDetail && (
           <div className="col-md-6">
             <Form.FormDetailText
               price={'100.00'} // formDetail.price

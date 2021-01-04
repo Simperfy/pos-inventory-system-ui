@@ -1,21 +1,20 @@
 import React from 'react';
 
-import { ReactComponent as DeleteIcon } from '../assets/icons/delete.svg';
+import {ReactComponent as DeleteIcon} from '../assets/icons/delete.svg';
 
 import './PendingItem.css';
 
-function PendingItem({ id, quantity, name, textBelow, textBelow2, textRight, textRightStyle, textRightBelow, removePendingItem }) {
-
+function PendingItem({id, quantity, name, textBelow, textBelow2, textRight, textRightStyle, textRightBelow, removePendingItem}) {
   const style = {
     textRightBelow: {
       lineHeight: 1,
-      overflow: "hidden",
-      maxWidth: "5rem",
-      display: "inline-block",
-      textOverflow: "ellipsis",
-      textDecoration: "line-through"
-    }
-  }
+      overflow: 'hidden',
+      maxWidth: '5rem',
+      display: 'inline-block',
+      textOverflow: 'ellipsis',
+      textDecoration: 'line-through',
+    },
+  };
 
   return (
     <>
@@ -26,7 +25,7 @@ function PendingItem({ id, quantity, name, textBelow, textBelow2, textRight, tex
             <br/>
             <span style={{lineHeight: 1}} className="barcode">{textBelow} {textBelow2 && <br/>} {textBelow2}</span>
           </p>
-          <div className="d-flex align-items-start" style={{ maxWidth: "10rem", }}>
+          <div className="d-flex align-items-start" style={{maxWidth: '10rem'}}>
             <div>
               <p className="text-right" style={textRightStyle}>
                 { textRight }
@@ -39,7 +38,7 @@ function PendingItem({ id, quantity, name, textBelow, textBelow2, textRight, tex
             </button>
           </div>
         </div>
-        {/*<span style={{lineHeight: 1}} className="barcode">{textBelow} {textBelow2 && <br/>} {textBelow2}</span>*/}
+        {/* <span style={{lineHeight: 1}} className="barcode">{textBelow} {textBelow2 && <br/>} {textBelow2}</span>*/}
       </div>
     </>
   );

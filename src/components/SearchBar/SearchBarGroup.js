@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchBarItem from './SearchBarItem';
 
-import { ReactComponent as Magnify } from '../../assets/icons/magnify.svg';
+import {ReactComponent as Magnify} from '../../assets/icons/magnify.svg';
 
 import './SearchBarGroup.css';
 import '../../assets/css/global-style.css';

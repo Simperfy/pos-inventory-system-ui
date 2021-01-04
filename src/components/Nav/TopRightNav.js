@@ -1,15 +1,15 @@
-import React, { useContext } from 'react';
+import React, {useContext} from 'react';
 
-import { useHistory } from 'react-router-dom';
-import { getRoute } from '../../routeConfig';
+import {useHistory} from 'react-router-dom';
+import {getRoute} from '../../routeConfig';
 
-import { AppContext } from '../../context/AppContext';
+import {AppContext} from '../../context/AppContext';
 
 import './TopRightNav.css';
 
-const TopRightNav = ({ username, hasBackBtn }) => {
+const TopRightNav = ({username, hasBackBtn}) => {
   const history = useHistory();
-  const { logout } = useContext(AppContext);
+  const {logout} = useContext(AppContext);
 
   return (
     <>
@@ -19,7 +19,7 @@ const TopRightNav = ({ username, hasBackBtn }) => {
         className="top-right-nav"
         onClick={() => {
           logout();
-          history.push(getRoute('home'))
+          history.push(getRoute('home'));
         }}
       >
         Logout

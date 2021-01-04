@@ -2,21 +2,21 @@ import React from 'react';
 
 import MainLayout from '../layout/MainLayout';
 import MainFormLayoutSales from '../layout/MainFormLayoutSales';
-import { withRouter } from 'react-router-dom'
-import { SalesContext } from '../context/SalesContext';
-import { AppContext } from '../context/AppContext';
-import {AbstractPage} from "./AbstractPage";
-import PendingItemsLayout from "../layout/PendingItemsLayout";
-import pendingItemTypes from "../util/pendingItemTypes";
-import enumKiloType from "../util/enumKiloType";
-import enumFormTypes from "../util/enumFormTypes";
+import {withRouter} from 'react-router-dom';
+import {SalesContext} from '../context/SalesContext';
+import {AppContext} from '../context/AppContext';
+import {AbstractPage} from './AbstractPage';
+import PendingItemsLayout from '../layout/PendingItemsLayout';
+import pendingItemTypes from '../enums/enumPendingItemTypes';
+// import enumKiloType from '../enums/enumKiloType';
+import enumFormTypes from '../enums/enumFormTypes';
 
 class SalesPage extends AbstractPage {
   static contextType = AppContext;
 
   addPendingItems = () => {
     if (!this.isValidFormSales()) return;
-    if(!this.removeDuplicate()) return;
+    if (!this.removeDuplicate()) return;
 
     const {
       itemText,
@@ -24,12 +24,12 @@ class SalesPage extends AbstractPage {
       // supplierName,
       // supplierId,
       quantity,
-      kilo
+      kilo,
     } = this.state.mainForm;
 
     const {
       price,
-      discount
+      discount,
     } = this.state.formDetail;
 
     // @TODO: check itemType
@@ -43,7 +43,7 @@ class SalesPage extends AbstractPage {
           barcode: itemBarcode,
           kilo: kilo,
           discount: discount,
-          price: price
+          price: price,
         },
         ...prevState.pendingItems,
       ],
@@ -53,7 +53,7 @@ class SalesPage extends AbstractPage {
   };
 
   handleSearchBarItemClick = (newFormValue) => {
-    this.addOpacityBlur()
+    this.addOpacityBlur();
 
     this.closeSearchResults();
     this.resetForm();
@@ -69,12 +69,12 @@ class SalesPage extends AbstractPage {
           ...prevState.mainForm,
           ...newFormValue,
           quantity: quantity,
-          kilo: newFormValue.sacks[0]?.sackValue || 0
+          kilo: newFormValue.sacks[0]?.sackValue || 0,
         },
         formDetail: {
           price: newFormValue.price,
-          discount: prevState.formDetail.discount
-        }
+          discount: prevState.formDetail.discount,
+        },
       };
     });
 
@@ -94,16 +94,16 @@ class SalesPage extends AbstractPage {
               </div>
               <div className="col-md-4">
                 <PendingItemsLayout pendingItems={this.state.pendingItems}
-                                    removeAllPendingItems={this.removeAllPendingItems}
-                                    removePendingItem={this.removePendingItem}
-                                    setState={this.setState.bind(this)}
-                                    pendingItemTypes={pendingItemTypes.sales}
+                  removeAllPendingItems={this.removeAllPendingItems}
+                  removePendingItem={this.removePendingItem}
+                  setState={this.setState.bind(this)}
+                  pendingItemTypes={pendingItemTypes.sales}
                 />
               </div>
             </div>
           </div>
         </MainLayout>
-        {/*{this.state.isConfirming && <Modal.ModalConfirm
+        {/* {this.state.isConfirming && <Modal.ModalConfirm
           confirmItems={this.state.pendingItems.map((pi) => ({id: pi.id, leftText: `${pi.quantity} x ${pi.name} ${pi.kilo > 0 ? `(${pi.kilo} kg)` : ''}`, rightText: pi.supplierName}))}
         />}
         {this.state.isLoading && <Modal.ModalLoading />}

@@ -6,13 +6,13 @@ import Row from 'react-bootstrap/Row';
 import InventoryLogo from '../assets/icons/inventory.svg';
 import MoneyLogo from '../assets/icons/money.svg';
 
-import { useHistory } from 'react-router-dom';
-import { getRoute } from '../routeConfig';
-import {AppContext} from "../context/AppContext";
+import {useHistory} from 'react-router-dom';
+import {getRoute} from '../routeConfig';
+import {AppContext} from '../context/AppContext';
 
 const SelectionScreen = () => {
   const history = useHistory();
-    const {state: {user: { username }}} = useContext(AppContext);
+  const {state: {user: {username}}} = useContext(AppContext);
 
   return (
     <div className="vh-100">

@@ -1,4 +1,4 @@
-import SearchBarGroup from "./SearchBarGroup";
-import SearchBarItem from "./SearchBarItem";
+import SearchBarGroup from './SearchBarGroup';
+import SearchBarItem from './SearchBarItem';
 
-export default {SearchBarGroup, SearchBarItem}
+export default {SearchBarGroup, SearchBarItem};

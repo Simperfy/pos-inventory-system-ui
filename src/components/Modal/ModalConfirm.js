@@ -1,7 +1,7 @@
 import React from 'react';
 import ModalLayout from '../../layout/ModalLayout';
 
-import { InventoryContext } from '../../context/InventoryContext';
+import {InventoryContext} from '../../context/InventoryContext';
 
 import './ModalConfirm.css';
 import FormButton from '../Form/FormButton';
@@ -39,16 +39,16 @@ class ModalConfirm extends React.Component {
                 text="Confirm"
                 solid
                 handleClick={this.context.handleSubmitConfirm}
-                style={{ fontSize: '1rem', margin: 0 }}
+                style={{fontSize: '1rem', margin: 0}}
               />
               <FormButton
                 color="red"
                 text="Cancel"
                 solid
                 handleClick={() =>
-                  this.context.setState({ isConfirming: false })
+                  this.context.setState({isConfirming: false})
                 }
-                style={{ fontSize: '1rem', margin: 0 }}
+                style={{fontSize: '1rem', margin: 0}}
               />
             </div>
           </div>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import Button from 'react-bootstrap/Button';
 import ModalLayout from '../../layout/ModalLayout';
@@ -9,14 +9,15 @@ import './ModalLogin.css';
 class ModalLogin extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: '' };
+    this.state = {value: ''};
   }
 
   validatePassword = (e) => {
     const regex = /^[0-9\b]+$/;
 
-    if (e.target.value === '' || regex.test(e.target.value))
-      this.setState({ value: e.target.value });
+    if (e.target.value === '' || regex.test(e.target.value)) {
+      this.setState({value: e.target.value});
+    }
 
     this.props.onChange(e);
   };

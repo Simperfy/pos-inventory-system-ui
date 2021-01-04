@@ -2,10 +2,10 @@ import React from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import { HomePage, InventoryPage, SelectionPage, SalesPage } from './pages';
-import { AppContext } from './context/AppContext';
-import { getRoute } from './routeConfig';
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import {HomePage, InventoryPage, SelectionPage, SalesPage} from './pages';
+import {AppContext} from './context/AppContext';
+import {getRoute} from './routeConfig';
 import Api from './api/Api';
 import env from 'react-dotenv';
 
@@ -19,31 +19,30 @@ class App extends React.Component {
       isLoggedIn: false,
       user: null,
       jwt: null,
-      isDisconnected: false
+      isDisconnected: false,
     };
 
     this.style = {
       noInternetDiv: {backgroundColor: '#ff8100', width: '100vw', position: 'fixed'},
-      noInternetP: {textAlign: 'center', fontSize: '1.5rem', color: 'white', margin: 'auto'}
-    }
-
+      noInternetP: {textAlign: 'center', fontSize: '1.5rem', color: 'white', margin: 'auto'},
+    };
   }
 
   componentDidMount() {
     this._isMounted = true;
     const jwt = localStorage.getItem('jwt');
     if (jwt) this.autoSignIn(jwt);
-    else this.setState({ isReady: true });
+    else this.setState({isReady: true});
 
     // @TODO: Don't remove, useful if server is in the cloud
     // Handle internet disconnection
-    /*this.handleConnectionChange();
+    /* this.handleConnectionChange();
     window.addEventListener('online', this.handleConnectionChange);
     window.addEventListener('offline', this.handleConnectionChange);*/
 
     if (!env.APP_ENV) {
       if (env.APP_ENV === 'development') return;
-      console.log('pinging')
+      console.log('pinging');
       console.log(env.APP_ENV);
       this.handleLocalServerConnectionPings();
     }
@@ -53,7 +52,7 @@ class App extends React.Component {
     this.serverPing = setInterval(() => {
       fetch(env.API_URL)
           .then(() => this.setState({isDisconnected: false}))
-          .catch(() => this.setState({isDisconnected: true}))
+          .catch(() => this.setState({isDisconnected: true}));
     }, 3000);
   }
 
@@ -63,7 +62,7 @@ class App extends React.Component {
 
     // @TODO: Don't remove, useful if server is in the cloud
     // Handle internet disconnection
-    /*window.removeEventListener('online', this.handleConnectionChange);
+    /* window.removeEventListener('online', this.handleConnectionChange);
     window.removeEventListener('offline', this.handleConnectionChange);*/
   }
 
@@ -90,35 +89,35 @@ class App extends React.Component {
 
   autoSignIn = (jwt) => {
     Api.getCurrentUser(jwt).then(
-      ({ data }) => {
-        this._isMounted &&
+        ({data}) => {
+          this._isMounted &&
           this.setState({
             isReady: true,
             isLoggedIn: true,
             user: data,
             jwt: jwt,
           });
-      },
-      (err) => {
-        this._isMounted &&
+        },
+        (err) => {
+          this._isMounted &&
           this.setState({
             isReady: true,
           });
-      }
+        },
     );
   }
 
   login = (user, jwt) => {
-    this.setState({isLoggedIn: true, user: user, jwt: jwt });
+    this.setState({isLoggedIn: true, user: user, jwt: jwt});
     localStorage.setItem('jwt', jwt);
   };
 
   logout = () => {
-    this.setState({isLoggedIn: false, user: null, jwt: null });
+    this.setState({isLoggedIn: false, user: null, jwt: null});
     localStorage.clear();
   }
 
-  PrivateRoute = ({ children, ...rest }) => <Route {...rest} render={() => this.state.isLoggedIn ? children : <Redirect to="/"/>} />;
+  PrivateRoute = ({children, ...rest}) => <Route {...rest} render={() => this.state.isLoggedIn ? children : <Redirect to="/"/>} />;
 
   render() {
     return this.state.isReady && (
@@ -127,18 +126,18 @@ class App extends React.Component {
           state: this.state,
           setState: this.setState,
           isLoggedIn: this.state.isLoggedIn,
-          history: this.props.history,
+          // history: this.props.history,
           login: this.login,
           logout: this.logout,
         }}
       >
         <Router>
-          <div className="vh-100 vw-100" style={{ backgroundColor: '#F2F2F2' }}>
-              { this.state.isDisconnected && (
+          <div className="vh-100 vw-100" style={{backgroundColor: '#F2F2F2'}}>
+            { this.state.isDisconnected && (
               <div style={this.style.noInternetDiv}>
                 <p style={this.style.noInternetP}>Server connection lost</p>
               </div>)
-              }
+            }
             <Container fluid className="d-flex flex-column h-100">
               <Switch>
                 <Route path={getRoute('home')} exact >

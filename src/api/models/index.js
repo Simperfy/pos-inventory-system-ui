@@ -1,3 +1,3 @@
 import ModelStocks from './ModelStocks';
 
-export { ModelStocks }
+export {ModelStocks};

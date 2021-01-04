@@ -1,6 +1,6 @@
 import React from 'react';
 
-function FormInput({ formType, label, placeHolder, onChange, max, min, value, hideZero }) {
+function FormInput({formType, label, placeHolder, onChange, max, min, value, hideZero}) {
   return (
     <div className="form-item">
       <label htmlFor="item-label">{label}:</label>

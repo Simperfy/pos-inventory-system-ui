@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Form} from '../index';
 
-import { SalesContext } from '../../context/SalesContext';
+import {SalesContext} from '../../context/SalesContext';
 
 import './FormGroup.css';
 
@@ -21,7 +21,7 @@ class FormGroupSalesQuantity extends React.Component {
 
     const {
       formDetail,
-      formDetailShow
+      // formDetailShow,
     } = this.context.state;
 
     const subTotal = quantity * formDetail.price;
@@ -43,13 +43,13 @@ class FormGroupSalesQuantity extends React.Component {
               hideZero
             />
             <Form.FormInput
-                formType="number"
-                onChange={this.context.handleDiscountInputChange}
-                label={'Discount'}
-                placeHolder={'0.00'}
-                value={formDetail.discount}
-                min="0"
-                hideZero
+              formType="number"
+              onChange={this.context.handleDiscountInputChange}
+              label={'Discount'}
+              placeHolder={'0.00'}
+              value={formDetail.discount}
+              min="0"
+              hideZero
             />
             <div className="form-btn-group">
               <Form.FormButton

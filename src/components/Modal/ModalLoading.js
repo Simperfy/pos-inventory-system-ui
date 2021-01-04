@@ -1,8 +1,8 @@
 import React from 'react';
 
 import ModalLayout from '../../layout/ModalLayout';
-import { InventoryContext } from '../../context/InventoryContext';
-import { ReactComponent as LoopIcon } from '../../assets/icons/loop.svg';
+import {InventoryContext} from '../../context/InventoryContext';
+import {ReactComponent as LoopIcon} from '../../assets/icons/loop.svg';
 
 import './ModalLoading.css';
 
@@ -21,7 +21,7 @@ class ModalLoading extends React.Component {
     this.interval = setInterval(() => {
       this.setState((prevState, props) => {
         if (prevState.counter++ > 2) prevState.counter = 0;
-        return { counter: prevState.counter };
+        return {counter: prevState.counter};
       });
     }, 1000);
   }

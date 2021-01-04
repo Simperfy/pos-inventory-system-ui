@@ -1,6 +1,6 @@
 import React from 'react';
 
-function FormStaticText({ text, textBelow }) {
+function FormStaticText({text, textBelow}) {
   return (
     <div className="form-item">
       <p>Item: {text}</p>

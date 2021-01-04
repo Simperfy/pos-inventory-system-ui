@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Form} from '../index';
 
-import { InventoryContext } from '../../context/InventoryContext';
+import {InventoryContext} from '../../context/InventoryContext';
 
 import './FormGroup.css';
 
@@ -35,10 +35,10 @@ class FormGroupInventorySack extends React.Component {
               hideZero
             />
             <Form.FormSelect
-                value={kilo}
-                onChange={this.context.handleSackSelectChange}
-                label={'Sack'}
-                options={sacks.map((s) => ({id: s.sackId, value: s.sackValue, name: s.sackLabel}))}
+              value={kilo}
+              onChange={this.context.handleSackSelectChange}
+              label={'Sack'}
+              options={sacks.map((s) => ({id: s.sackId, value: s.sackValue, name: s.sackLabel}))}
             />
             <Form.FormSelect
               value={supplierId}
@@ -62,7 +62,7 @@ class FormGroupInventorySack extends React.Component {
           </div>
         </div>
 
-        {/*{this.props.formDetail && (
+        {/* {this.props.formDetail && (
           <div className="col-md-6">
             <Form.FormDetailText
               price={'100.00'} // formDetail.price

@@ -6,9 +6,9 @@ import profileMalePic from '../assets/images/profile_male.png';
 import profileFemalePic from '../assets/images/profile_female.jpg';
 import axios from 'axios';
 import env from 'react-dotenv';
-import { getRoute } from '../routeConfig';
+import {getRoute} from '../routeConfig';
 import {AppContext} from '../context/AppContext';
-import { withRouter } from 'react-router-dom'
+import {withRouter} from 'react-router-dom';
 import Api from '../api/Api';
 
 class Home extends React.Component {
@@ -31,9 +31,9 @@ class Home extends React.Component {
 
   componentDidMount() {
     this._isMounted = true;
-    Api.getUsers().then(({ data }) => {
-      const users = data.map((u) => ({ id: u.id, user: u.username, email: u.email, gender: u.gender }));
-      this._isMounted && this.setState({ users: users });
+    Api.getUsers().then(({data}) => {
+      const users = data.map((u) => ({id: u.id, user: u.username, email: u.email, gender: u.gender}));
+      this._isMounted && this.setState({users: users});
     });
   }
 
@@ -41,30 +41,31 @@ class Home extends React.Component {
     this._isMounted = false;
   }
 
-  handleClose = () => this.setState({ showModal: false });
+  handleClose = () => this.setState({showModal: false});
 
   handleClick = (user, email, gender) =>{
-    this.setState({ selectedUser: user, selectedUserEmail: email, selectedUserGender: gender, showModal: true });
+    this.setState({selectedUser: user, selectedUserEmail: email, selectedUserGender: gender, showModal: true});
   }
 
   handleLogin = () => {
-    this.setState({ incorrectPassword: false });
+    this.setState({incorrectPassword: false});
     axios
-      .post(`${env.API_URL}/auth/local`, {
-        identifier: this.state.selectedUser,
-        password: this.state.selectedUserPassword,
-      })
-      .then(
-        ({ data: {user, jwt} }) => {
-          this.context.login(user, jwt)
-          this.props.history.push(getRoute('selection'))
-        },
-        (err) => {
-          const statusCode = err.response.data.statusCode;
-          if (statusCode >= 400 && statusCode < 500 && this._isMounted)
-            this.setState({ incorrectPassword: true });
-        }
-      );
+        .post(`${env.API_URL}/auth/local`, {
+          identifier: this.state.selectedUser,
+          password: this.state.selectedUserPassword,
+        })
+        .then(
+            ({data: {user, jwt}}) => {
+              this.context.login(user, jwt);
+              this.props.history.push(getRoute('selection'));
+            },
+            (err) => {
+              const statusCode = err.response.data.statusCode;
+              if (statusCode >= 400 && statusCode < 500 && this._isMounted) {
+                this.setState({incorrectPassword: true});
+              }
+            },
+        );
   }
 
   handlePinChange = (e) => this.setState({selectedUserPassword: e.target.value});
@@ -74,7 +75,7 @@ class Home extends React.Component {
       <>
         <Row
           className="justify-content-around"
-          style={{ marginTop: '3.75rem' }}
+          style={{marginTop: '3.75rem'}}
         >
           {this.state.users.map((u) => (
             <Card.CardProfile
