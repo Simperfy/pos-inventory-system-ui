@@ -18,24 +18,7 @@ class SalesPage extends AbstractPage {
   render() {
     return (
       <SalesContext.Provider
-        value={{
-          state: this.state,
-          setState: this.setState.bind(this),
-          addPendingItems: this.addPendingItems,
-          removePendingItem: this.removePendingItem,
-          removeAllPendingItems: this.removeAllPendingItems,
-          closeForm: this.closeForm,
-          showForm: this.showForm,
-          handleSearchBarChange: this.handleSearchBarChange,
-          handleSearchBarItemClick: this.handleSearchBarItemClick,
-          handleSearchBarFocus: this.handleSearchBarFocus,
-          handleSearchBarBlur: this.handleSearchBarBlur,
-          handleSubmitConfirm: this.handleSubmitConfirm,
-          handleSupplierSelectChange: this.handleSupplierSelectChange,
-          handleQuantityInputChange: this.handleQuantityInputChange,
-          handleSackSelectChange: this.handleSackSelectChange,
-          handleDiscountInputChange: this.handleDiscountInputChange,
-        }}
+        value={this.providerFunctions()}
       >
         <MainLayout type="sales">
           <div className="container-fluid">

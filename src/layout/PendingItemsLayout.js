@@ -30,16 +30,16 @@ class PendingItemsLayout extends React.Component {
     return (
       <div style={this.pendingItemsContainerStyle} className="px-4 d-flex flex-column justify-content-between">
         <div className="pending-item-scrollable-inventory ">
-          {this.context.state.pendingItems.length > 0 && (
+          {this.props.pendingItems.length > 0 && (
             <Form.FormButton
-              handleClick={this.context.removeAllPendingItems}
+              handleClick={this.props.removeAllPendingItems}
               color="red"
               style={this.removeAllStyle}
               text="remove all"
             />
           )}
           <div style={{ clear: 'both' }} />
-          {this.context.state.pendingItems.map((pi) => (
+          {this.props.pendingItems.map((pi) => (
             <PendingItem
               key={pi.id}
               id={pi.id}
@@ -51,13 +51,13 @@ class PendingItemsLayout extends React.Component {
           ))}
         </div>
 
-        {this.context.state.pendingItems.length > 0 &&
+        {this.props.pendingItems.length > 0 &&
          <Form.FormButton
           color="blue"
           solid
           style={{ padding: 0, width: '100%' }}
           text="Submit Inventory"
-          handleClick={() => this.context.setState({ isConfirming: true })}
+          handleClick={() => this.props.setState({ isConfirming: true })}
         />}
       </div>
     );

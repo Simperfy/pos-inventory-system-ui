@@ -18,23 +18,7 @@ class InventoryPage extends AbstractPage {
   render() {
     return (
       <InventoryContext.Provider
-        value={{
-          state: this.state,
-          setState: this.setState.bind(this),
-          addPendingItems: this.addPendingItems,
-          removePendingItem: this.removePendingItem,
-          removeAllPendingItems: this.removeAllPendingItems,
-          closeForm: this.closeForm,
-          showForm: this.showForm,
-          handleSearchBarChange: this.handleSearchBarChange,
-          handleSearchBarItemClick: this.handleSearchBarItemClick,
-          handleSearchBarFocus: this.handleSearchBarFocus,
-          handleSearchBarBlur: this.handleSearchBarBlur,
-          handleSubmitConfirm: this.handleSubmitConfirm,
-          handleSupplierSelectChange: this.handleSupplierSelectChange,
-          handleQuantityInputChange: this.handleQuantityInputChange,
-          handleSackSelectChange: this.handleSackSelectChange,
-        }}
+        value={this.providerFunctions()}
       >
         <MainLayout type="inventory">
           <div className="container-fluid">
@@ -43,7 +27,9 @@ class InventoryPage extends AbstractPage {
                 <MainFormLayoutInventory />
               </div>
               <div className="col-md-4">
-                <PendingItemsLayout />
+                <PendingItemsLayout pendingItems={this.state.pendingItems}
+                                    removeAllPendingItems={this.removeAllPendingItems}
+                                    setState={this.setState.bind(this)} />
               </div>
             </div>
           </div>
