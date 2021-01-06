@@ -8,6 +8,8 @@ import {AppContext} from './context/AppContext';
 import {getRoute} from './routeConfig';
 import Api from './api/Api';
 import env from 'react-dotenv';
+import store from './store';
+import {Provider} from 'react-redux';
 
 class App extends React.Component {
   _isMounted = false;
@@ -121,47 +123,49 @@ class App extends React.Component {
 
   render() {
     return this.state.isReady && (
-      <AppContext.Provider
-        value={{
-          state: this.state,
-          setState: this.setState,
-          isLoggedIn: this.state.isLoggedIn,
-          // history: this.props.history,
-          login: this.login,
-          logout: this.logout,
-        }}
-      >
-        <Router>
-          <div className="vh-100 vw-100" style={{backgroundColor: '#F2F2F2'}}>
-            { this.state.isDisconnected && (
-              <div style={this.style.noInternetDiv}>
-                <p style={this.style.noInternetP}>Server connection lost</p>
-              </div>)
-            }
-            <Container fluid className="d-flex flex-column h-100">
-              <Switch>
-                <Route path={getRoute('home')} exact >
-                  { !this.state.isLoggedIn ? <HomePage /> : <Redirect to={getRoute('selection')}/> }
-                </Route>
+      <Provider store={store}>
+        <AppContext.Provider
+          value={{
+            state: this.state,
+            setState: this.setState,
+            isLoggedIn: this.state.isLoggedIn,
+            // history: this.props.history,
+            login: this.login,
+            logout: this.logout,
+          }}
+        >
+          <Router>
+            <div className="vh-100 vw-100" style={{backgroundColor: '#F2F2F2'}}>
+              { this.state.isDisconnected && (
+                <div style={this.style.noInternetDiv}>
+                  <p style={this.style.noInternetP}>Server connection lost</p>
+                </div>)
+              }
+              <Container fluid className="d-flex flex-column h-100">
+                <Switch>
+                  <Route path={getRoute('home')} exact >
+                    { !this.state.isLoggedIn ? <HomePage /> : <Redirect to={getRoute('selection')}/> }
+                  </Route>
 
-                <this.PrivateRoute path={getRoute('selection')}>
-                  <SelectionPage/>
-                </this.PrivateRoute>
-                <this.PrivateRoute path={getRoute('inventory')}>
-                  <InventoryPage/>
-                </this.PrivateRoute>
-                <this.PrivateRoute path={getRoute('sales')}>
-                  <SalesPage/>
-                </this.PrivateRoute>
+                  <this.PrivateRoute path={getRoute('selection')}>
+                    <SelectionPage/>
+                  </this.PrivateRoute>
+                  <this.PrivateRoute path={getRoute('inventory')}>
+                    <InventoryPage/>
+                  </this.PrivateRoute>
+                  <this.PrivateRoute path={getRoute('sales')}>
+                    <SalesPage/>
+                  </this.PrivateRoute>
 
-                <Route path="*">
-                  <p>Invalid link</p>
-                </Route>
-              </Switch>
-            </Container>
-          </div>
-        </Router>
-      </AppContext.Provider>
+                  <Route path="*">
+                    <p>Invalid link</p>
+                  </Route>
+                </Switch>
+              </Container>
+            </div>
+          </Router>
+        </AppContext.Provider>
+      </Provider>
     );
   }
 }

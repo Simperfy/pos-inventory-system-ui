@@ -233,7 +233,8 @@ export class AbstractPage extends React.Component {
 
       const jwt = this.context.state.jwt;
       const id = this.context.state.user.id;
-      const pendingItems = this.state.pendingItems;
+      const pendingItems = this.props.pendingItems; // coming from redux
+
       ModelStocks.createBatch(jwt, id, pendingItems)
           .then((data) =>
             setTimeout(() => this.setState({isSuccess: true, pendingItems: []}), 1000),

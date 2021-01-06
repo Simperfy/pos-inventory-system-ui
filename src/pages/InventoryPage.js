@@ -9,6 +9,8 @@ import {InventoryContext} from '../context/InventoryContext';
 import {AppContext} from '../context/AppContext';
 import {AbstractPage} from './AbstractPage';
 import pendingItemTypes from '../enums/enumPendingItemTypes';
+import {connect} from 'react-redux';
+import {addPendingItem} from '../actions/pendingItemsActions';
 
 class InventoryPage extends AbstractPage {
   static contextType = AppContext;
@@ -26,7 +28,7 @@ class InventoryPage extends AbstractPage {
       kilo,
     } = this.state.mainForm;
 
-    this.setState((prevState, props) => ({
+    /* this.setState((prevState, props) => ({
       pendingItems: [
         {
           id: itemBarcode + this.pendingItemsCounter++,
@@ -39,7 +41,20 @@ class InventoryPage extends AbstractPage {
         },
         ...prevState.pendingItems,
       ],
-    }));
+    }));*/
+
+    const item = {
+      name: itemText,
+      supplierName: supplierName,
+      supplierId: supplierId,
+      quantity: quantity,
+      barcode: itemBarcode,
+      kilo: kilo,
+    };
+
+    this.props.addPendingItem(item);
+
+
     this.closeForm();
     this.resetForm();
   };
@@ -75,7 +90,7 @@ class InventoryPage extends AbstractPage {
                 <MainFormLayoutInventory />
               </div>
               <div className="col-md-4">
-                <PendingItemsLayout pendingItems={this.state.pendingItems}
+                <PendingItemsLayout // pendingItems={this.state.pendingItems}
                   removeAllPendingItems={this.removeAllPendingItems}
                   removePendingItem={this.removePendingItem}
                   setState={this.setState.bind(this)}
@@ -86,7 +101,7 @@ class InventoryPage extends AbstractPage {
           </div>
         </MainLayout>
         {this.state.isConfirming && <Modal.ModalConfirm
-          confirmItems={this.state.pendingItems.map((pi) => ({id: pi.id, leftText: `${pi.quantity} x ${pi.name} ${pi.kilo > 0 ? `(${pi.kilo} kg)` : ''}`, rightText: pi.supplierName}))}
+          confirmItems={this.props.pendingItems.map((pi) => ({id: pi.id, leftText: `${pi.quantity} x ${pi.name} ${pi.kilo > 0 ? `(${pi.kilo} kg)` : ''}`, rightText: pi.supplierName}))}
         />}
         {this.state.isLoading && <Modal.ModalLoading />}
         {this.state.isSuccess && <Modal.ModalSuccess handleClick={this.handleModalSuccessClick} />}
@@ -96,4 +111,9 @@ class InventoryPage extends AbstractPage {
   }
 }
 
-export default withRouter(InventoryPage);
+// export default withRouter(InventoryPage);
+
+export default withRouter(connect((state) => ({
+  pendingItems: state.pending.pendingItems,
+}), {addPendingItem},
+)(InventoryPage));
