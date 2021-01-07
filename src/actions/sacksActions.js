@@ -1,13 +1,14 @@
 import * as types from '../types';
+import {mapSacks} from '../util';
 
 export const updateSacks = (sacks) => (dispatch, getState) => {
-  sacks = sacks.map((s) => ({id: s.sackId, name: s.sackLabel, value: s.sackValue}));
+  sacks = sacks.map(mapSacks);
 
   dispatch({type: types.UPDATE_SACKS, payload: {sacks}});
 };
 
 export const updateSacksAndKilo = (sacks) => (dispatch, getState) => {
-  sacks = sacks.map((s) => ({id: s.sackId, name: s.sackLabel, value: s.sackValue}));
+  sacks = sacks.map(mapSacks);
   const kilo = sacks[0]?.value || 0;
 
   dispatch({type: types.UPDATE_KILO, payload: {kilo}});

@@ -16,7 +16,7 @@ import {updateSuppliers} from '../actions/suppliersActions';
 import {updateSacks, updateSackSelectedId} from '../actions/sacksActions';
 import {addPendingSalesItem} from '../actions/pendingItemsActions';
 import {updatePrice} from '../actions/priceActions';
-import {resetQuantity} from '../actions/quantityActions';
+import {resetQuantity, updateQuantity} from '../actions/quantityActions';
 
 class SalesPage extends AbstractPage {
   static contextType = AppContext;
@@ -124,5 +124,5 @@ export default withRouter(connect((state) => ({
   pendingItems: state.pending.pendingItems,
   quantity: state.quantity,
   sacks: state.sacksStore.sacks,
-}), {addPendingSalesItem, updateSearchResults, updateSuppliers, updateSacks, updateSackSelectedId, updatePrice, resetQuantity},
+}), {addPendingSalesItem, updateSearchResults, updateSuppliers, updateSacks, updateSackSelectedId, updatePrice, resetQuantity, updateQuantity},
 )(SalesPage));

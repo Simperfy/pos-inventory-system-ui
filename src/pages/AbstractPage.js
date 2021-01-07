@@ -330,9 +330,9 @@ export class AbstractPage extends React.Component {
     handleItemTypeSelectChange = (e) => {
       const kiloType = parseInt(e.target.value);
 
-      if (kiloType === enumKiloType.kilo) {
-        this.props.resetQuantity();
-      }
+      if (kiloType === enumKiloType.kilo) this.props.updateQuantity(1);
+      else this.props.resetQuantity();
+
       this.setState((prevState, props) => ({mainForm: {...prevState.mainForm, kiloType: kiloType, kilo: kiloType === enumKiloType.kilo ? 0 : prevState.mainForm?.sacks[0]?.sackValue || 0}}));
     }
 

@@ -8,7 +8,7 @@ import './FormGroup.css';
 import enumKiloType from '../../enums/enumKiloType';
 import {connect} from 'react-redux';
 import {updateDiscountOnInput} from '../../actions/discountActions';
-import {updateQuantityOnInput} from '../../actions/quantityActions';
+import {updateQuantity, updateQuantityOnInput} from '../../actions/quantityActions';
 import {updateSackSelectedIdAndKilo} from '../../actions/sacksActions';
 import {updateKiloOnInput} from '../../actions/kiloActions';
 
@@ -16,7 +16,8 @@ class FormGroupSalesKilo extends React.Component {
   static contextType = SalesContext;
 
   componentDidMount() {
-    this.context.setState((prevState, props) => ({mainForm: {...prevState.mainForm, kilo: 0}}) );
+    // this.context.setState((prevState, props) => ({mainForm: {...prevState.mainForm, kilo: 0}}) );
+    this.props.updateQuantity(1);
   }
 
   render() {
@@ -45,15 +46,17 @@ class FormGroupSalesKilo extends React.Component {
             />
             { kiloType === enumKiloType.sack &&
             <>
+              {/* QUANTITY */}
               <Form.FormInput
                 formType="number"
-                onChange={this.props.updateQuantity}
+                onChange={this.props.updateQuantityOnInput}
                 label={'Qty'}
                 placeHolder={'1 pcs'}
                 value={this.props.quantity}
                 min="1"
                 hideZero
               />
+              {/* SACK */}
               <Form.FormSelect
                 value={this.props.selectedSackId}
                 onChange={(e) => this.props.updateSackSelectedIdAndKilo(e.target.value)}
@@ -64,9 +67,10 @@ class FormGroupSalesKilo extends React.Component {
 
             { kiloType === enumKiloType.kilo &&
             <>
+              {/* KILO */}
               <Form.FormInput
                 formType="number"
-                onChange={this.props.updateKilo}
+                onChange={this.props.updateKiloOnInput}
                 label={'Kilo'}
                 placeHolder={'1.0'}
                 value={this.props.kilo}
@@ -76,7 +80,7 @@ class FormGroupSalesKilo extends React.Component {
             </>}
             <Form.FormInput
               formType="number"
-              onChange={this.props.updateDiscount}
+              onChange={this.props.updateDiscountOnInput}
               label={'Discount'}
               placeHolder={'0.00'}
               value={this.props.discount}
@@ -115,4 +119,10 @@ export default connect((state) => ({
   discount: state.discount,
   sacks: state.sacksStore.sacks,
   selectedSackId: state.sacksStore.selectedSackId,
-}), {updateDiscount: updateDiscountOnInput, updateQuantity: updateQuantityOnInput, updateSackSelectedIdAndKilo, updateKilo: updateKiloOnInput})(FormGroupSalesKilo);
+}), {
+  updateQuantity,
+  updateDiscountOnInput,
+  updateQuantityOnInput,
+  updateSackSelectedIdAndKilo,
+  updateKiloOnInput,
+})(FormGroupSalesKilo);
