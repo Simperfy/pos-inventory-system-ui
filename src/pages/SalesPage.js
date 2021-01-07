@@ -15,11 +15,12 @@ import {connect} from 'react-redux';
 import {updateSearchResults} from '../actions/searchResultsActions';
 import {updateSuppliers} from '../actions/suppliersActions';
 import {updateSacks, updateSackSelectedId} from '../actions/sacksActions';
-import {addPendingSalesItem} from '../actions/pendingItemsActions';
+import {addPendingSalesItem, removeAllPendingItems} from '../actions/pendingItemsActions';
 import {updatePrice, updatePriceBySackId} from '../actions/priceActions';
 import {resetQuantity, updateQuantity} from '../actions/quantityActions';
 import {updateItemBarcode, updateItemPrice, updateItemText} from '../actions/itemActions';
 import {updateKiloBySackId} from '../actions/kiloActions';
+import {enumSubmitConfirmTypes} from '../enums/enumSubmitConfirmTypes';
 
 class SalesPage extends AbstractPage {
   static contextType = AppContext;
@@ -77,6 +78,10 @@ class SalesPage extends AbstractPage {
     this.showForm(newFormValue.formType);
   };
 
+  componentDidMount() {
+    this.props.removeAllPendingItems(false);
+  }
+
   render() {
     return (
       <SalesContext.Provider
@@ -89,9 +94,7 @@ class SalesPage extends AbstractPage {
                 <MainFormLayoutSales />
               </div>
               <div className="col-md-4">
-                <PendingItemsLayout // pendingItems={this.state.pendingItems}
-                  // removeAllPendingItems={this.removeAllPendingItems}
-                  // removePendingItem={this.removePendingItem}
+                <PendingItemsLayout
                   setState={this.setState.bind(this)}
                   pendingItemTypes={pendingItemTypes.sales}
                 />
@@ -100,9 +103,9 @@ class SalesPage extends AbstractPage {
           </div>
         </MainLayout>
         {this.state.isConfirming && <Modal.ModalConfirm
-          handleSubmitConfirm={this.context.handleSubmitConfirm}
+          handleSubmitConfirm={() => this.handleSubmitConfirm(enumSubmitConfirmTypes.SALES_SUBMIT)}
           setState={this.context.setState.bind(this)}
-          confirmItems={this.state.pendingItems.map((pi) => ({id: pi.id, leftText: `${pi.quantity} x ${pi.name} ${pi.kilo > 0 ? `(${pi.kilo} kg)` : ''}`, rightText: pi.supplierName}))}
+          confirmItems={this.props.pendingItems.map((pi) => ({id: pi.id, leftText: `${pi.quantity} x ${pi.name} ${pi.kilo > 0 ? `(${pi.kilo} kg)` : ''}`, rightText: pi.supplierName}))}
         />}
         {this.state.isLoading && <Modal.ModalLoading />}
         {this.state.isSuccess && <Modal.ModalSuccess handleClick={this.handleModalSuccessClick} />}
@@ -135,5 +138,6 @@ export default withRouter(connect((state) => ({
   updateItemPrice,
   updateKiloBySackId,
   updatePriceBySackId,
+  removeAllPendingItems,
 },
 )(SalesPage));

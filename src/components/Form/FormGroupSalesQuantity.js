@@ -23,7 +23,7 @@ class FormGroupSalesQuantity extends React.Component {
             <Form.FormStaticText text={this.props.itemText} textBelow={this.props.itemBarcode} />
             <Form.FormInput
               formType="number"
-              onChange={this.props.updateQuantity}
+              onChange={this.props.updateQuantityOnInput}
               label={'Qty'}
               placeHolder={'1 pcs'}
               value={quantity}
@@ -32,7 +32,7 @@ class FormGroupSalesQuantity extends React.Component {
             />
             <Form.FormInput
               formType="number"
-              onChange={this.props.updateDiscount}
+              onChange={this.props.updateDiscountOnInput}
               label={'Discount'}
               placeHolder={'0.00'}
               value={discount}
@@ -71,5 +71,5 @@ export default connect((state) => ({
   discount: state.discount,
   itemText: state.item.text,
   itemBarcode: state.item.barcode,
-}), {updateQuantity: updateQuantityOnInput, updateDiscount: updateDiscountOnInput},
+}), {updateQuantityOnInput, updateDiscountOnInput},
 )(FormGroupSalesQuantity);

@@ -4,6 +4,7 @@ import {ModelStocks} from '../api/models';
 import {getRoute} from '../routeConfig';
 import enumKiloType from '../enums/enumKiloType';
 import formTypes from '../enums/enumFormTypes';
+import {enumSubmitConfirmTypes} from '../enums/enumSubmitConfirmTypes';
 
 export class AbstractPage extends React.Component {
   constructor(props) {
@@ -230,18 +231,22 @@ export class AbstractPage extends React.Component {
       setTimeout(() => this.closeSearchResults(), 100);
     }
 
-    handleSubmitConfirm = (e) => {
-      console.log('submit');
-      this.setState({isConfirming: false, isLoading: true});
+    handleSubmitConfirm = (enumSubmitConfirmType) => {
+      if (enumSubmitConfirmType === enumSubmitConfirmTypes.INVENTORY_SUBMIT) {
+        console.log('submit');
+        this.setState({isConfirming: false, isLoading: true});
 
-      const jwt = this.context.state.jwt;
-      const id = this.context.state.user.id;
-      const pendingItems = this.props.pendingItems; // coming from redux
+        const jwt = this.context.state.jwt;
+        const id = this.context.state.user.id;
+        const pendingItems = this.props.pendingItems; // coming from redux
 
-      ModelStocks.createBatch(jwt, id, pendingItems)
-          .then((data) =>
-            setTimeout(() => this.setState({isSuccess: true, pendingItems: []}), 1000),
-          (err) => setTimeout(() => this.setState({isFailed: true}), 1000));
+        ModelStocks.createBatch(jwt, id, pendingItems)
+            .then((data) =>
+              setTimeout(() => this.setState({isSuccess: true, pendingItems: []}), 1000),
+            (err) => setTimeout(() => this.setState({isFailed: true}), 1000));
+      } else if (enumSubmitConfirmType === enumSubmitConfirmTypes.SALES_SUBMIT) {
+        console.log('Sales submit');
+      }
     }
 
     handleSupplierSelectChange = (e) => {

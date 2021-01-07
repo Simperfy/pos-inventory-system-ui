@@ -10,11 +10,12 @@ import {AppContext} from '../context/AppContext';
 import {AbstractPage} from './AbstractPage';
 import pendingItemTypes from '../enums/enumPendingItemTypes';
 import {connect} from 'react-redux';
-import {addPendingItem} from '../actions/pendingItemsActions';
+import {addPendingInventoryItem, removeAllPendingItems} from '../actions/pendingItemsActions';
 import {updateSearchResults} from '../actions/searchResultsActions';
 import {updateSuppliers} from '../actions/suppliersActions';
 import {updateSacksAndKilo, updateSackSelectedId, updateSackSelectedIdAndKilo} from '../actions/sacksActions';
 import {updateItemBarcode, updateItemText} from '../actions/itemActions';
+import {enumSubmitConfirmTypes} from '../enums/enumSubmitConfirmTypes';
 // import {updateKiloOnInput} from '../actions/kiloActions';
 
 class InventoryPage extends AbstractPage {
@@ -24,20 +25,9 @@ class InventoryPage extends AbstractPage {
     // if (!this.isValidFormInventory()) return;
     if (!this.removeDuplicate()) return;
 
-    const {
-      // itemText,
-      // itemBarcode,
-      supplierName,
-      supplierId,
-      // quantity,
-      // kilo,
-    } = this.state.mainForm;
-
     const item = {
       name: this.props.itemText,
       barcode: this.props.itemBarcode,
-      supplierName: supplierName,
-      supplierId: supplierId,
       quantity: this.props.quantity,
       kilo: this.props.kilo,
     };
@@ -62,6 +52,10 @@ class InventoryPage extends AbstractPage {
     this.showForm(newFormValue.formType);
   };
 
+  componentDidMount() {
+    this.props.removeAllPendingItems(false);
+  }
+
   render() {
     return (
       <InventoryContext.Provider
@@ -83,7 +77,7 @@ class InventoryPage extends AbstractPage {
           </div>
         </MainLayout>
         {this.state.isConfirming && <Modal.ModalConfirm
-          handleSubmitConfirm={this.context.handleSubmitConfirm}
+          handleSubmitConfirm={() => this.handleSubmitConfirm(enumSubmitConfirmTypes.INVENTORY_SUBMIT)}
           setState={this.context.setState.bind(this)}
           confirmItems={this.props.pendingItems.map((pi) => ({id: pi.id, leftText: `${pi.quantity} x ${pi.name} ${pi.kilo > 0 ? `(${pi.kilo} kg)` : ''}`, rightText: pi.supplierName}))}
         />}
@@ -103,7 +97,7 @@ export default withRouter(connect((state) => ({
   itemText: state.item.text,
   itemBarcode: state.item.barcode,
 }), {
-  addPendingItem,
+  addPendingItem: addPendingInventoryItem,
   updateSearchResults,
   updateSuppliers,
   updateSacksAndKilo,
@@ -111,5 +105,6 @@ export default withRouter(connect((state) => ({
   updateSackSelectedIdAndKilo,
   updateItemText,
   updateItemBarcode,
+  removeAllPendingItems,
 },
 )(InventoryPage));
