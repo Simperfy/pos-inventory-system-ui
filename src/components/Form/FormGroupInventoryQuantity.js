@@ -7,20 +7,16 @@ import {InventoryContext} from '../../context/InventoryContext';
 import './FormGroup.css';
 import {connect} from 'react-redux';
 import {updateQuantityOnInput} from '../../actions/quantityActions';
+import {updateSuppliersSelectedId, updateSuppliersSelectedIdOnInput} from '../../actions/suppliersActions';
 
 class FormGroupInventoryQuantity extends React.Component {
   static contextType = InventoryContext;
 
-  render() {
-    const {
-      // suppliers,
-      // itemText,
-      // itemBarcode,
-      supplierId,
-      // quantity,
-      // kilo,
-    } = this.context.state.mainForm;
+  componentDidMount() {
+    this.props.updateSuppliersSelectedId(this.props.suppliers[0].id);
+  }
 
+  render() {
     return (
       <div className="row form-group-container" ref={this.context.state.formGroupRef}>
         <div className="col-md-6">
@@ -28,7 +24,7 @@ class FormGroupInventoryQuantity extends React.Component {
             <Form.FormStaticText text={this.props.itemText} textBelow={this.props.itemBarcode} />
             <Form.FormInput
               formType="number"
-              onChange={this.props.updateQuantity}
+              onChange={this.props.updateQuantityOnInput}
               label={'Qty'}
               placeHolder={'1 pcs'}
               value={this.props.quantity}
@@ -36,8 +32,8 @@ class FormGroupInventoryQuantity extends React.Component {
               hideZero
             />
             <Form.FormSelect
-              value={supplierId}
-              onChange={this.context.handleSupplierSelectChange}
+              value={this.props.supplierSelectedId}
+              onChange={this.props.updateSuppliersSelectedIdOnInput}
               label={'Supplier'}
               options={this.props.suppliers}
             />
@@ -64,8 +60,9 @@ class FormGroupInventoryQuantity extends React.Component {
 
 export default connect((state) => ({
   quantity: state.quantity,
-  suppliers: state.suppliers,
+  suppliers: state.suppliersStore.suppliers,
   itemText: state.item.text,
   itemBarcode: state.item.barcode,
-}), {updateQuantity: updateQuantityOnInput},
+  supplierSelectedId: state.suppliersStore.supplierSelectedId,
+}), {updateQuantityOnInput, updateSuppliersSelectedIdOnInput, updateSuppliersSelectedId},
 )(FormGroupInventoryQuantity);

@@ -17,7 +17,7 @@ const store = createStore(
       pending: pendingItemsReducer,
       quantity: quantityReducer,
       searchResults: searchResultsReducer,
-      suppliers: suppliersReducer,
+      suppliersStore: suppliersReducer,
       sacksStore: sacksReducer,
       kilo: kiloReducer,
       discount: discountReducer,

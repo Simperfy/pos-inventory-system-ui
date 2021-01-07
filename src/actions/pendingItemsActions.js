@@ -4,11 +4,14 @@ import {v4 as uuidv4} from 'uuid';
 // for inventory
 export const addPendingItem = (item) => (dispatch, getState) => {
   const pendingItems = getState().pending.pendingItems?.slice() || [];
+  const supplierSelectedId = getState().suppliersStore.supplierSelectedId;
+  const supplierName = getState().suppliersStore.suppliers.find((s) => s.id === supplierSelectedId).name;
+
   pendingItems.push({
     id: uuidv4(),
     name: item.name,
-    supplierName: item.supplierName,
-    supplierId: item.supplierId,
+    supplierName: supplierName,
+    supplierId: supplierSelectedId,
     quantity: item.quantity,
     barcode: item.barcode,
     kilo: item.kilo,
