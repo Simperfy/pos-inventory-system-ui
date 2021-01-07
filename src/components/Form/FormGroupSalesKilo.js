@@ -32,18 +32,6 @@ class FormGroupSalesKilo extends React.Component {
       kiloTypes,
     } = this.context.state.mainForm;
 
-    const {
-      formDetail,
-      // formDetailShow,
-    } = this.context.state;
-
-    const discount = this.props.discount;
-    const quantity = this.props.quantity;
-    const price = this.props.price;
-    const subTotal = quantity * price;
-    const discountTotal = quantity * (isNaN(discount) ? 0 : discount);
-    const total = subTotal - discountTotal;
-
     return (
       <div className="row form-group-container" ref={this.context.state.formGroupRef}>
         <div className="col-md-6">
@@ -113,13 +101,7 @@ class FormGroupSalesKilo extends React.Component {
 
         {this.props.quantity > 0 && (
           <div className="col-md-6">
-            <Form.FormDetailText
-              /* price={formDetail.price?.toFixed(2)}
-              discount={formDetail.discount?.toFixed(2)}
-              subTotal={subTotal?.toFixed(2)}
-              discountTotal={discountTotal?.toFixed(2)}
-              total={total?.toFixed(2)}*/
-            />
+            <Form.FormDetailText />
           </div>
         )}
       </div>

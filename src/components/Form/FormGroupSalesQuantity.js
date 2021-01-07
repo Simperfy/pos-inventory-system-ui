@@ -22,17 +22,8 @@ class FormGroupSalesQuantity extends React.Component {
       // kilo,
     } = this.context.state.mainForm;
 
-    const {
-      formDetail,
-      // formDetailShow,
-    } = this.context.state;
-
     const quantity = this.props.quantity;
     const discount = this.props.discount;
-
-    const subTotal = quantity * formDetail.price;
-    const discountTotal = quantity * discount;
-    const total = subTotal - discountTotal;
 
     return (
       <div className="row form-group-container" ref={this.context.state.formGroupRef}>
@@ -75,13 +66,7 @@ class FormGroupSalesQuantity extends React.Component {
 
         {quantity > 0 && (
           <div className="col-md-6">
-            <Form.FormDetailText
-              /* price={formDetail.price?.toFixed(2)}
-              discount={formDetail.discount?.toFixed(2)}
-              subTotal={subTotal?.toFixed(2)}
-              discountTotal={discountTotal?.toFixed(2)}
-              total={total?.toFixed(2)}*/
-            />
+            <Form.FormDetailText />
           </div>
         )}
       </div>

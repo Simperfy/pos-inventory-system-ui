@@ -16,6 +16,7 @@ import {updateSuppliers} from '../actions/suppliersActions';
 import {updateSacks, updateSackSelectedId} from '../actions/sacksActions';
 import {addPendingSalesItem} from '../actions/pendingItemsActions';
 import {updatePrice} from '../actions/priceActions';
+import {resetQuantity} from '../actions/quantityActions';
 
 class SalesPage extends AbstractPage {
   static contextType = AppContext;
@@ -74,12 +75,12 @@ class SalesPage extends AbstractPage {
           ...prevState.mainForm,
           ...newFormValue,
           // quantity: quantity,
-          kilo: newFormValue.sacks[0]?.sackValue || 0,
+          // kilo: newFormValue.sacks[0]?.sackValue || 0,
         },
-        formDetail: {
+        /* formDetail: {
           price: newFormValue.price,
           discount: prevState.formDetail.discount,
-        },
+        },*/
       };
     });
 
@@ -123,5 +124,5 @@ export default withRouter(connect((state) => ({
   pendingItems: state.pending.pendingItems,
   quantity: state.quantity,
   sacks: state.sacksStore.sacks,
-}), {addPendingSalesItem, updateSearchResults, updateSuppliers, updateSacks, updateSackSelectedId, updatePrice},
+}), {addPendingSalesItem, updateSearchResults, updateSuppliers, updateSacks, updateSackSelectedId, updatePrice, resetQuantity},
 )(SalesPage));

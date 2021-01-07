@@ -5,3 +5,7 @@ export const updateQuantityOnInput = (e) => (dispatch, getState) => {
 
   dispatch({type: types.UPDATE_QUANTITY, payload: {quantity}});
 };
+
+export const resetQuantity = () => (dispatch, getState) => {
+  dispatch({type: types.UPDATE_QUANTITY, payload: {quantity: 1}});
+};
