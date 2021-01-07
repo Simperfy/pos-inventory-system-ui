@@ -1,4 +1,4 @@
 export default Object.freeze({
-  'inventory': 0,
-  'sales': 1,
+  'inventory': 'INVENTORY',
+  'sales': 'SALES',
 });

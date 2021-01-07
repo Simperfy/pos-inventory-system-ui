@@ -11,24 +11,17 @@ import {updateDiscountOnInput} from '../../actions/discountActions';
 import {updateQuantity, updateQuantityOnInput} from '../../actions/quantityActions';
 import {updateSackSelectedIdAndKilo} from '../../actions/sacksActions';
 import {updateKiloOnInput} from '../../actions/kiloActions';
+// import {updatePrice} from '../../actions/priceActions';
 
 class FormGroupSalesKilo extends React.Component {
   static contextType = SalesContext;
 
   componentDidMount() {
-    // this.context.setState((prevState, props) => ({mainForm: {...prevState.mainForm, kilo: 0}}) );
     this.props.updateQuantity(1);
   }
 
   render() {
     const {
-      // suppliers,
-      // itemText,
-      // itemBarcode,
-      // supplierId,
-      // quantity,
-      // sacks,
-      // kilo,
       kiloType,
       kiloTypes,
     } = this.context.state.mainForm;
