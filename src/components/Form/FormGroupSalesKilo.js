@@ -9,8 +9,8 @@ import enumKiloType from '../../enums/enumKiloType';
 import {connect} from 'react-redux';
 import {updateDiscountOnInput} from '../../actions/discountActions';
 import {updateQuantity, updateQuantityOnInput} from '../../actions/quantityActions';
-import {updateSackSelectedIdAndKilo} from '../../actions/sacksActions';
-import {updateKiloOnInput} from '../../actions/kiloActions';
+import {updateSackSelectedIdAndKilo, updateSackSelectedIdWith} from '../../actions/sacksActions';
+import {updateKilo, updateKiloOnInputAndPrice} from '../../actions/kiloActions';
 // import {updatePrice} from '../../actions/priceActions';
 
 class FormGroupSalesKilo extends React.Component {
@@ -18,6 +18,7 @@ class FormGroupSalesKilo extends React.Component {
 
   componentDidMount() {
     this.props.updateQuantity(1);
+    this.props.updateKilo(1);
   }
 
   render() {
@@ -52,7 +53,8 @@ class FormGroupSalesKilo extends React.Component {
               {/* SACK */}
               <Form.FormSelect
                 value={this.props.selectedSackId}
-                onChange={(e) => this.props.updateSackSelectedIdAndKilo(e.target.value)}
+                // onChange={(e) => this.props.updateSackSelectedIdAndKilo(e.target.value)}
+                onChange={(e) => this.props.updateSackSelectedIdWith(e.target.value, ['kilo', 'price'])}
                 label={'Sack'}
                 options={this.props.sacks}
               />
@@ -63,7 +65,7 @@ class FormGroupSalesKilo extends React.Component {
               {/* KILO */}
               <Form.FormInput
                 formType="number"
-                onChange={this.props.updateKiloOnInput}
+                onChange={this.props.updateKiloOnInputAndPrice}
                 label={'Kilo'}
                 placeHolder={'1.0'}
                 value={this.props.kilo}
@@ -119,5 +121,7 @@ export default connect((state) => ({
   updateDiscountOnInput,
   updateQuantityOnInput,
   updateSackSelectedIdAndKilo,
-  updateKiloOnInput,
+  updateKiloOnInputAndPrice,
+  updateKilo,
+  updateSackSelectedIdWith,
 })(FormGroupSalesKilo);

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import {Modal} from '../components';
 import MainLayout from '../layout/MainLayout';
 import MainFormLayoutSales from '../layout/MainFormLayoutSales';
 import {withRouter} from 'react-router-dom';
@@ -15,9 +16,10 @@ import {updateSearchResults} from '../actions/searchResultsActions';
 import {updateSuppliers} from '../actions/suppliersActions';
 import {updateSacks, updateSackSelectedId} from '../actions/sacksActions';
 import {addPendingSalesItem} from '../actions/pendingItemsActions';
-import {updatePrice} from '../actions/priceActions';
+import {updatePrice, updatePriceBySackId} from '../actions/priceActions';
 import {resetQuantity, updateQuantity} from '../actions/quantityActions';
 import {updateItemBarcode, updateItemPrice, updateItemText} from '../actions/itemActions';
+import {updateKiloBySackId} from '../actions/kiloActions';
 
 class SalesPage extends AbstractPage {
   static contextType = AppContext;
@@ -97,12 +99,14 @@ class SalesPage extends AbstractPage {
             </div>
           </div>
         </MainLayout>
-        {/* {this.state.isConfirming && <Modal.ModalConfirm
+        {this.state.isConfirming && <Modal.ModalConfirm
+          handleSubmitConfirm={this.context.handleSubmitConfirm}
+          setState={this.context.setState.bind(this)}
           confirmItems={this.state.pendingItems.map((pi) => ({id: pi.id, leftText: `${pi.quantity} x ${pi.name} ${pi.kilo > 0 ? `(${pi.kilo} kg)` : ''}`, rightText: pi.supplierName}))}
         />}
         {this.state.isLoading && <Modal.ModalLoading />}
         {this.state.isSuccess && <Modal.ModalSuccess handleClick={this.handleModalSuccessClick} />}
-        {this.state.isFailed && <Modal.ModalFailed handleClick={this.handleModalFailedClick} handleClose={this.handleModalFailedClose}/>}*/}
+        {this.state.isFailed && <Modal.ModalFailed handleClick={this.handleModalFailedClick} handleClose={this.handleModalFailedClose}/>}
       </SalesContext.Provider>
     );
   }
@@ -129,5 +133,7 @@ export default withRouter(connect((state) => ({
   updateItemText,
   updateItemBarcode,
   updateItemPrice,
+  updateKiloBySackId,
+  updatePriceBySackId,
 },
 )(SalesPage));

@@ -25,3 +25,19 @@ export const updateSackSelectedIdAndKilo = (sackId) => (dispatch, getState) => {
   dispatch({type: types.UPDATE_KILO, payload: {kilo}});
   dispatch({type: types.UPDATE_SACK_SELECTED_VALUE, payload: {sackId}});
 };
+
+export const updateSackSelectedIdWith = (sackId, params) => (dispatch, getState) => {
+  const sack = getState().sacksStore.sacks.find((s) => s.id === sackId);
+
+  if (params.some((p) => p === 'kilo')) {
+    const kilo = sack.value;
+    dispatch({type: types.UPDATE_KILO, payload: {kilo}});
+  }
+
+  if (params.some((p) => p === 'price')) {
+    const price = sack.price;
+    dispatch({type: types.UPDATE_PRICE, payload: {price}});
+  }
+
+  dispatch({type: types.UPDATE_SACK_SELECTED_VALUE, payload: {sackId}});
+};

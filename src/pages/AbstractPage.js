@@ -334,6 +334,8 @@ export class AbstractPage extends React.Component {
         this.props.updateQuantity(1);
       } else if (kiloType === enumKiloType.sack) {
         this.props.resetQuantity();
+        this.props.updateKiloBySackId(this.props.sacks[0].id);
+        this.props.updatePriceBySackId(this.props.sacks[0].id);
       }
 
       this.setState((prevState, props) => ({mainForm: {...prevState.mainForm, kiloType: kiloType, kilo: kiloType === enumKiloType.kilo ? 0 : prevState.mainForm?.sacks[0]?.sackValue || 0}}));

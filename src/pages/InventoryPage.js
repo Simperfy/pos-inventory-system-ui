@@ -83,6 +83,8 @@ class InventoryPage extends AbstractPage {
           </div>
         </MainLayout>
         {this.state.isConfirming && <Modal.ModalConfirm
+          handleSubmitConfirm={this.context.handleSubmitConfirm}
+          setState={this.context.setState.bind(this)}
           confirmItems={this.props.pendingItems.map((pi) => ({id: pi.id, leftText: `${pi.quantity} x ${pi.name} ${pi.kilo > 0 ? `(${pi.kilo} kg)` : ''}`, rightText: pi.supplierName}))}
         />}
         {this.state.isLoading && <Modal.ModalLoading />}
