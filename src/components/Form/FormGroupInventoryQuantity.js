@@ -5,6 +5,8 @@ import {Form} from '../index';
 import {InventoryContext} from '../../context/InventoryContext';
 
 import './FormGroup.css';
+import {connect} from 'react-redux';
+import {updateQuantity} from '../../actions/quantityActions';
 
 class FormGroupInventoryQuantity extends React.Component {
   static contextType = InventoryContext;
@@ -15,7 +17,7 @@ class FormGroupInventoryQuantity extends React.Component {
       itemText,
       itemBarcode,
       supplierId,
-      quantity,
+      // quantity,
       // kilo,
     } = this.context.state.mainForm;
 
@@ -26,11 +28,12 @@ class FormGroupInventoryQuantity extends React.Component {
             <Form.FormStaticText text={itemText} textBelow={itemBarcode} />
             <Form.FormInput
               formType="number"
-              onChange={this.context.handleQuantityInputChange}
+              onChange={this.props.updateQuantity}
               label={'Qty'}
               placeHolder={'1 pcs'}
-              value={quantity}
+              value={this.props.quantity}
               min="1"
+              hideZero
             />
             <Form.FormSelect
               value={supplierId}
@@ -69,4 +72,9 @@ class FormGroupInventoryQuantity extends React.Component {
     );
   }
 }
-export default FormGroupInventoryQuantity;
+// export default FormGroupInventoryQuantity;
+
+export default connect((state) => ({
+  quantity: state.quantity,
+}), {updateQuantity},
+)(FormGroupInventoryQuantity);

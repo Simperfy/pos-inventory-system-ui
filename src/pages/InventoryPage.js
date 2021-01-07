@@ -16,7 +16,7 @@ class InventoryPage extends AbstractPage {
   static contextType = AppContext;
 
   addPendingItems = () => {
-    if (!this.isValidFormInventory()) return;
+    // if (!this.isValidFormInventory()) return;
     if (!this.removeDuplicate()) return;
 
     const {
@@ -24,7 +24,7 @@ class InventoryPage extends AbstractPage {
       itemBarcode,
       supplierName,
       supplierId,
-      quantity,
+      // quantity,
       kilo,
     } = this.state.mainForm;
 
@@ -47,7 +47,7 @@ class InventoryPage extends AbstractPage {
       name: itemText,
       supplierName: supplierName,
       supplierId: supplierId,
-      quantity: quantity,
+      quantity: this.props.quantity,
       barcode: itemBarcode,
       kilo: kilo,
     };
@@ -115,5 +115,6 @@ class InventoryPage extends AbstractPage {
 
 export default withRouter(connect((state) => ({
   pendingItems: state.pending.pendingItems,
+  quantity: state.quantity,
 }), {addPendingItem},
 )(InventoryPage));
