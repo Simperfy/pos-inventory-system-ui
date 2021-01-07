@@ -6,6 +6,7 @@ import {searchResultsReducer} from './reducers/searchResultsReducers';
 import {suppliersReducer} from './reducers/suppliersReducers';
 import {sacksReducer} from './reducers/sacksReducers';
 import {kiloReducer} from './reducers/kiloReducers';
+import {discountReducer} from './reducers/discountReducers';
 
 const initialState = {};
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -17,6 +18,7 @@ const store = createStore(
       suppliers: suppliersReducer,
       sacksStore: sacksReducer,
       kilo: kiloReducer,
+      discount: discountReducer,
     }),
     initialState,
     composeEnhancer(applyMiddleware(thunk)),

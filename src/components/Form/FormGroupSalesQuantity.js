@@ -7,6 +7,7 @@ import {SalesContext} from '../../context/SalesContext';
 import './FormGroup.css';
 import {connect} from 'react-redux';
 import {updateQuantity} from '../../actions/quantityActions';
+import {updateDiscount} from '../../actions/discountActions';
 
 class FormGroupSalesQuantity extends React.Component {
   static contextType = SalesContext;
@@ -27,9 +28,10 @@ class FormGroupSalesQuantity extends React.Component {
     } = this.context.state;
 
     const quantity = this.props.quantity;
+    const discount = this.props.discount;
 
     const subTotal = quantity * formDetail.price;
-    const discountTotal = quantity * formDetail.discount;
+    const discountTotal = quantity * discount;
     const total = subTotal - discountTotal;
 
     return (
@@ -48,10 +50,10 @@ class FormGroupSalesQuantity extends React.Component {
             />
             <Form.FormInput
               formType="number"
-              onChange={this.context.handleDiscountInputChange}
+              onChange={this.props.updateDiscount}
               label={'Discount'}
               placeHolder={'0.00'}
-              value={formDetail.discount}
+              value={discount}
               min="0"
               hideZero
             />
@@ -90,5 +92,6 @@ class FormGroupSalesQuantity extends React.Component {
 
 export default connect((state) => ({
   quantity: state.quantity,
-}), {updateQuantity},
+  discount: state.discount,
+}), {updateQuantity, updateDiscount},
 )(FormGroupSalesQuantity);

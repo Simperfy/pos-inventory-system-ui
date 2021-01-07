@@ -6,6 +6,11 @@ import {SalesContext} from '../../context/SalesContext';
 
 import './FormGroup.css';
 import enumKiloType from '../../enums/enumKiloType';
+import {connect} from 'react-redux';
+import {updateDiscount} from '../../actions/discountActions';
+import {updateQuantity} from '../../actions/quantityActions';
+import {updateSackSelectedIdAndKilo} from '../../actions/sacksActions';
+import {updateKilo} from '../../actions/kiloActions';
 
 class FormGroupSalesKilo extends React.Component {
   static contextType = SalesContext;
@@ -20,9 +25,9 @@ class FormGroupSalesKilo extends React.Component {
       itemText,
       itemBarcode,
       // supplierId,
-      quantity,
-      sacks,
-      kilo,
+      // quantity,
+      // sacks,
+      // kilo,
       kiloType,
       kiloTypes,
     } = this.context.state.mainForm;
@@ -32,8 +37,10 @@ class FormGroupSalesKilo extends React.Component {
       // formDetailShow,
     } = this.context.state;
 
+    const discount = this.props.discount;
+    const quantity = this.props.quantity;
     const subTotal = quantity * formDetail.price;
-    const discountTotal = quantity * (isNaN(formDetail.discount) ? 0 : formDetail.discount);
+    const discountTotal = quantity * (isNaN(discount) ? 0 : discount);
     const total = subTotal - discountTotal;
 
     return (
@@ -45,24 +52,24 @@ class FormGroupSalesKilo extends React.Component {
               value={kiloType}
               onChange={this.context.handleItemTypeSelectChange}
               label={'Type'}
-              options={kiloTypes.map((s) => ({id: s.id, value: s.value, name: s.name}))}
+              options={kiloTypes.map((s) => ({id: s.value, name: s.name}))}
             />
             { kiloType === enumKiloType.sack &&
             <>
               <Form.FormInput
                 formType="number"
-                onChange={this.context.handleQuantityInputChange}
+                onChange={this.props.updateQuantity}
                 label={'Qty'}
                 placeHolder={'1 pcs'}
-                value={quantity}
+                value={this.props.quantity}
                 min="1"
                 hideZero
               />
               <Form.FormSelect
-                value={kilo}
-                onChange={this.context.handleSackSelectChange}
+                value={this.props.selectedSackId}
+                onChange={(e) => this.props.updateSackSelectedIdAndKilo(e.target.value)}
                 label={'Sack'}
-                options={sacks.map((s) => ({id: s.sackId, value: s.sackValue, name: s.sackLabel}))}
+                options={this.props.sacks}
               />
             </>}
 
@@ -70,20 +77,20 @@ class FormGroupSalesKilo extends React.Component {
             <>
               <Form.FormInput
                 formType="number"
-                onChange={this.context.handleKiloInputChange}
+                onChange={this.props.updateKilo}
                 label={'Kilo'}
                 placeHolder={'1.0'}
-                value={kilo}
+                value={this.props.kilo}
                 min="1"
                 hideZero
               />
             </>}
             <Form.FormInput
               formType="number"
-              onChange={this.context.handleDiscountInputChange}
+              onChange={this.props.updateDiscount}
               label={'Discount'}
               placeHolder={'0.00'}
-              value={formDetail.discount}
+              value={this.props.discount}
               min="0"
               hideZero
             />
@@ -103,7 +110,7 @@ class FormGroupSalesKilo extends React.Component {
           </div>
         </div>
 
-        {quantity > 0 && (
+        {this.props.quantity > 0 && (
           <div className="col-md-6">
             <Form.FormDetailText
               price={formDetail.price?.toFixed(2)}
@@ -118,4 +125,11 @@ class FormGroupSalesKilo extends React.Component {
     );
   }
 }
-export default FormGroupSalesKilo;
+
+export default connect((state) => ({
+  kilo: state.kilo,
+  quantity: state.quantity,
+  discount: state.discount,
+  sacks: state.sacksStore.sacks,
+  selectedSackId: state.sacksStore.selectedSackId,
+}), {updateDiscount, updateQuantity, updateSackSelectedIdAndKilo, updateKilo})(FormGroupSalesKilo);
