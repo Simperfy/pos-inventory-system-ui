@@ -200,9 +200,11 @@ export class AbstractPage extends React.Component {
 
       if (val) {
         Api.getItems(this.context.state.jwt, {item_name_contains: val}).then(({data}) => {
-          data = data.map(this.mapItems);
-
-          this.setState({searchResults: data});
+          console.log('data');
+          console.log(data);
+          this.props.updateSearchResults(data);
+          /* data = data.map(this.mapItems);
+          this.setState({searchResults: data});*/
           this.showSearchResults();
         });
       } else if (!val && this.state.searchResults.length > 0) {
@@ -216,8 +218,9 @@ export class AbstractPage extends React.Component {
       const val = e.target.value;
       if (!val) {
         Api.getItems(this.context.state.jwt, {_limit: 10}).then(({data}) => {
-          data = data.map(this.mapItems);
-          this.setState({searchResults: data});
+          this.props.updateSearchResults(data);
+          /* data = data.map(this.mapItems);
+          this.setState({searchResults: data});*/
           this.showSearchResults();
         });
       } else if (val && this.state.searchResults.length > 0 && !this.state.showSearchResults) this.showSearchResults();

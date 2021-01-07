@@ -6,9 +6,7 @@ function FormSelect({label, options, value, onChange}) {
       <label htmlFor="supplier-label">{label}:</label>
       <select value={value} onChange={onChange} name="supplier" id="supplier-label">
         {options.map((s) => (
-          <option key={s.id} value={s.value}>
-            {s.name}
-          </option>
+          <option key={s.id} value={s.id}>{s.name}</option>
         ))}
       </select>
     </div>

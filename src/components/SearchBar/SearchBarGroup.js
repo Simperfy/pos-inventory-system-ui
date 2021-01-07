@@ -5,6 +5,7 @@ import {ReactComponent as Magnify} from '../../assets/icons/magnify.svg';
 
 import './SearchBarGroup.css';
 import '../../assets/css/global-style.css';
+import {connect} from 'react-redux';
 
 class SearchBarGroup extends React.Component {
   render() {
@@ -43,4 +44,6 @@ class SearchBarGroup extends React.Component {
   }
 }
 
-export default SearchBarGroup;
+export default connect((state) => ({
+  searchResults: state.searchResults,
+}), {})(SearchBarGroup);

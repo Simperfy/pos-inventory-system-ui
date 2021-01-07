@@ -11,6 +11,8 @@ import {AbstractPage} from './AbstractPage';
 import pendingItemTypes from '../enums/enumPendingItemTypes';
 import {connect} from 'react-redux';
 import {addPendingItem} from '../actions/pendingItemsActions';
+import {updateSearchResults} from '../actions/searchResultsActions';
+import {updateSuppliers} from '../actions/suppliersActions';
 
 class InventoryPage extends AbstractPage {
   static contextType = AppContext;
@@ -64,6 +66,7 @@ class InventoryPage extends AbstractPage {
 
     this.closeSearchResults();
     this.resetForm();
+    this.props.updateSuppliers(newFormValue.suppliers);
     this.setState((prevState, props) => {
       return {
         mainForm: {
@@ -116,5 +119,5 @@ class InventoryPage extends AbstractPage {
 export default withRouter(connect((state) => ({
   pendingItems: state.pending.pendingItems,
   quantity: state.quantity,
-}), {addPendingItem},
+}), {addPendingItem, updateSearchResults, updateSuppliers},
 )(InventoryPage));

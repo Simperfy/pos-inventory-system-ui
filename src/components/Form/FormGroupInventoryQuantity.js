@@ -13,7 +13,7 @@ class FormGroupInventoryQuantity extends React.Component {
 
   render() {
     const {
-      suppliers,
+      // suppliers,
       itemText,
       itemBarcode,
       supplierId,
@@ -39,7 +39,7 @@ class FormGroupInventoryQuantity extends React.Component {
               value={supplierId}
               onChange={this.context.handleSupplierSelectChange}
               label={'Supplier'}
-              options={suppliers.map((s) => ({id: s.id, value: s.id, name: s.supplierName}))}
+              options={this.props.suppliers}
             />
             <div className="form-btn-group">
               <Form.FormButton
@@ -64,5 +64,6 @@ class FormGroupInventoryQuantity extends React.Component {
 
 export default connect((state) => ({
   quantity: state.quantity,
+  suppliers: state.suppliers,
 }), {updateQuantity},
 )(FormGroupInventoryQuantity);
