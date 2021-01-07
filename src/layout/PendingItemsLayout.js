@@ -4,7 +4,7 @@ import {Form} from '../components';
 import PendingItem from '../components/PendingItem';
 import pendingItemTypes from '../enums/enumPendingItemTypes';
 import {connect} from 'react-redux';
-import {addPendingItem} from '../actions/pendingItemsActions';
+import {addPendingItem, removeAllPendingItems} from '../actions/pendingItemsActions';
 
 class PendingItemsLayout extends React.Component {
   constructor(props) {
@@ -99,5 +99,5 @@ class PendingItemsLayout extends React.Component {
 // export default PendingItemsLayout;
 export default connect((state) => ({
   pendingItems: state.pending.pendingItems,
-}), {addPendingItem},
+}), {addPendingItem, removeAllPendingItems},
 )(PendingItemsLayout);

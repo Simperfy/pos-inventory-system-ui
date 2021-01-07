@@ -13,15 +13,11 @@ export const addPendingItem = (item) => (dispatch, getState) => {
     kilo: item.kilo,
   });
 
-  /*  pendingItems.push({
-    id: 'was2345678',
-    name: 'Test Item',
-    supplierName: 'The Supplier',
-    supplierId: 77,
-    quantity: 88,
-    barcode: '1234567890',
-    kilo: 99,
-  });*/
-
   dispatch({type: types.ADD_TO_PENDING_ITEMS, payload: {pendingItems}});
+};
+
+export const removeAllPendingItems = () => (dispatch, getState) => {
+  if (window.confirm('Do you want to remove all items?')) {
+    dispatch({type: types.REMOVE_ALL_PENDING_ITEMS, payload: {pendingItems: []}});
+  }
 };

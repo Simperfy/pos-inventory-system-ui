@@ -91,7 +91,7 @@ class InventoryPage extends AbstractPage {
               </div>
               <div className="col-md-4">
                 <PendingItemsLayout // pendingItems={this.state.pendingItems}
-                  removeAllPendingItems={this.removeAllPendingItems}
+                  // removeAllPendingItems={this.removeAllPendingItems}
                   removePendingItem={this.removePendingItem}
                   setState={this.setState.bind(this)}
                   pendingItemTypes={pendingItemTypes.inventory}
