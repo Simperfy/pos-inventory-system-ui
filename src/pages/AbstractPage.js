@@ -297,7 +297,7 @@ export class AbstractPage extends React.Component {
       const id = e.target.value; // id if using the redux
       const kilo = this.props.sacks.find((s) => s.id === id).value;
 
-      this.props.updateSackSelectedId(id);
+      this.props.updateSackSelectedIdAndKilo(id);
 
       this.setState((prevState, props) => ({
         mainForm: {...prevState.mainForm, kilo: kilo},
