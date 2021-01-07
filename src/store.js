@@ -4,6 +4,7 @@ import {pendingItemsReducer} from './reducers/pendingItemsReducers';
 import {quantityReducer} from './reducers/quantityReducers';
 import {searchResultsReducer} from './reducers/searchResultsReducers';
 import {suppliersReducer} from './reducers/suppliersReducers';
+import {sacksReducer} from './reducers/sacksReducers';
 
 const initialState = {};
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -13,6 +14,7 @@ const store = createStore(
       quantity: quantityReducer,
       searchResults: searchResultsReducer,
       suppliers: suppliersReducer,
+      sacksStore: sacksReducer,
     }),
     initialState,
     composeEnhancer(applyMiddleware(thunk)),

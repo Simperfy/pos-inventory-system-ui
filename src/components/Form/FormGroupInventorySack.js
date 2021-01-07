@@ -17,9 +17,9 @@ class FormGroupInventorySack extends React.Component {
       itemText,
       itemBarcode,
       supplierId,
-      sacks,
+      // sacks,
       // quantity,
-      kilo,
+      // kilo,
     } = this.context.state.mainForm;
 
     return (
@@ -37,10 +37,10 @@ class FormGroupInventorySack extends React.Component {
               hideZero
             />
             <Form.FormSelect
-              value={kilo}
+              value={this.props.selectedSackId}
               onChange={this.context.handleSackSelectChange}
               label={'Sack'}
-              options={sacks.map((s) => ({id: s.sackId, value: s.sackValue, name: s.sackLabel}))}
+              options={this.props.sacks}
             />
             <Form.FormSelect
               value={supplierId}
@@ -71,5 +71,7 @@ class FormGroupInventorySack extends React.Component {
 export default connect((state) => ({
   quantity: state.quantity,
   suppliers: state.suppliers,
+  sacks: state.sacksStore.sacks,
+  selectedSackId: state.sacksStore.selectedSackId,
 }), {updateQuantity},
 )(FormGroupInventorySack);

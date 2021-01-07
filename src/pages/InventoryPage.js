@@ -13,6 +13,7 @@ import {connect} from 'react-redux';
 import {addPendingItem} from '../actions/pendingItemsActions';
 import {updateSearchResults} from '../actions/searchResultsActions';
 import {updateSuppliers} from '../actions/suppliersActions';
+import {updateSacks, updateSackSelectedId} from '../actions/sacksActions';
 
 class InventoryPage extends AbstractPage {
   static contextType = AppContext;
@@ -54,8 +55,7 @@ class InventoryPage extends AbstractPage {
       kilo: kilo,
     };
 
-    this.props.addPendingItem(item);
-
+    this.props.addPendingItem(item); // redux
 
     this.closeForm();
     this.resetForm();
@@ -66,7 +66,9 @@ class InventoryPage extends AbstractPage {
 
     this.closeSearchResults();
     this.resetForm();
-    this.props.updateSuppliers(newFormValue.suppliers);
+    this.props.updateSuppliers(newFormValue.suppliers); // redux
+    this.props.updateSacks(newFormValue.sacks); // redux
+
     this.setState((prevState, props) => {
       return {
         mainForm: {
@@ -119,5 +121,6 @@ class InventoryPage extends AbstractPage {
 export default withRouter(connect((state) => ({
   pendingItems: state.pending.pendingItems,
   quantity: state.quantity,
-}), {addPendingItem, updateSearchResults, updateSuppliers},
+  sacks: state.sacksStore.sacks,
+}), {addPendingItem, updateSearchResults, updateSuppliers, updateSacks, updateSackSelectedId},
 )(InventoryPage));
