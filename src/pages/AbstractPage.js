@@ -246,6 +246,8 @@ export class AbstractPage extends React.Component {
             (err) => setTimeout(() => this.setState({isFailed: true}), 1000));
       } else if (enumSubmitConfirmType === enumSubmitConfirmTypes.SALES_SUBMIT) {
         console.log('Sales submit');
+        const pendingItems = this.props.pendingItems; // coming from redux
+        console.log(pendingItems);
       }
     }
 

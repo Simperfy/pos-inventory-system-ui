@@ -3,14 +3,15 @@ import ModalLayout from '../../layout/ModalLayout';
 
 import './ModalConfirm.css';
 import FormButton from '../Form/FormButton';
+import {enumSubmitConfirmTypes} from '../../enums/enumSubmitConfirmTypes';
 
-function ModalConfirm({confirmItems, handleSubmitConfirm, setState}) {
+function ModalConfirm({confirmItems, handleSubmitConfirm, setState, submitConfirmType}) {
   return (
     <>
       <ModalLayout>
         <div className="d-flex flex-column h-100 w-100 px-3 confirm-item-container justify-content-between">
           <div>
-            <h4>Adding Items to inventory:</h4>
+            <h4>Adding Items to {submitConfirmType === enumSubmitConfirmTypes.INVENTORY_SUBMIT ? 'inventory' : 'sales'}:</h4>
             <div className="confirm-item-scrollable">
               {confirmItems.map((ci) => (
                 <div
