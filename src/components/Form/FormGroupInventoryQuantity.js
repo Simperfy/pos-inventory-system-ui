@@ -57,22 +57,10 @@ class FormGroupInventoryQuantity extends React.Component {
           </div>
         </div>
 
-        {/* {this.props.formDetail && (
-          <div className="col-md-6">
-            <Form.FormDetailText
-              price={'100.00'} // formDetail.price
-              discount={'10.00'} // formDetail.discount
-              subTotal={'300.00'} // formDetail.subTotal
-              discountTotal={'30.00'} // formDetail.discountTotal
-              total={'270.00'} // formDetail.total
-            />
-          </div>
-        )}*/}
       </div>
     );
   }
 }
-// export default FormGroupInventoryQuantity;
 
 export default connect((state) => ({
   quantity: state.quantity,
