@@ -29,23 +29,8 @@ class InventoryPage extends AbstractPage {
       supplierName,
       supplierId,
       // quantity,
-      kilo,
+      // kilo,
     } = this.state.mainForm;
-
-    /* this.setState((prevState, props) => ({
-      pendingItems: [
-        {
-          id: itemBarcode + this.pendingItemsCounter++,
-          name: itemText,
-          supplierName: supplierName,
-          supplierId: supplierId,
-          quantity: quantity,
-          barcode: itemBarcode,
-          kilo: kilo,
-        },
-        ...prevState.pendingItems,
-      ],
-    }));*/
 
     const item = {
       name: itemText,
@@ -53,7 +38,7 @@ class InventoryPage extends AbstractPage {
       supplierId: supplierId,
       quantity: this.props.quantity,
       barcode: itemBarcode,
-      kilo: kilo,
+      kilo: this.props.kilo,
     };
 
     this.props.addPendingItem(item); // redux
@@ -78,7 +63,7 @@ class InventoryPage extends AbstractPage {
           ...newFormValue,
           supplierName: newFormValue.suppliers[0].supplierName,
           supplierId: newFormValue.suppliers[0].id,
-          kilo: newFormValue.sacks[0]?.sackValue || 0,
+          // kilo: newFormValue.sacks[0]?.sackValue || 0,
         },
       };
     });
@@ -97,9 +82,7 @@ class InventoryPage extends AbstractPage {
                 <MainFormLayoutInventory />
               </div>
               <div className="col-md-4">
-                <PendingItemsLayout // pendingItems={this.state.pendingItems}
-                  // removeAllPendingItems={this.removeAllPendingItems}
-                  // removePendingItem={this.removePendingItem}
+                <PendingItemsLayout
                   setState={this.setState.bind(this)}
                   pendingItemTypes={pendingItemTypes.inventory}
                 />
