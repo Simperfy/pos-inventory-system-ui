@@ -110,7 +110,7 @@ class SalesPage extends AbstractPage {
         />}
         {this.state.isLoading && <Modal.ModalLoading />}
         {this.state.isSuccess && <Modal.ModalSuccess handleClick={this.handleModalSuccessClick} />}
-        {this.state.isFailed && <Modal.ModalFailed handleClick={this.handleModalFailedClick} handleClose={this.handleModalFailedClose}/>}
+        {this.state.isFailed && <Modal.ModalFailed handleClick={() => this.handleModalFailedClick(enumSubmitConfirmTypes.SALES_SUBMIT)} handleClose={this.handleModalFailedClose}/>}
       </SalesContext.Provider>
     );
   }

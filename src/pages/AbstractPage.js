@@ -5,6 +5,8 @@ import {getRoute} from '../routeConfig';
 import enumKiloType from '../enums/enumKiloType';
 import formTypes from '../enums/enumFormTypes';
 import {enumSubmitConfirmTypes} from '../enums/enumSubmitConfirmTypes';
+import ModelTransactionItem from '../api/models/ModelTransactionItem';
+import {ModelTransactions} from '../api/models/ModelTransactions';
 
 export class AbstractPage extends React.Component {
   constructor(props) {
@@ -207,7 +209,7 @@ export class AbstractPage extends React.Component {
           /* data = data.map(this.mapItems);
           this.setState({searchResults: data});*/
           this.showSearchResults();
-        });
+        }).then((data) => null, (err) => null);
       } else if (!val && this.state.searchResults.length > 0) {
         this.showSearchResults();
       } else {
@@ -232,23 +234,34 @@ export class AbstractPage extends React.Component {
     }
 
     handleSubmitConfirm = (enumSubmitConfirmType) => {
+      this.setState({isConfirming: false, isLoading: true});
+
+      const jwt = this.context.state.jwt;
+      const id = this.context.state.user.id;
+      const pendingItems = this.props.pendingItems; // coming from redux
+
       if (enumSubmitConfirmType === enumSubmitConfirmTypes.INVENTORY_SUBMIT) {
-        console.log('submit');
-        this.setState({isConfirming: false, isLoading: true});
-
-        const jwt = this.context.state.jwt;
-        const id = this.context.state.user.id;
-        const pendingItems = this.props.pendingItems; // coming from redux
-
+        // Inventory
         ModelStocks.createBatch(jwt, id, pendingItems)
             .then((data) =>
               setTimeout(() => this.setState({isSuccess: true, pendingItems: []}), 1000),
-            (err) => setTimeout(() => this.setState({isFailed: true}), 1000));
+            (err) => this.showFailedModal());
       } else if (enumSubmitConfirmType === enumSubmitConfirmTypes.SALES_SUBMIT) {
-        console.log('Sales submit');
-        const pendingItems = this.props.pendingItems; // coming from redux
-        console.log(pendingItems);
+        // Sales
+        ModelTransactions.create(jwt, id).then(({data}) => {
+          ModelTransactionItem.createBatch(jwt, data.id, pendingItems)
+              .then((data) => {
+                console.log('data');
+                console.log(data);
+                setTimeout(() => this.setState({isSuccess: true, pendingItems: []}), 1000);
+              },
+              (err) => this.showFailedModal());
+        }, (err) => this.showFailedModal());
       }
+    }
+
+    showFailedModal() {
+      setTimeout(() => this.setState({isFailed: true}), 1000);
     }
 
     handleSupplierSelectChange = (e) => {
@@ -321,9 +334,9 @@ export class AbstractPage extends React.Component {
       this.setState({isFailed: false, isLoading: false});
     }
 
-    handleModalFailedClick = (e) => {
+    handleModalFailedClick = (submitConfirmType) => {
       this.setState({isFailed: false, isLoading: false});
-      setTimeout(() => this.handleSubmitConfirm(), 250);
+      setTimeout(() => this.handleSubmitConfirm(submitConfirmType), 250);
     }
 
     addOpacityBlur = () => {

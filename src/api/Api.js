@@ -34,6 +34,14 @@ export default class Api {
   //   });
   // }
 
+  static async create(jwt, url, params) {
+    const baseURL = env.API_URL;
+
+    return axios.post(baseURL + url, {...params}, {
+      headers: {Authorization: `Bearer ${jwt}`},
+    });
+  }
+
   static async createBatch(jwt, batchData) {
     const instance = axios.create({
       baseURL: env.API_URL,
