@@ -5,6 +5,8 @@ import {Form} from '../index';
 import {SalesContext} from '../../context/SalesContext';
 
 import './FormGroup.css';
+import {connect} from 'react-redux';
+import {updateQuantity} from '../../actions/quantityActions';
 
 class FormGroupSalesQuantity extends React.Component {
   static contextType = SalesContext;
@@ -15,7 +17,7 @@ class FormGroupSalesQuantity extends React.Component {
       itemText,
       itemBarcode,
       // supplierId,
-      quantity,
+      // quantity,
       // kilo,
     } = this.context.state.mainForm;
 
@@ -23,6 +25,8 @@ class FormGroupSalesQuantity extends React.Component {
       formDetail,
       // formDetailShow,
     } = this.context.state;
+
+    const quantity = this.props.quantity;
 
     const subTotal = quantity * formDetail.price;
     const discountTotal = quantity * formDetail.discount;
@@ -35,7 +39,7 @@ class FormGroupSalesQuantity extends React.Component {
             <Form.FormStaticText text={itemText} textBelow={itemBarcode} />
             <Form.FormInput
               formType="number"
-              onChange={this.context.handleQuantityInputChange}
+              onChange={this.props.updateQuantity}
               label={'Qty'}
               placeHolder={'1 pcs'}
               value={quantity}
@@ -82,4 +86,9 @@ class FormGroupSalesQuantity extends React.Component {
     );
   }
 }
-export default FormGroupSalesQuantity;
+
+
+export default connect((state) => ({
+  quantity: state.quantity,
+}), {updateQuantity},
+)(FormGroupSalesQuantity);

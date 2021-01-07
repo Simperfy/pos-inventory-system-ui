@@ -10,12 +10,17 @@ import PendingItemsLayout from '../layout/PendingItemsLayout';
 import pendingItemTypes from '../enums/enumPendingItemTypes';
 // import enumKiloType from '../enums/enumKiloType';
 import enumFormTypes from '../enums/enumFormTypes';
+import {connect} from 'react-redux';
+import {updateSearchResults} from '../actions/searchResultsActions';
+import {updateSuppliers} from '../actions/suppliersActions';
+import {updateSacks, updateSackSelectedId} from '../actions/sacksActions';
+import {addPendingSalesItem} from '../actions/pendingItemsActions';
 
 class SalesPage extends AbstractPage {
   static contextType = AppContext;
 
   addPendingItems = () => {
-    if (!this.isValidFormSales()) return;
+    // if (!this.isValidFormSales()) return;
     if (!this.removeDuplicate()) return;
 
     const {
@@ -23,7 +28,7 @@ class SalesPage extends AbstractPage {
       itemBarcode,
       // supplierName,
       // supplierId,
-      quantity,
+      // quantity,
       kilo,
     } = this.state.mainForm;
 
@@ -34,20 +39,18 @@ class SalesPage extends AbstractPage {
 
     // @TODO: check itemType
     // @TODO: check whether sack or kilo
-    this.setState((prevState, props) => ({
-      pendingItems: [
-        {
-          id: itemBarcode + this.pendingItemsCounter++,
-          name: itemText,
-          quantity: quantity,
-          barcode: itemBarcode,
-          kilo: kilo,
-          discount: discount,
-          price: price,
-        },
-        ...prevState.pendingItems,
-      ],
-    }));
+    const item = {
+      id: itemBarcode + this.pendingItemsCounter++,
+      name: itemText,
+      quantity: this.props.quantity,
+      barcode: itemBarcode,
+      kilo: kilo,
+      discount: discount,
+      price: price,
+    };
+
+    this.props.addPendingSalesItem(item); // redux
+
     this.closeForm();
     this.resetForm();
   };
@@ -58,8 +61,8 @@ class SalesPage extends AbstractPage {
     this.closeSearchResults();
     this.resetForm();
 
-    console.log('newFormValue');
-    console.log(newFormValue);
+    this.props.updateSuppliers(newFormValue.suppliers); // redux
+    this.props.updateSacks(newFormValue.sacks); // redux
 
     this.setState((prevState, props) => {
       const quantity = this.state.formType === enumFormTypes.salesPerKilo ? 1 : prevState.mainForm.quantity;
@@ -93,9 +96,9 @@ class SalesPage extends AbstractPage {
                 <MainFormLayoutSales />
               </div>
               <div className="col-md-4">
-                <PendingItemsLayout pendingItems={this.state.pendingItems}
-                  removeAllPendingItems={this.removeAllPendingItems}
-                  removePendingItem={this.removePendingItem}
+                <PendingItemsLayout // pendingItems={this.state.pendingItems}
+                  // removeAllPendingItems={this.removeAllPendingItems}
+                  // removePendingItem={this.removePendingItem}
                   setState={this.setState.bind(this)}
                   pendingItemTypes={pendingItemTypes.sales}
                 />
@@ -114,4 +117,9 @@ class SalesPage extends AbstractPage {
   }
 }
 
-export default withRouter(SalesPage);
+export default withRouter(connect((state) => ({
+  pendingItems: state.pending.pendingItems,
+  quantity: state.quantity,
+  sacks: state.sacksStore.sacks,
+}), {addPendingSalesItem, updateSearchResults, updateSuppliers, updateSacks, updateSackSelectedId},
+)(SalesPage));
