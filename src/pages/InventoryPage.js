@@ -14,7 +14,8 @@ import {addPendingItem} from '../actions/pendingItemsActions';
 import {updateSearchResults} from '../actions/searchResultsActions';
 import {updateSuppliers} from '../actions/suppliersActions';
 import {updateSacksAndKilo, updateSackSelectedId, updateSackSelectedIdAndKilo} from '../actions/sacksActions';
-import {updateKiloOnInput} from '../actions/kiloActions';
+import {updateItemBarcode, updateItemText} from '../actions/itemActions';
+// import {updateKiloOnInput} from '../actions/kiloActions';
 
 class InventoryPage extends AbstractPage {
   static contextType = AppContext;
@@ -24,8 +25,8 @@ class InventoryPage extends AbstractPage {
     if (!this.removeDuplicate()) return;
 
     const {
-      itemText,
-      itemBarcode,
+      // itemText,
+      // itemBarcode,
       supplierName,
       supplierId,
       // quantity,
@@ -33,11 +34,11 @@ class InventoryPage extends AbstractPage {
     } = this.state.mainForm;
 
     const item = {
-      name: itemText,
+      name: this.props.itemText,
+      barcode: this.props.itemBarcode,
       supplierName: supplierName,
       supplierId: supplierId,
       quantity: this.props.quantity,
-      barcode: itemBarcode,
       kilo: this.props.kilo,
     };
 
@@ -53,20 +54,11 @@ class InventoryPage extends AbstractPage {
     this.closeSearchResults();
     this.resetForm();
 
+    this.props.updateItemText(newFormValue.itemText);
+    this.props.updateItemBarcode(newFormValue.itemBarcode);
     this.props.updateSuppliers(newFormValue.suppliers); // redux
     this.props.updateSacksAndKilo(newFormValue.sacks); // redux
 
-    this.setState((prevState, props) => {
-      return {
-        mainForm: {
-          ...prevState.mainForm,
-          ...newFormValue,
-          supplierName: newFormValue.suppliers[0].supplierName,
-          supplierId: newFormValue.suppliers[0].id,
-          // kilo: newFormValue.sacks[0]?.sackValue || 0,
-        },
-      };
-    });
     this.showForm(newFormValue.formType);
   };
 
@@ -101,12 +93,21 @@ class InventoryPage extends AbstractPage {
   }
 }
 
-// export default withRouter(InventoryPage);
-
 export default withRouter(connect((state) => ({
   pendingItems: state.pending.pendingItems,
   quantity: state.quantity,
   sacks: state.sacksStore.sacks,
   kilo: state.kilo,
-}), {addPendingItem, updateSearchResults, updateSuppliers, updateSacksAndKilo, updateSackSelectedId, updateKilo: updateKiloOnInput, updateSackSelectedIdAndKilo},
+  itemText: state.item.text,
+  itemBarcode: state.item.barcode,
+}), {
+  addPendingItem,
+  updateSearchResults,
+  updateSuppliers,
+  updateSacksAndKilo,
+  updateSackSelectedId,
+  updateSackSelectedIdAndKilo,
+  updateItemText,
+  updateItemBarcode,
+},
 )(InventoryPage));

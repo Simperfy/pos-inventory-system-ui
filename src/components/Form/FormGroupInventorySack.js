@@ -14,8 +14,8 @@ class FormGroupInventorySack extends React.Component {
   render() {
     const {
       // suppliers,
-      itemText,
-      itemBarcode,
+      // itemText,
+      // itemBarcode,
       supplierId,
       // sacks,
       // quantity,
@@ -26,7 +26,7 @@ class FormGroupInventorySack extends React.Component {
       <div className="row form-group-container" ref={this.context.state.formGroupRef}>
         <div className="col-md-6">
           <div className="d-flex flex-column main-form">
-            <Form.FormStaticText text={itemText} textBelow={itemBarcode} />
+            <Form.FormStaticText text={this.props.itemText} textBelow={this.props.itemBarcode} />
             <Form.FormInput
               formType="number"
               onChange={this.props.updateQuantity}
@@ -73,5 +73,7 @@ export default connect((state) => ({
   suppliers: state.suppliers,
   sacks: state.sacksStore.sacks,
   selectedSackId: state.sacksStore.selectedSackId,
+  itemText: state.item.text,
+  itemBarcode: state.item.barcode,
 }), {updateQuantity: updateQuantityOnInput},
 )(FormGroupInventorySack);

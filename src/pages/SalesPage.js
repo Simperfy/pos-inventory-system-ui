@@ -17,6 +17,7 @@ import {updateSacks, updateSackSelectedId} from '../actions/sacksActions';
 import {addPendingSalesItem} from '../actions/pendingItemsActions';
 import {updatePrice} from '../actions/priceActions';
 import {resetQuantity, updateQuantity} from '../actions/quantityActions';
+import {updateItemBarcode, updateItemText} from '../actions/itemActions';
 
 class SalesPage extends AbstractPage {
   static contextType = AppContext;
@@ -25,30 +26,13 @@ class SalesPage extends AbstractPage {
     // if (!this.isValidFormSales()) return;
     if (!this.removeDuplicate()) return;
 
-    const {
-      itemText,
-      itemBarcode,
-      // supplierName,
-      // supplierId,
-      // quantity,
-      kilo,
-    } = this.state.mainForm;
-
-    const {
-      price,
-      discount,
-    } = this.state.formDetail;
-
-    // @TODO: check itemType
-    // @TODO: check whether sack or kilo
     const item = {
-      id: itemBarcode + this.pendingItemsCounter++,
-      name: itemText,
+      name: this.props.itemText,
+      barcode: this.props.itemBarcode,
       quantity: this.props.quantity,
-      barcode: itemBarcode,
-      kilo: kilo,
-      discount: discount,
-      price: price,
+      kilo: this.props.kilo,
+      discount: this.props.discount,
+      price: this.props.price,
     };
 
     this.props.addPendingSalesItem(item); // redux
@@ -63,6 +47,8 @@ class SalesPage extends AbstractPage {
     this.closeSearchResults();
     this.resetForm();
 
+    this.props.updateItemText(newFormValue.itemText);
+    this.props.updateItemBarcode(newFormValue.itemBarcode);
     this.props.updateSuppliers(newFormValue.suppliers); // redux
     this.props.updateSacks(newFormValue.sacks); // redux
     this.props.updatePrice(newFormValue.price); // redux
@@ -71,6 +57,7 @@ class SalesPage extends AbstractPage {
       // const quantity = this.state.formType === enumFormTypes.salesPerKilo ? 1 : prevState.mainForm.quantity;
 
       return {
+        // @TODO FORM TYPE MUST BE INCLUDED IN REDUX BEFORE REMOVING THIS
         mainForm: {
           ...prevState.mainForm,
           ...newFormValue,
@@ -124,5 +111,21 @@ export default withRouter(connect((state) => ({
   pendingItems: state.pending.pendingItems,
   quantity: state.quantity,
   sacks: state.sacksStore.sacks,
-}), {addPendingSalesItem, updateSearchResults, updateSuppliers, updateSacks, updateSackSelectedId, updatePrice, resetQuantity, updateQuantity},
+  itemText: state.item.text,
+  itemBarcode: state.item.barcode,
+  kilo: state.kilo,
+  discount: state.discount,
+  price: state.price,
+}), {
+  addPendingSalesItem,
+  updateSearchResults,
+  updateSuppliers,
+  updateSacks,
+  updateSackSelectedId,
+  updatePrice,
+  resetQuantity,
+  updateQuantity,
+  updateItemText,
+  updateItemBarcode,
+},
 )(SalesPage));

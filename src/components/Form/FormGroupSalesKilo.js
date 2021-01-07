@@ -23,8 +23,8 @@ class FormGroupSalesKilo extends React.Component {
   render() {
     const {
       // suppliers,
-      itemText,
-      itemBarcode,
+      // itemText,
+      // itemBarcode,
       // supplierId,
       // quantity,
       // sacks,
@@ -37,7 +37,7 @@ class FormGroupSalesKilo extends React.Component {
       <div className="row form-group-container" ref={this.context.state.formGroupRef}>
         <div className="col-md-6">
           <div className="d-flex flex-column main-form">
-            <Form.FormStaticText text={itemText} textBelow={itemBarcode} />
+            <Form.FormStaticText text={this.props.itemText} textBelow={this.props.itemBarcode} />
             <Form.FormSelect
               value={kiloType}
               onChange={this.context.handleItemTypeSelectChange}
@@ -119,6 +119,8 @@ export default connect((state) => ({
   discount: state.discount,
   sacks: state.sacksStore.sacks,
   selectedSackId: state.sacksStore.selectedSackId,
+  itemText: state.item.text,
+  itemBarcode: state.item.barcode,
 }), {
   updateQuantity,
   updateDiscountOnInput,
