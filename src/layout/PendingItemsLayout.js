@@ -4,7 +4,7 @@ import {Form} from '../components';
 import PendingItem from '../components/PendingItem';
 import pendingItemTypes from '../enums/enumPendingItemTypes';
 import {connect} from 'react-redux';
-import {addPendingItem, removeAllPendingItems} from '../actions/pendingItemsActions';
+import {addPendingItem, removeAllPendingItems, removeSinglePendingItem} from '../actions/pendingItemsActions';
 
 class PendingItemsLayout extends React.Component {
   constructor(props) {
@@ -49,7 +49,7 @@ class PendingItemsLayout extends React.Component {
                   name={`${pi.name} ${pi.kilo > 0 ? `(${pi.kilo} kg)` : ''}`}
                   textBelow={pi.barcode}
                   textBelow2={pi.supplierName}
-                  removePendingItem={this.props.removePendingItem}
+                  removePendingItem={this.props.removeSinglePendingItem}
                 />
               );
             } else if (this.props.pendingItemTypes === pendingItemTypes.sales) {
@@ -68,7 +68,7 @@ class PendingItemsLayout extends React.Component {
                   textRight={textRight}
                   textRightStyle={{fontSize: '1.2rem'}}
                   textRightBelow={totalDiscount > 0 && textRightBelow}
-                  removePendingItem={this.props.removePendingItem}
+                  removePendingItem={this.props.removeSinglePendingItem}
                 />
               );
             }
@@ -99,5 +99,5 @@ class PendingItemsLayout extends React.Component {
 // export default PendingItemsLayout;
 export default connect((state) => ({
   pendingItems: state.pending.pendingItems,
-}), {addPendingItem, removeAllPendingItems},
+}), {addPendingItem, removeAllPendingItems, removeSinglePendingItem},
 )(PendingItemsLayout);
