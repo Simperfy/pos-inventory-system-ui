@@ -7,10 +7,10 @@ import {SalesContext} from '../../context/SalesContext';
 import './FormGroup.css';
 import enumKiloType from '../../enums/enumKiloType';
 import {connect} from 'react-redux';
-import {updateDiscount} from '../../actions/discountActions';
-import {updateQuantity} from '../../actions/quantityActions';
+import {updateDiscountOnInput} from '../../actions/discountActions';
+import {updateQuantityOnInput} from '../../actions/quantityActions';
 import {updateSackSelectedIdAndKilo} from '../../actions/sacksActions';
-import {updateKilo} from '../../actions/kiloActions';
+import {updateKiloOnInput} from '../../actions/kiloActions';
 
 class FormGroupSalesKilo extends React.Component {
   static contextType = SalesContext;
@@ -39,7 +39,8 @@ class FormGroupSalesKilo extends React.Component {
 
     const discount = this.props.discount;
     const quantity = this.props.quantity;
-    const subTotal = quantity * formDetail.price;
+    const price = this.props.price;
+    const subTotal = quantity * price;
     const discountTotal = quantity * (isNaN(discount) ? 0 : discount);
     const total = subTotal - discountTotal;
 
@@ -113,11 +114,11 @@ class FormGroupSalesKilo extends React.Component {
         {this.props.quantity > 0 && (
           <div className="col-md-6">
             <Form.FormDetailText
-              price={formDetail.price?.toFixed(2)}
+              /* price={formDetail.price?.toFixed(2)}
               discount={formDetail.discount?.toFixed(2)}
               subTotal={subTotal?.toFixed(2)}
               discountTotal={discountTotal?.toFixed(2)}
-              total={total?.toFixed(2)}
+              total={total?.toFixed(2)}*/
             />
           </div>
         )}
@@ -132,4 +133,4 @@ export default connect((state) => ({
   discount: state.discount,
   sacks: state.sacksStore.sacks,
   selectedSackId: state.sacksStore.selectedSackId,
-}), {updateDiscount, updateQuantity, updateSackSelectedIdAndKilo, updateKilo})(FormGroupSalesKilo);
+}), {updateDiscount: updateDiscountOnInput, updateQuantity: updateQuantityOnInput, updateSackSelectedIdAndKilo, updateKilo: updateKiloOnInput})(FormGroupSalesKilo);

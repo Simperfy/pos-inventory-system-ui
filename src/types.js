@@ -9,6 +9,8 @@ export const UPDATE_QUANTITY = 'UPDATE_QUANTITY';
 
 export const UPDATE_SUPPLIERS = 'UPDATE_SUPPLIERS';
 
+export const UPDATE_PRICE = 'UPDATE_PRICE';
+
 export const UPDATE_KILO = 'UPDATE_KILO';
 
 export const UPDATE_DISCOUNT = 'UPDATE_DISCOUNT';

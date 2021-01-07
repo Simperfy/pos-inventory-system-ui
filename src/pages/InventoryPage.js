@@ -14,7 +14,7 @@ import {addPendingItem} from '../actions/pendingItemsActions';
 import {updateSearchResults} from '../actions/searchResultsActions';
 import {updateSuppliers} from '../actions/suppliersActions';
 import {updateSacksAndKilo, updateSackSelectedId, updateSackSelectedIdAndKilo} from '../actions/sacksActions';
-import {updateKilo} from '../actions/kiloActions';
+import {updateKiloOnInput} from '../actions/kiloActions';
 
 class InventoryPage extends AbstractPage {
   static contextType = AppContext;
@@ -108,5 +108,5 @@ export default withRouter(connect((state) => ({
   quantity: state.quantity,
   sacks: state.sacksStore.sacks,
   kilo: state.kilo,
-}), {addPendingItem, updateSearchResults, updateSuppliers, updateSacksAndKilo, updateSackSelectedId, updateKilo, updateSackSelectedIdAndKilo},
+}), {addPendingItem, updateSearchResults, updateSuppliers, updateSacksAndKilo, updateSackSelectedId, updateKilo: updateKiloOnInput, updateSackSelectedIdAndKilo},
 )(InventoryPage));

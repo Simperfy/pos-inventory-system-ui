@@ -6,8 +6,8 @@ import {SalesContext} from '../../context/SalesContext';
 
 import './FormGroup.css';
 import {connect} from 'react-redux';
-import {updateQuantity} from '../../actions/quantityActions';
-import {updateDiscount} from '../../actions/discountActions';
+import {updateQuantityOnInput} from '../../actions/quantityActions';
+import {updateDiscountOnInput} from '../../actions/discountActions';
 
 class FormGroupSalesQuantity extends React.Component {
   static contextType = SalesContext;
@@ -76,11 +76,11 @@ class FormGroupSalesQuantity extends React.Component {
         {quantity > 0 && (
           <div className="col-md-6">
             <Form.FormDetailText
-              price={formDetail.price?.toFixed(2)}
+              /* price={formDetail.price?.toFixed(2)}
               discount={formDetail.discount?.toFixed(2)}
               subTotal={subTotal?.toFixed(2)}
               discountTotal={discountTotal?.toFixed(2)}
-              total={total?.toFixed(2)}
+              total={total?.toFixed(2)}*/
             />
           </div>
         )}
@@ -93,5 +93,5 @@ class FormGroupSalesQuantity extends React.Component {
 export default connect((state) => ({
   quantity: state.quantity,
   discount: state.discount,
-}), {updateQuantity, updateDiscount},
+}), {updateQuantity: updateQuantityOnInput, updateDiscount: updateDiscountOnInput},
 )(FormGroupSalesQuantity);

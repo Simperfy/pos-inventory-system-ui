@@ -9,12 +9,13 @@ import {AbstractPage} from './AbstractPage';
 import PendingItemsLayout from '../layout/PendingItemsLayout';
 import pendingItemTypes from '../enums/enumPendingItemTypes';
 // import enumKiloType from '../enums/enumKiloType';
-import enumFormTypes from '../enums/enumFormTypes';
+// import enumFormTypes from '../enums/enumFormTypes';
 import {connect} from 'react-redux';
 import {updateSearchResults} from '../actions/searchResultsActions';
 import {updateSuppliers} from '../actions/suppliersActions';
 import {updateSacks, updateSackSelectedId} from '../actions/sacksActions';
 import {addPendingSalesItem} from '../actions/pendingItemsActions';
+import {updatePrice} from '../actions/priceActions';
 
 class SalesPage extends AbstractPage {
   static contextType = AppContext;
@@ -63,15 +64,16 @@ class SalesPage extends AbstractPage {
 
     this.props.updateSuppliers(newFormValue.suppliers); // redux
     this.props.updateSacks(newFormValue.sacks); // redux
+    this.props.updatePrice(newFormValue.price); // redux
 
     this.setState((prevState, props) => {
-      const quantity = this.state.formType === enumFormTypes.salesPerKilo ? 1 : prevState.mainForm.quantity;
+      // const quantity = this.state.formType === enumFormTypes.salesPerKilo ? 1 : prevState.mainForm.quantity;
 
       return {
         mainForm: {
           ...prevState.mainForm,
           ...newFormValue,
-          quantity: quantity,
+          // quantity: quantity,
           kilo: newFormValue.sacks[0]?.sackValue || 0,
         },
         formDetail: {
@@ -121,5 +123,5 @@ export default withRouter(connect((state) => ({
   pendingItems: state.pending.pendingItems,
   quantity: state.quantity,
   sacks: state.sacksStore.sacks,
-}), {addPendingSalesItem, updateSearchResults, updateSuppliers, updateSacks, updateSackSelectedId},
+}), {addPendingSalesItem, updateSearchResults, updateSuppliers, updateSacks, updateSackSelectedId, updatePrice},
 )(SalesPage));

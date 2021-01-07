@@ -6,7 +6,7 @@ import {InventoryContext} from '../../context/InventoryContext';
 
 import './FormGroup.css';
 import {connect} from 'react-redux';
-import {updateQuantity} from '../../actions/quantityActions';
+import {updateQuantityOnInput} from '../../actions/quantityActions';
 
 class FormGroupInventorySack extends React.Component {
   static contextType = InventoryContext;
@@ -73,5 +73,5 @@ export default connect((state) => ({
   suppliers: state.suppliers,
   sacks: state.sacksStore.sacks,
   selectedSackId: state.sacksStore.selectedSackId,
-}), {updateQuantity},
+}), {updateQuantity: updateQuantityOnInput},
 )(FormGroupInventorySack);
