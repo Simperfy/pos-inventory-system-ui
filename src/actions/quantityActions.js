@@ -7,8 +7,6 @@ export const updateQuantityOnInput = (e) => (dispatch, getState) => {
 };
 
 export const updateQuantity = (quantity) => (dispatch, getState) => {
-  console.log('quantity');
-  console.log(quantity);
   dispatch({type: types.UPDATE_QUANTITY, payload: {quantity}});
 };
 

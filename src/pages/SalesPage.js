@@ -17,7 +17,7 @@ import {updateSacks, updateSackSelectedId} from '../actions/sacksActions';
 import {addPendingSalesItem} from '../actions/pendingItemsActions';
 import {updatePrice} from '../actions/priceActions';
 import {resetQuantity, updateQuantity} from '../actions/quantityActions';
-import {updateItemBarcode, updateItemText} from '../actions/itemActions';
+import {updateItemBarcode, updateItemPrice, updateItemText} from '../actions/itemActions';
 
 class SalesPage extends AbstractPage {
   static contextType = AppContext;
@@ -49,6 +49,7 @@ class SalesPage extends AbstractPage {
 
     this.props.updateItemText(newFormValue.itemText);
     this.props.updateItemBarcode(newFormValue.itemBarcode);
+    this.props.updateItemPrice(newFormValue.price); // retain item kilo/qty price
     this.props.updateSuppliers(newFormValue.suppliers); // redux
     this.props.updateSacks(newFormValue.sacks); // redux
     this.props.updatePrice(newFormValue.price); // redux
@@ -127,5 +128,6 @@ export default withRouter(connect((state) => ({
   updateQuantity,
   updateItemText,
   updateItemBarcode,
+  updateItemPrice,
 },
 )(SalesPage));

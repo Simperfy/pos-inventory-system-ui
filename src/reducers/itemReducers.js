@@ -3,6 +3,7 @@ import * as types from '../types';
 const initialState = {
   text: '',
   barcode: '',
+  price: 0,
 };
 
 export const itemReducer = (state = initialState, action) => {
