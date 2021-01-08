@@ -13,3 +13,7 @@ export const mapSearchResults = (d) => ({
 });
 
 export const mapSacks = (s) => ({id: s.sackId.toString(), name: s.sackLabel, value: s.sackValue, price: s.sackPrice});
+
+const checkRemaining = (remaining) => remaining > 0;
+
+export const isValidQuantity = (remaining, quantity) => (checkRemaining(remaining) && quantity <= remaining) || isNaN(quantity);
