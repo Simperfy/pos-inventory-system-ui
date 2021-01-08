@@ -12,6 +12,15 @@ export default class Api {
     return axios.get(`${env.API_URL}/users`);
   }
 
+  static async getItems(jwt, val) {
+    const url = `${env.API_URL}/items/find-by-id-or-name?item_name=${val}&id_like=${val}`;
+
+    return axios.get(url, {
+      headers: {Authorization: `Bearer ${jwt}`},
+    });
+  }
+
+  /*
   static async getItems(jwt, params = {}) {
     const url = this.setParams(`${env.API_URL}/items`, params);
 
@@ -19,6 +28,7 @@ export default class Api {
       headers: {Authorization: `Bearer ${jwt}`},
     });
   }
+*/
 
   // static async getItemsByNameOrId(jwt, query) {
   //   const url = `${env.API_URL}/items?_where[_or][0][item_name_contains]=${query}&_where[_or][1][id_in]=${query}`;

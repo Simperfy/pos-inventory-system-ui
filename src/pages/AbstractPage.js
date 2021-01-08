@@ -198,7 +198,7 @@ export class AbstractPage extends React.Component {
       };
     }
 
-    getRemainingItems = (val, params) => {
+    getRemainingItems = (val) => {
       const jwt = this.context.state.jwt;
 
       // eslint-disable-next-line camelcase
@@ -206,7 +206,7 @@ export class AbstractPage extends React.Component {
         // console.log('remaining_stocks');
         // console.log(remaining_stocks);
 
-        Api.getItems(this.context.state.jwt, params).then(({data}) => {
+        Api.getItems(this.context.state.jwt, val).then(({data}) => {
           // console.log('data');
           // console.log(data);
 
@@ -228,7 +228,7 @@ export class AbstractPage extends React.Component {
       const val = e.target.value;
 
       if (val) {
-        this.getRemainingItems(val, {item_name_contains: val});
+        this.getRemainingItems(val);
       } else if (!val && this.props.searchResults.length > 0) {
         this.showSearchResults();
       } else {
