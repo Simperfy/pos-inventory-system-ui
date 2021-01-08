@@ -34,6 +34,14 @@ export default class Api {
   //   });
   // }
 
+  static async get(jwt, url, params) {
+    const newUrl = this.setParams(`${env.API_URL}${url}`, params);
+
+    return axios.get(newUrl, {
+      headers: {Authorization: `Bearer ${jwt}`},
+    });
+  }
+
   static async create(jwt, url, params) {
     const baseURL = env.API_URL;
 

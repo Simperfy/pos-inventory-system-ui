@@ -198,18 +198,37 @@ export class AbstractPage extends React.Component {
       };
     }
 
+    getRemainingItems = (val, params) => {
+      const jwt = this.context.state.jwt;
+
+      // eslint-disable-next-line camelcase
+      ModelStocks.getRemaining(jwt, val).then(({data: {remaining_stocks}}) => {
+        // console.log('remaining_stocks');
+        // console.log(remaining_stocks);
+
+        Api.getItems(this.context.state.jwt, params).then(({data}) => {
+          // console.log('data');
+          // console.log(data);
+
+          data = data.map((d) => {
+            const remaining = remaining_stocks.find((rs) => rs.id === d.id)?.remaining || 0;
+            return {...d, remaining};
+          });
+
+          // console.log('new data');
+          // console.log(data);
+
+          this.props.updateSearchResults(data);
+          this.showSearchResults();
+        }).then((data) => null, (err) => console.log(err));
+      }).then((data) => null, (err) => console.log(err));
+    }
+
     handleSearchBarChange = (e) => {
       const val = e.target.value;
 
       if (val) {
-        Api.getItems(this.context.state.jwt, {item_name_contains: val}).then(({data}) => {
-          console.log('data');
-          console.log(data);
-          this.props.updateSearchResults(data);
-          /* data = data.map(this.mapItems);
-          this.setState({searchResults: data});*/
-          this.showSearchResults();
-        }).then((data) => null, (err) => null);
+        this.getRemainingItems(val, {item_name_contains: val});
       } else if (!val && this.props.searchResults.length > 0) {
         this.showSearchResults();
       } else {
@@ -221,12 +240,7 @@ export class AbstractPage extends React.Component {
       const val = e.target.value;
 
       if (!val) {
-        Api.getItems(this.context.state.jwt, {_limit: 10}).then(({data}) => {
-          this.props.updateSearchResults(data);
-          /* data = data.map(this.mapItems);
-          this.setState({searchResults: data});*/
-          this.showSearchResults();
-        });
+        this.getRemainingItems(val, {_limit: 10});
       } else if (val && this.props.searchResults.length > 0 && !this.state.showSearchResults) this.showSearchResults();
     }
 

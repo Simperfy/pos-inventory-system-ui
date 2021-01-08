@@ -1,6 +1,14 @@
 import Api from '../Api';
 
 export default class ModelStocks {
+  static async getRemaining(jwt, itemNameQuery) {
+    const params = {
+      search: itemNameQuery,
+    };
+
+    return Api.get(jwt, '/items/remaining', params);
+  }
+
   static async createBatch(jwt, userId, pendingItems) {
     const batchData = [
       // {url: '/stocks', data: {}}
