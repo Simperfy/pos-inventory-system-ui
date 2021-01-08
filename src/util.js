@@ -9,6 +9,7 @@ export const mapSearchResults = (d) => ({
     supplierName: s.supplier_name,
   })),
   price: d.price,
+  remaining: d.remaining,
 });
 
 export const mapSacks = (s) => ({id: s.sackId.toString(), name: s.sackLabel, value: s.sackValue, price: s.sackPrice});

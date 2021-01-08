@@ -32,6 +32,7 @@ class SearchBarGroup extends React.Component {
                 <SearchBarItem
                   key={res.id}
                   name={res.name}
+                  remaining={res.remaining}
                   barcode={res.barcode}
                   onClick={() => this.props.handleSearchBarItemClick(res)}
                 />
