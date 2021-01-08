@@ -96,6 +96,7 @@ export default withRouter(connect((state) => ({
   kilo: state.kilo,
   itemText: state.item.text,
   itemBarcode: state.item.barcode,
+  searchResults: state.searchResults,
 }), {
   addPendingItem: addPendingInventoryItem,
   updateSearchResults,

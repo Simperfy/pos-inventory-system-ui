@@ -125,6 +125,7 @@ export default withRouter(connect((state) => ({
   kilo: state.kilo,
   discount: state.discount,
   price: state.price,
+  searchResults: state.searchResults,
 }), {
   addPendingSalesItem,
   updateSearchResults,

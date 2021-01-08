@@ -210,7 +210,7 @@ export class AbstractPage extends React.Component {
           this.setState({searchResults: data});*/
           this.showSearchResults();
         }).then((data) => null, (err) => null);
-      } else if (!val && this.state.searchResults.length > 0) {
+      } else if (!val && this.props.searchResults.length > 0) {
         this.showSearchResults();
       } else {
         this.closeSearchResults();
@@ -219,6 +219,7 @@ export class AbstractPage extends React.Component {
 
     handleSearchBarFocus = (e) => {
       const val = e.target.value;
+
       if (!val) {
         Api.getItems(this.context.state.jwt, {_limit: 10}).then(({data}) => {
           this.props.updateSearchResults(data);
@@ -226,7 +227,7 @@ export class AbstractPage extends React.Component {
           this.setState({searchResults: data});*/
           this.showSearchResults();
         });
-      } else if (val && this.state.searchResults.length > 0 && !this.state.showSearchResults) this.showSearchResults();
+      } else if (val && this.props.searchResults.length > 0 && !this.state.showSearchResults) this.showSearchResults();
     }
 
     handleSearchBarBlur = (e) => {
