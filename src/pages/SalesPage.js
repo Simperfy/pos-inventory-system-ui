@@ -18,9 +18,10 @@ import {updateSacks, updateSackSelectedId} from '../actions/sacksActions';
 import {addPendingSalesItem, removeAllPendingItems} from '../actions/pendingItemsActions';
 import {updatePrice, updatePriceBySackId} from '../actions/priceActions';
 import {resetQuantity, updateQuantity} from '../actions/quantityActions';
-import {updateItemBarcode, updateItemPrice, updateItemText} from '../actions/itemActions';
+import {updateItemBarcode, updateItemPrice, updateItemRemaining, updateItemText} from '../actions/itemActions';
 import {updateKiloBySackId} from '../actions/kiloActions';
 import {enumSubmitConfirmTypes} from '../enums/enumSubmitConfirmTypes';
+import formTypes from '../enums/enumFormTypes';
 
 class SalesPage extends AbstractPage {
   static contextType = AppContext;
@@ -38,44 +39,48 @@ class SalesPage extends AbstractPage {
       price: this.props.price,
     };
 
-    this.props.addPendingSalesItem(item); // redux
+    this.props.addPendingSalesItem(item);
 
     this.closeForm();
     this.resetForm();
   };
 
-  handleSearchBarItemClick = (newFormValue) => {
+  handleSearchBarItemClick = (res) => {
+    const itemText = res.name;
+    const itemBarcode = res.id;
+    const suppliers = res.suppliers;
+    const sacks = res.sacks;
+    const price = res.price;
+    const remaining = res.remaining;
+    const formType = res.kiloAble ? formTypes.salesPerKilo : formTypes.salesPerQuantity;
+
     this.addOpacityBlur();
 
     this.closeSearchResults();
     this.resetForm();
 
-    this.props.updateItemText(newFormValue.itemText);
-    this.props.updateItemBarcode(newFormValue.itemBarcode);
-    this.props.updateItemPrice(newFormValue.price); // retain item kilo/qty price
-    this.props.updateSuppliers(newFormValue.suppliers); // redux
-    this.props.updateSacks(newFormValue.sacks); // redux
-    this.props.updatePrice(newFormValue.price); // redux
+    console.log('newFormValue');
+    console.log(res);
+
+    this.props.updateItemText(itemText);
+    this.props.updateItemBarcode(itemBarcode);
+    this.props.updateItemPrice(price); // retain item kilo/qty price
+    this.props.updateSuppliers(suppliers);
+    this.props.updateItemRemaining(remaining);
+    this.props.updateSacks(sacks);
+    this.props.updatePrice(price);
 
     this.setState((prevState, props) => {
-      // const quantity = this.state.formType === enumFormTypes.salesPerKilo ? 1 : prevState.mainForm.quantity;
-
       return {
         // @TODO FORM TYPE MUST BE INCLUDED IN REDUX BEFORE REMOVING THIS
         mainForm: {
           ...prevState.mainForm,
-          ...newFormValue,
-          // quantity: quantity,
-          // kilo: newFormValue.sacks[0]?.sackValue || 0,
+          ...res,
         },
-        /* formDetail: {
-          price: newFormValue.price,
-          discount: prevState.formDetail.discount,
-        },*/
       };
     });
 
-    this.showForm(newFormValue.formType);
+    this.showForm(formType);
   };
 
   componentDidMount() {
@@ -141,5 +146,6 @@ export default withRouter(connect((state) => ({
   updateKiloBySackId,
   updatePriceBySackId,
   removeAllPendingItems,
+  updateItemRemaining,
 },
 )(SalesPage));

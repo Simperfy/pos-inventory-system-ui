@@ -14,8 +14,9 @@ import {addPendingInventoryItem, removeAllPendingItems} from '../actions/pending
 import {updateSearchResults} from '../actions/searchResultsActions';
 import {updateSuppliers} from '../actions/suppliersActions';
 import {updateSacksAndKilo, updateSackSelectedId, updateSackSelectedIdAndKilo} from '../actions/sacksActions';
-import {updateItemBarcode, updateItemText} from '../actions/itemActions';
+import {updateItemBarcode, updateItemRemaining, updateItemText} from '../actions/itemActions';
 import {enumSubmitConfirmTypes} from '../enums/enumSubmitConfirmTypes';
+import formTypes from '../enums/enumFormTypes';
 // import {updateKiloOnInput} from '../actions/kiloActions';
 
 class InventoryPage extends AbstractPage {
@@ -32,24 +33,32 @@ class InventoryPage extends AbstractPage {
       kilo: this.props.kilo,
     };
 
-    this.props.addPendingItem(item); // redux
+    this.props.addPendingInventoryItem(item);
 
     this.closeForm();
     this.resetForm();
   };
 
-  handleSearchBarItemClick = (newFormValue) => {
+  handleSearchBarItemClick = (res) => {
+    const itemText = res.name;
+    const itemBarcode = res.id;
+    const suppliers = res.suppliers;
+    const sacks = res.sacks;
+    const remaining = res.remaining;
+    const formType = res.kiloAble ? formTypes.inventoryPerSack : formTypes.inventoryPerQuantity;
+
     this.addOpacityBlur();
 
     this.closeSearchResults();
     this.resetForm();
 
-    this.props.updateItemText(newFormValue.itemText);
-    this.props.updateItemBarcode(newFormValue.itemBarcode);
-    this.props.updateSuppliers(newFormValue.suppliers); // redux
-    this.props.updateSacksAndKilo(newFormValue.sacks); // redux
+    this.props.updateItemText(itemText);
+    this.props.updateItemBarcode(itemBarcode);
+    this.props.updateItemRemaining(remaining);
+    this.props.updateSuppliers(suppliers);
+    this.props.updateSacksAndKilo(sacks);
 
-    this.showForm(newFormValue.formType);
+    this.showForm(formType);
   };
 
   componentDidMount() {
@@ -98,7 +107,7 @@ export default withRouter(connect((state) => ({
   itemBarcode: state.item.barcode,
   searchResults: state.searchResults,
 }), {
-  addPendingItem: addPendingInventoryItem,
+  addPendingInventoryItem,
   updateSearchResults,
   updateSuppliers,
   updateSacksAndKilo,
@@ -107,5 +116,6 @@ export default withRouter(connect((state) => ({
   updateItemText,
   updateItemBarcode,
   removeAllPendingItems,
+  updateItemRemaining,
 },
 )(InventoryPage));

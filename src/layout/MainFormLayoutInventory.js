@@ -22,13 +22,7 @@ function MainFormLayoutInventory() {
         handleSearchBarBlur={handleSearchBarBlur}
         showSearchResults={showSearchResults}
         searchResults={searchResults}
-        handleSearchBarItemClick={(res) => handleSearchBarItemClick({
-          itemText: res.name,
-          itemBarcode: res.id,
-          suppliers: res.suppliers,
-          sacks: res.sacks,
-          formType: res.kiloAble ? formTypes.inventoryPerSack : formTypes.inventoryPerQuantity,
-        })}/>
+        handleSearchBarItemClick={(res) => handleSearchBarItemClick(res)}/>
 
       {(showForm && formType === formTypes.inventoryPerQuantity) && <Form.FormGroupInventoryQuantity/>}
       {(showForm && formType === formTypes.inventoryPerSack) && <Form.FormGroupInventorySack/>}

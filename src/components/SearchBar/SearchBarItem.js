@@ -21,6 +21,7 @@ function SearchBarItem({name, barcode, remaining, onClick}) {
       textDecoration: 'line-through',
     };
   }
+
   return (
     <div className="search-bar-item d-flex justify-content-between" style={divStyle} onClick={outOfStock ? null : onClick}>
       <div>
