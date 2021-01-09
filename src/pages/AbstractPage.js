@@ -183,21 +183,6 @@ export class AbstractPage extends React.Component {
     closeSearchResults = () => this.setState({showSearchResults: false});
     showSearchResults = () => this.setState({showSearchResults: true});
 
-    mapItems = (d) => {
-      return {
-        id: d._id,
-        barcode: d._id,
-        name: d.item_name,
-        kiloAble: d.kiloable,
-        sacks: d.item_kilos.map((ik) => ({sackId: ik.id, sackLabel: ik.label, sackValue: ik.value})),
-        suppliers: d.suppliers.map((s) => ({
-          id: s.id,
-          supplierName: s.supplier_name,
-        })),
-        price: d.price,
-      };
-    }
-
     getRemainingItems = (val) => {
       const jwt = this.context.state.jwt;
 
