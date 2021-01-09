@@ -88,11 +88,18 @@ class InventoryPage extends AbstractPage {
         {this.state.isConfirming && <Modal.ModalConfirm
           handleSubmitConfirm={() => this.handleSubmitConfirm(enumSubmitConfirmTypes.INVENTORY_SUBMIT)}
           setState={this.context.setState.bind(this)}
-          confirmItems={this.props.pendingItems.map((pi) => ({id: pi.id, leftText: `${pi.quantity} x ${pi.name} ${pi.kilo > 0 ? `(${pi.kilo} kg)` : ''}`, rightText: pi.supplierName}))}
+          confirmItems={this.props.pendingItems.map((pi) => ({
+            id: pi.id,
+            leftText: `${pi.quantity} x ${pi.name} ${pi.kilo > 0 ? `(${pi.kilo} kg)` : ''}`,
+            rightText: pi.supplierName,
+          }),
+          )}
         />}
         {this.state.isLoading && <Modal.ModalLoading />}
         {this.state.isSuccess && <Modal.ModalSuccess handleClick={this.handleModalSuccessClick} />}
-        {this.state.isFailed && <Modal.ModalFailed handleClick={() => this.handleModalFailedClick(enumSubmitConfirmTypes.INVENTORY_SUBMIT)} handleClose={this.handleModalFailedClose}/>}
+        {this.state.isFailed && <Modal.ModalFailed
+          handleClick={() => this.handleModalFailedClick(enumSubmitConfirmTypes.INVENTORY_SUBMIT)}
+          handleClose={this.handleModalFailedClose}/>}
       </InventoryContext.Provider>
     );
   }

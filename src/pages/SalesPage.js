@@ -111,11 +111,18 @@ class SalesPage extends AbstractPage {
           handleSubmitConfirm={() => this.handleSubmitConfirm(enumSubmitConfirmTypes.SALES_SUBMIT)}
           submitConfirmType={enumSubmitConfirmTypes.SALES_SUBMIT}
           setState={this.context.setState.bind(this)}
-          confirmItems={this.props.pendingItems.map((pi) => ({id: pi.id, leftText: `${pi.quantity} x ${pi.name} ${pi.kilo > 0 ? `(${pi.kilo} kg)` : ''}`, rightText: '₱'+pi.price}))}
+          confirmItems={this.props.pendingItems.map((pi) => ({
+            id: pi.id,
+            leftText: `${pi.quantity} x ${pi.name} ${pi.kilo > 0 ? `(${pi.kilo} kg)` : ''}`,
+            rightText: '₱'+pi.price,
+          }),
+          )}
         />}
         {this.state.isLoading && <Modal.ModalLoading />}
         {this.state.isSuccess && <Modal.ModalSuccess handleClick={this.handleModalSuccessClick} />}
-        {this.state.isFailed && <Modal.ModalFailed handleClick={() => this.handleModalFailedClick(enumSubmitConfirmTypes.SALES_SUBMIT)} handleClose={this.handleModalFailedClose}/>}
+        {this.state.isFailed && <Modal.ModalFailed
+          handleClick={() => this.handleModalFailedClick(enumSubmitConfirmTypes.SALES_SUBMIT)}
+          handleClose={this.handleModalFailedClose}/>}
       </SalesContext.Provider>
     );
   }
