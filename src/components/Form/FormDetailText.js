@@ -1,10 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-function FormDetailText({price, discount, quantity}) {
-  // const discount = this.props.discount;
-  // const quantity = this.props.quantity;
-  // const price = this.props.price;
+export const FormDetailText = ({price, discount, quantity}) => {
   const subTotal = quantity * price;
   const discountTotal = quantity * (isNaN(discount) ? 0 : discount);
   const total = subTotal - discountTotal;
@@ -23,7 +20,7 @@ function FormDetailText({price, discount, quantity}) {
       <p style={{textDecoration: total <= 0 ? 'line-through' : 'none'}}>Total: ₱{total}</p>
     </div>
   );
-}
+};
 
 export default connect((state) => ({
   price: state.price,
