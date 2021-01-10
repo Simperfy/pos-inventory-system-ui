@@ -53,6 +53,8 @@
   "devDependencies": {
     "@types/react-router-dom": "^5.1.7",
     "babel-eslint": "^10.1.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.5",
     "eslint": "^7.17.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-react": "^7.22.0",
