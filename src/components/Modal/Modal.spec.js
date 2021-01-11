@@ -6,6 +6,7 @@ import ModalConfirm from './ModalConfirm';
 import ModalFailed from './ModalFailed';
 import ModalLoading from './ModalLoading';
 import ModalSuccess from './ModalSuccess';
+import ModalLogin from './ModalLogin';
 
 describe('ModalConfirm Test', () => {
   let wrapper;
@@ -93,5 +94,21 @@ describe('ModalSuccess Test', () => {
 
   it('should find "Success" when rendered', () => {
     expect(wrapper.find('h2').text()).toBe('Success');
+  });
+});
+
+describe('ModalLogin Test', () => {
+  let wrapper;
+  let mockHandleClick;
+
+  beforeEach(() => {
+    mockHandleClick = jest.fn(() => null);
+    wrapper = mount(<ModalLogin handleLogin={mockHandleClick}/>);
+  });
+
+  it('should call "mockHandleClick" when clicked', () => {
+    wrapper.find('button').simulate('click');
+
+    expect(mockHandleClick.mock.calls.length).toBe(1);
   });
 });
