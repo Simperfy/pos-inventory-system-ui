@@ -1,9 +1,10 @@
 import {mount, shallow} from 'enzyme';
 
 import React from 'react';
-import ModalConfirm from './ModalConfirm';
 import {enumSubmitConfirmTypes} from '../../enums/enumSubmitConfirmTypes';
+import ModalConfirm from './ModalConfirm';
 import ModalFailed from './ModalFailed';
+import ModalLoading from './ModalLoading';
 
 describe('ModalConfirm Test', () => {
   let wrapper;
@@ -56,5 +57,28 @@ describe('ModalFailed Test', () => {
     wrapper.find('.modal-close').simulate('click');
 
     expect(mockHandleClose.mock.calls.length).toBe(1);
+  });
+});
+
+describe('ModalLoading Test', () => {
+  let wrapper;
+  beforeEach(() => {
+    jest.useFakeTimers();
+    wrapper = shallow(<ModalLoading/>);
+  });
+
+  it('should animate when rendered', () => {
+    expect(wrapper.find('h2').text()).toBe('Please wait');
+    expect(wrapper.state('counter')).toBe(0);
+
+    jest.advanceTimersByTime(1100);
+    expect(wrapper.find('h2').text()).toBe('Please wait.');
+
+    jest.advanceTimersByTime(1100);
+    expect(wrapper.find('h2').text()).toBe('Please wait..');
+
+    jest.advanceTimersByTime(1100);
+    expect(wrapper.find('h2').text()).toBe('Please wait...');
+    expect(wrapper.state('counter')).toBe(3);
   });
 });
