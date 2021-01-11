@@ -1,5 +1,5 @@
 import React from 'react';
-import ModalLayout from '../../layout/ModalLayout';
+import ModalLayout from '../../containers/ModalLayout';
 import FormButton from '../Form/FormButton';
 import {ReactComponent as SuccessIcon} from '../../assets/icons/tick.svg';
 

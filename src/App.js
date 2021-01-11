@@ -42,7 +42,7 @@ class App extends React.Component {
     window.addEventListener('online', this.handleConnectionChange);
     window.addEventListener('offline', this.handleConnectionChange);*/
 
-    if (!env.APP_ENV) {
+    if (env.APP_ENV) {
       if (env.APP_ENV === 'development') return;
       console.log('pinging');
       console.log(env.APP_ENV);

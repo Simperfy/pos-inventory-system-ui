@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ModalLayout from '../../layout/ModalLayout';
+import ModalLayout from '../../containers/ModalLayout';
 import {InventoryContext} from '../../context/InventoryContext';
 import {ReactComponent as LoopIcon} from '../../assets/icons/loop.svg';
 

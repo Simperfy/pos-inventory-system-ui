@@ -1,9 +1,9 @@
 import React from 'react';
 
 import {Modal} from '../components';
-import MainLayout from '../layout/MainLayout';
-import MainFormLayoutInventory from '../layout/MainFormLayoutInventory';
-import PendingItemsLayout from '../layout/PendingItemsLayout';
+import MainLayout from '../containers/MainLayout';
+import MainFormLayoutInventory from '../containers/MainFormLayoutInventory';
+import PendingItemsLayout from '../containers/PendingItemsLayout';
 import {withRouter} from 'react-router-dom';
 import {InventoryContext} from '../context/InventoryContext';
 import {AppContext} from '../context/AppContext';

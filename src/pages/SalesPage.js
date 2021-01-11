@@ -1,13 +1,13 @@
 import React from 'react';
 
 import {Modal} from '../components';
-import MainLayout from '../layout/MainLayout';
-import MainFormLayoutSales from '../layout/MainFormLayoutSales';
+import MainLayout from '../containers/MainLayout';
+import MainFormLayoutSales from '../containers/MainFormLayoutSales';
 import {withRouter} from 'react-router-dom';
 import {SalesContext} from '../context/SalesContext';
 import {AppContext} from '../context/AppContext';
 import {AbstractPage} from './AbstractPage';
-import PendingItemsLayout from '../layout/PendingItemsLayout';
+import PendingItemsLayout from '../containers/PendingItemsLayout';
 import pendingItemTypes from '../enums/enumPendingItemTypes';
 // import enumKiloType from '../enums/enumKiloType';
 // import enumFormTypes from '../enums/enumFormTypes';

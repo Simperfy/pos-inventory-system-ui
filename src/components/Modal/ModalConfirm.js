@@ -1,5 +1,5 @@
 import React from 'react';
-import ModalLayout from '../../layout/ModalLayout';
+import ModalLayout from '../../containers/ModalLayout';
 
 import './ModalConfirm.css';
 import FormButton from '../Form/FormButton';
