@@ -3,7 +3,6 @@ import Api from '../api/Api';
 import {ModelStocks} from '../api/models';
 import {getRoute} from '../routeConfig';
 import enumKiloType from '../enums/enumKiloType';
-import formTypes from '../enums/enumFormTypes';
 import {enumSubmitConfirmTypes} from '../enums/enumSubmitConfirmTypes';
 import ModelTransactionItem from '../api/models/ModelTransactionItem';
 import {ModelTransactions} from '../api/models/ModelTransactions';
@@ -77,19 +76,18 @@ export class AbstractPage extends React.Component {
       }));
     }
 
-    isValidFormInventory = () => {
-      const mainForm = this.state.mainForm;
+    isValidFormInventory = (item) => {
       const nonEmptyFields = [
         'itemText',
         'itemBarcode',
         // 'suppliers',
-        'supplierName',
+        // 'supplierName',
         'quantity',
         // 'kilo',
       ];
 
-      for (const key of Object.keys(mainForm)) {
-        if (nonEmptyFields.includes(key) && !mainForm[key]) {
+      for (const key of Object.keys(item)) {
+        if (nonEmptyFields.includes(key) && !item[key]) {
           window.alert(`Invalid "${key.toUpperCase()}" values`);
           return false;
         }
@@ -98,25 +96,15 @@ export class AbstractPage extends React.Component {
       return true;
     }
 
-    isValidFormSales = () => {
-      const mainForm = this.state.mainForm;
-      let nonEmptyFields = [
+    isValidFormSales = (item) => {
+      const nonEmptyFields = [
         'itemText',
         'itemBarcode',
+        'quantity',
       ];
 
-
-      if ( (mainForm.formType === formTypes.salesPerKilo) && (mainForm.kiloType !== enumKiloType.kilo)) {
-        nonEmptyFields = [
-          'itemText',
-          'itemBarcode',
-          'quantity',
-          // 'kilo',
-        ];
-      }
-
-      for (const key of Object.keys(mainForm)) {
-        if (nonEmptyFields.includes(key) && !mainForm[key]) {
+      for (const key of Object.keys(item)) {
+        if (nonEmptyFields.includes(key) && !item[key]) {
           window.alert(`Invalid "${key.toUpperCase()}" values`);
           return false;
         }

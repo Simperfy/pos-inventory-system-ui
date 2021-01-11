@@ -27,9 +27,6 @@ class SalesPage extends AbstractPage {
   static contextType = AppContext;
 
   addPendingItems = () => {
-    // if (!this.isValidFormSales()) return;
-    if (!this.removeDuplicate()) return;
-
     const item = {
       name: this.props.itemText,
       barcode: this.props.itemBarcode,
@@ -38,6 +35,9 @@ class SalesPage extends AbstractPage {
       discount: this.props.discount,
       price: this.props.price,
     };
+
+    if (!this.isValidFormSales(item)) return;
+    if (!this.removeDuplicate()) return;
 
     this.props.addPendingSalesItem(item);
 
