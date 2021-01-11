@@ -18,7 +18,7 @@ describe('FormButton Test', () => {
   });
 
   it('should call click function when clicked', () => {
-    expect(wrapper.find('button').simulate('click'));
+    wrapper.find('button').simulate('click');
     expect(mockHandleClick.mock.calls.length).toBe(1);
   });
 

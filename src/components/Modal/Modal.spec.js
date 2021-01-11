@@ -1,9 +1,9 @@
-import {shallow} from 'enzyme';
+import {mount, shallow} from 'enzyme';
 
 import React from 'react';
 import ModalConfirm from './ModalConfirm';
-// import FormButton from '../Form/FormButton';
 import {enumSubmitConfirmTypes} from '../../enums/enumSubmitConfirmTypes';
+import ModalFailed from './ModalFailed';
 
 describe('ModalConfirm Test', () => {
   let wrapper;
@@ -33,5 +33,28 @@ describe('ModalConfirm Test', () => {
     wrapper = shallow(<ModalConfirm confirmItems={confirmItems}/>);
 
     expect(wrapper.find('.confirm-item-info').text()).toBe('100');
+  });
+});
+
+describe('ModalFailed Test', () => {
+  let wrapper;
+  let mockHandleClose;
+  // let mockHandleClick;
+
+  beforeEach(() => {
+    mockHandleClose = jest.fn(() => null); // no need to test this as this is already tested
+    // mockHandleClick = jest.fn(() => null);
+    // wrapper = render(<ModalFailed handleClose={mockHandleClose} handleClick={mockHandleClick}/>);
+    wrapper = mount(<ModalFailed handleClose={mockHandleClose}/>);
+  });
+
+  it('should find "Failed" when rendered', () => {
+    expect(wrapper.find('h2').text()).toBe('Failed');
+  });
+
+  it('should call function from ".modal-close class" when clicked', () => {
+    wrapper.find('.modal-close').simulate('click');
+
+    expect(mockHandleClose.mock.calls.length).toBe(1);
   });
 });
