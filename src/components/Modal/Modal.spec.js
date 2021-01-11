@@ -5,6 +5,7 @@ import {enumSubmitConfirmTypes} from '../../enums/enumSubmitConfirmTypes';
 import ModalConfirm from './ModalConfirm';
 import ModalFailed from './ModalFailed';
 import ModalLoading from './ModalLoading';
+import ModalSuccess from './ModalSuccess';
 
 describe('ModalConfirm Test', () => {
   let wrapper;
@@ -80,5 +81,17 @@ describe('ModalLoading Test', () => {
     jest.advanceTimersByTime(1100);
     expect(wrapper.find('h2').text()).toBe('Please wait...');
     expect(wrapper.state('counter')).toBe(3);
+  });
+});
+
+describe('ModalSuccess Test', () => {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = shallow(<ModalSuccess />);
+  });
+
+  it('should find "Success" when rendered', () => {
+    expect(wrapper.find('h2').text()).toBe('Success');
   });
 });
