@@ -13,9 +13,6 @@ class FormGroupSalesQuantity extends React.Component {
   static contextType = SalesContext;
 
   render() {
-    const quantity = this.props.quantity;
-    const discount = this.props.discount;
-
     return (
       <div className="row form-group-container" ref={this.context.state.formGroupRef}>
         <div className="col-md-6">
@@ -26,7 +23,7 @@ class FormGroupSalesQuantity extends React.Component {
               onChange={this.props.updateQuantityOnInput}
               label={'Qty'}
               placeHolder={'1 pcs'}
-              value={quantity}
+              value={this.props.quantity}
               min="1"
               hideZero
             />
@@ -35,7 +32,7 @@ class FormGroupSalesQuantity extends React.Component {
               onChange={this.props.updateDiscountOnInput}
               label={'Discount'}
               placeHolder={'0.00'}
-              value={discount}
+              value={this.props.discount}
               min="0"
               hideZero
             />
@@ -55,7 +52,7 @@ class FormGroupSalesQuantity extends React.Component {
           </div>
         </div>
 
-        {quantity > 0 && (
+        {this.props.quantity > 0 && (
           <div className="col-md-6">
             <Form.FormDetailText />
           </div>
