@@ -339,6 +339,7 @@ export class AbstractPage extends React.Component {
       const kiloType = e.target.value;
 
       if (kiloType === enumKiloType.kilo) {
+        this.props.updateKilo(1);
         this.props.updateQuantity(1);
       } else if (kiloType === enumKiloType.sack) {
         this.props.resetQuantity();

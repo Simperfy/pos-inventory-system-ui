@@ -19,7 +19,7 @@ import {addPendingSalesItem, removeAllPendingItems} from '../actions/pendingItem
 import {updatePrice, updatePriceBySackId} from '../actions/priceActions';
 import {resetQuantity, updateQuantity} from '../actions/quantityActions';
 import {updateItemBarcode, updateItemPrice, updateItemRemaining, updateItemText} from '../actions/itemActions';
-import {updateKiloBySackId} from '../actions/kiloActions';
+import {updateKilo, updateKiloBySackId} from '../actions/kiloActions';
 import {enumSubmitConfirmTypes} from '../enums/enumSubmitConfirmTypes';
 import formTypes from '../enums/enumFormTypes';
 
@@ -59,9 +59,7 @@ class SalesPage extends AbstractPage {
     this.closeSearchResults();
     this.resetForm();
 
-    console.log('newFormValue');
-    console.log(res);
-
+    this.props.updateKilo(0);
     this.props.updateItemText(itemText);
     this.props.updateItemBarcode(itemBarcode);
     this.props.updateItemPrice(price); // retain item kilo/qty price
@@ -150,6 +148,7 @@ export default withRouter(connect((state) => ({
   updateItemText,
   updateItemBarcode,
   updateItemPrice,
+  updateKilo,
   updateKiloBySackId,
   updatePriceBySackId,
   removeAllPendingItems,

@@ -11,7 +11,6 @@ export const updatePrice = (price) => (dispatch, getState) => {
 };
 
 export const updatePriceBySackId = (sackId) => (dispatch, getState) => {
-  console.log('ITS HAPPENING');
   const price = getState().sacksStore.sacks.find((s) => s.id === sackId).price;
 
   dispatch({type: types.UPDATE_PRICE, payload: {price}});
