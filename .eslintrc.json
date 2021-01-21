@@ -22,7 +22,7 @@
     "rules": {
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
-        "linebreak-style": ["error", "windows"],
+        "linebreak-style": "off",
         "max-len": "off",
         "require-jsdoc": "off",
         "no-invalid-this": "off",
