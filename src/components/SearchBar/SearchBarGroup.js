@@ -16,7 +16,7 @@ class SearchBarGroup extends React.Component {
             <input
               className="search-bar-input"
               type="text"
-              placeholder="Item / 5fe2ff51ab328745dc231241"
+              placeholder="Search"
               onChange={this.props.handleSearchBarChange}
               onFocus={this.props.handleSearchBarFocus}
               onBlur={this.props.handleSearchBarBlur}

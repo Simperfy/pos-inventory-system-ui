@@ -26,3 +26,4 @@ yarn-error.log*
 .eslintcache
 .env
 debug.log
+/public/env.js

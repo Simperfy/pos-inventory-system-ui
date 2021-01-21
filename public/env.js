@@ -1,4 +1,4 @@
 window.env = {
-  "API_URL": "http://192.168.254.150:4000",
+  "API_URL": "http://localhost:1337",
   "APP_ENV": "production"
 };
