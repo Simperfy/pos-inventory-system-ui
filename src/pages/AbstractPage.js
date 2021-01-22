@@ -175,16 +175,16 @@ export class AbstractPage extends React.Component {
       const jwt = this.context.state.jwt;
 
       // eslint-disable-next-line camelcase
-      ModelStocks.getRemaining(jwt, val).then(({data: {remaining_stocks}}) => {
-        // console.log('remaining_stocks');
-        // console.log(remaining_stocks);
+      ModelStocks.getRemaining(jwt, val).then(({data: {remaining_items}}) => {
+        // console.log('remaining_items');
+        // console.log(remaining_items);
 
         Api.getItems(this.context.state.jwt, val).then(({data}) => {
           // console.log('data');
           // console.log(data);
 
           data = data.map((d) => {
-            const remaining = remaining_stocks.find((rs) => rs.id === d.id)?.remaining || 0;
+            const remaining = remaining_items.find((rs) => rs.id === d.id)?.remaining || 0;
             return {...d, remaining};
           });
 
