@@ -5,7 +5,7 @@ export const mapSearchResults = (d) => ({
   kiloAble: false,
   // sacks: d.item_kilos.map((ik) => ({sackId: ik.id.toString(), sackLabel: ik.label, sackValue: ik.value, sackPrice: ik.price})),
   sacks: [],
-  suppliers: d.suppliers.map((s) => ({
+  suppliers: d.item_group.suppliers.map((s) => ({
     id: s.id.toString(),
     supplierName: s.supplier_name,
   })),
