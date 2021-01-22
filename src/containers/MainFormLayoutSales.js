@@ -25,7 +25,7 @@ function MainFormLayoutSales() {
         handleSearchBarItemClick={(res) => handleSearchBarItemClick(res)}/>
 
       {(showForm && formType === formTypes.salesPerQuantity) && <Form.FormGroupSalesQuantity/>}
-      {(showForm && formType === formTypes.salesPerKilo) && <Form.FormGroupSalesKilo/>}
+      {/* {(showForm && formType === formTypes.salesPerKilo) && <Form.FormGroupSalesKilo/>}*/}
     </>
   );
 }

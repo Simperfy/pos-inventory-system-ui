@@ -7,6 +7,10 @@ export const addPendingInventoryItem = (item) => (dispatch, getState) => {
   const supplierSelectedId = getState().suppliersStore.supplierSelectedId;
   const supplierName = getState().suppliersStore.suppliers.find((s) => s.id === supplierSelectedId).name;
 
+  const isAlreadyAdded = pendingItems.some((pi) => pi.barcode === item.barcode && pi.supplierId === supplierSelectedId);
+
+  if (isAlreadyAdded) return alert(`${item.name} item with same supplier already exist. Please remove duplicate first.`);
+
   pendingItems.push({
     id: uuidv4(),
     name: item.name,

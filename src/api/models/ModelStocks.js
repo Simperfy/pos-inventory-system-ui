@@ -18,7 +18,8 @@ export default class ModelStocks {
       batchData.push({
         url: '/stocks',
         data: {
-          'kilo': pi.kilo <= 0 ? null : pi.kilo,
+          // 'kilo': pi.kilo <= 0 ? null : pi.kilo,
+          'kilo': null,
           'stock_quantity': pi.quantity,
           'item': pi.barcode,
           'supplier': pi.supplierId,

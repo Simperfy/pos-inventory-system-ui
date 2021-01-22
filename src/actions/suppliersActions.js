@@ -11,5 +11,5 @@ export const updateSuppliersSelectedIdOnInput = (e) => (dispatch, getState) => {
 };
 
 export const updateSuppliersSelectedId = (supplierSelectedId) => (dispatch, getState) => {
-  dispatch({type: types.UPDATE_SUPPLIER_SELECTED_ID, payload: {supplierSelectedId}});
+  dispatch({type: types.UPDATE_SUPPLIER_SELECTED_ID, payload: {supplierSelectedId: supplierSelectedId.toString()}});
 };

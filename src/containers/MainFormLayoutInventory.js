@@ -25,7 +25,7 @@ function MainFormLayoutInventory() {
         handleSearchBarItemClick={(res) => handleSearchBarItemClick(res)}/>
 
       {(showForm && formType === formTypes.inventoryPerQuantity) && <Form.FormGroupInventoryQuantity/>}
-      {(showForm && formType === formTypes.inventoryPerSack) && <Form.FormGroupInventorySack/>}
+      {/* {(showForm && formType === formTypes.inventoryPerSack) && <Form.FormGroupInventorySack/>}*/}
     </>
   );
 }
