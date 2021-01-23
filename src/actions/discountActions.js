@@ -10,3 +10,7 @@ export const updateDiscountOnInput = (e) => (dispatch, getState) => {
 
   if (price > 0 && discount <= price) dispatch({type: types.UPDATE_DISCOUNT, payload: {discount}});
 };
+
+export const resetDiscount = () => (dispatch, getState) => {
+  dispatch({type: types.RESET_DISCOUNT});
+};

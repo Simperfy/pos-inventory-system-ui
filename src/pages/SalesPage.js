@@ -22,6 +22,7 @@ import {updateItemBarcode, updateItemPrice, updateItemRemaining, updateItemText}
 import {updateKilo, updateKiloBySackId} from '../actions/kiloActions';
 import {enumSubmitConfirmTypes} from '../enums/enumSubmitConfirmTypes';
 import formTypes from '../enums/enumFormTypes';
+import {resetDiscount} from '../actions/discountActions';
 
 class SalesPage extends AbstractPage {
   static contextType = AppContext;
@@ -60,6 +61,7 @@ class SalesPage extends AbstractPage {
     this.resetForm();
 
     this.props.resetQuantity();
+    this.props.resetDiscount();
     this.props.updateKilo(0);
     this.props.updateItemText(itemText);
     this.props.updateItemBarcode(itemBarcode);
@@ -154,5 +156,6 @@ export default withRouter(connect((state) => ({
   updatePriceBySackId,
   removeAllPendingItems,
   updateItemRemaining,
+  resetDiscount,
 },
 )(SalesPage));
