@@ -25,5 +25,5 @@ export const updateQuantity = (quantity) => (dispatch, getState) => {
 };
 
 export const resetQuantity = () => (dispatch, getState) => {
-  dispatch({type: types.UPDATE_QUANTITY, payload: {quantity: 0}});
+  dispatch({type: types.RESET_QUANTITY});
 };
