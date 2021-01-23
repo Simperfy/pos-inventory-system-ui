@@ -17,6 +17,7 @@ import {updateSacksAndKilo, updateSackSelectedId, updateSackSelectedIdAndKilo} f
 import {updateItemBarcode, updateItemRemaining, updateItemText} from '../actions/itemActions';
 import {enumSubmitConfirmTypes} from '../enums/enumSubmitConfirmTypes';
 import formTypes from '../enums/enumFormTypes';
+import {resetQuantity} from '../actions/quantityActions';
 // import {updateKiloOnInput} from '../actions/kiloActions';
 
 class InventoryPage extends AbstractPage {
@@ -52,6 +53,7 @@ class InventoryPage extends AbstractPage {
     this.closeSearchResults();
     this.resetForm();
 
+    this.props.resetQuantity();
     this.props.updateItemText(itemText);
     this.props.updateItemBarcode(itemBarcode);
     this.props.updateItemRemaining(remaining);
@@ -124,5 +126,6 @@ export default withRouter(connect((state) => ({
   updateItemBarcode,
   removeAllPendingItems,
   updateItemRemaining,
+  resetQuantity,
 },
 )(InventoryPage));

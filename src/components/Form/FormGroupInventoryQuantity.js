@@ -24,7 +24,7 @@ class FormGroupInventoryQuantity extends React.Component {
             <Form.FormStaticText text={this.props.itemText} textBelow={this.props.itemBarcode} />
             <Form.FormInput
               formType="number"
-              onChange={this.props.updateQuantityOnInput}
+              onChange={(e) => this.props.updateQuantityOnInput(e, false)}
               label={'Qty'}
               placeHolder={'1 pcs'}
               value={this.props.quantity}

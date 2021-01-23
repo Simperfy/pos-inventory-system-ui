@@ -59,6 +59,7 @@ class SalesPage extends AbstractPage {
     this.closeSearchResults();
     this.resetForm();
 
+    this.props.resetQuantity();
     this.props.updateKilo(0);
     this.props.updateItemText(itemText);
     this.props.updateItemBarcode(itemBarcode);

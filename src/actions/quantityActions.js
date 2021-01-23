@@ -1,8 +1,10 @@
 import * as types from '../types';
 import {isValidQuantity} from '../util';
 
-export const updateQuantityOnInput = (e) => (dispatch, getState) => {
+export const updateQuantityOnInput = (e, shouldCheckRemaining = true) => (dispatch, getState) => {
   const quantity = parseInt(e.target.value);
+  if (!shouldCheckRemaining) return dispatch({type: types.UPDATE_QUANTITY, payload: {quantity}});
+
   const remaining = getState().item.remaining;
 
   if (isValidQuantity(remaining, quantity)) {
