@@ -2,10 +2,10 @@ import React from 'react';
 
 import './SearchBarItem.css';
 
-function SearchBarItem({name, barcode, remaining, onClick}) {
+function SearchBarItem({name, barcode, remaining, onClick, checkIfOutOfStock = true}) {
   let labelStyle = {};
   let divStyle = {};
-  const outOfStock = remaining <= 0;
+  const outOfStock = (remaining <= 0) && checkIfOutOfStock;
 
   const spanStyle = {
     color: 'red',

@@ -35,6 +35,7 @@ class SearchBarGroup extends React.Component {
                   remaining={res.remaining}
                   barcode={res.barcode}
                   onClick={() => this.props.handleSearchBarItemClick(res)}
+                  checkIfOutOfStock={this.props.checkIfOutOfStock}
                 />
               ))}
             </div>

@@ -22,7 +22,9 @@ function MainFormLayoutInventory() {
         handleSearchBarBlur={handleSearchBarBlur}
         showSearchResults={showSearchResults}
         searchResults={searchResults}
-        handleSearchBarItemClick={(res) => handleSearchBarItemClick(res)}/>
+        handleSearchBarItemClick={(res) => handleSearchBarItemClick(res)}
+        checkIfOutOfStock={false}
+      />
 
       {(showForm && formType === formTypes.inventoryPerQuantity) && <Form.FormGroupInventoryQuantity/>}
       {/* {(showForm && formType === formTypes.inventoryPerSack) && <Form.FormGroupInventorySack/>}*/}
