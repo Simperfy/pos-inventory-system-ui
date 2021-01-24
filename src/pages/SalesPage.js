@@ -115,7 +115,7 @@ class SalesPage extends AbstractPage {
           confirmItems={this.props.pendingItems.map((pi) => ({
             id: pi.id,
             leftText: `${pi.quantity} x ${pi.name} ${pi.kilo > 0 ? `(${pi.kilo} kg)` : ''}`,
-            rightText: '₱'+pi.price,
+            rightText: '₱'+(pi.price - pi.discount) * pi.quantity,
           }),
           )}
         />}

@@ -229,13 +229,13 @@ export class AbstractPage extends React.Component {
       const pendingItems = this.props.pendingItems; // coming from redux
 
       if (enumSubmitConfirmType === enumSubmitConfirmTypes.INVENTORY_SUBMIT) {
-        // Inventory
+        // Handle Inventory Submission
         ModelStocks.createBatch(jwt, id, pendingItems)
             .then((data) =>
               setTimeout(() => this.setState({isSuccess: true, pendingItems: []}), 1000),
             (err) => this.showFailedModal());
       } else if (enumSubmitConfirmType === enumSubmitConfirmTypes.SALES_SUBMIT) {
-        // Sales
+        // Handle Sales Submission
         ModelTransactions.create(jwt, id).then(({data}) => {
           ModelTransactionItem.createBatch(jwt, data.id, pendingItems)
               .then((data) => {

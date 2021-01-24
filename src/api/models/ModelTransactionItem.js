@@ -10,9 +10,9 @@ export default class ModelTransactionItem {
       batchData.push({
         url: '/transaction-items',
         data: {
-          'discount': pi.discount,
-          'kilo': pi.kilo,
           'quantity': pi.quantity,
+          'discount': pi.discount,
+          'subtotal': (pi.price - pi.discount) * pi.quantity,
           'item': pi.barcode,
           'price': pi.price,
           'transaction': transactionId,
