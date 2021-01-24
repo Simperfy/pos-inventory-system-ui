@@ -184,12 +184,12 @@ export class AbstractPage extends React.Component {
           console.log(data);
 
           data = data.map((d) => {
-            const remaining = remaining_items.find((rs) => rs.id === d.id)?.remaining || 0;
+            const remaining = remaining_items.find((rs) => rs.id === d.id)?.remaining_unit || 0;
             return {...d, remaining};
           });
 
-          // console.log('new data');
-          // console.log(data);
+          console.log('new data');
+          console.log(data);
 
           this.props.updateSearchResults(data);
           this.showSearchResults();
